@@ -1,6 +1,16 @@
 {
-  "hero.title": "Hello, future portfolio 👋",
-  "hero.subtitle": "We’re wiring up a clean, modular Next.js + TS stack.",
-  "cta.primary": "Get a Quote",
-  "cta.secondary": "See Services"
+  "hero": {
+    "title": "Hello, future portfolio 👋",
+    "subtitle": "We’re wiring up a clean, modular Next.js + TS stack."
+  },
+  "cta": {
+    "primary": "Get a Quote",
+    "secondary": "See Services"
+  },
+  "seo": {
+    "home": {
+      "title": "Fateme Ahmadi – Brand Identity & Web Design",
+      "description": "I design clean brand identities and fast, SEO-friendly websites built with React/Next.js. Based in Iran, serving global clients."
+    }
+  }
 }
