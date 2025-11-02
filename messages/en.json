@@ -1,16 +1,54 @@
 {
   "hero": {
-    "title": "Hello, future portfolio 👋",
-    "subtitle": "We’re wiring up a clean, modular Next.js + TS stack."
+    "name": "Fateme Ahmadi",
+    "designer": "Designer",
+    "developer": "Developer",
+    "descriptionPrimary": "I’m creating and developing digital stuff since — Y:2019",
+    "descriptionSecondary": "and producing video content since — Y:2022",
+    "downloadCv": "Download CV",
+    "cvBadge": "CV",
+    "imageAlt": "Portrait of Fateme Ahmadi at her desk"
   },
-  "cta": {
-    "primary": "Get a Quote",
-    "secondary": "See Services"
+  "navigation": {
+    "home": "Home",
+    "portfolio": "Portfolio",
+    "about": "About",
+    "quote": "Get a Quote",
+    "blog": "Blog"
+  },
+  "header": {
+    "title": "Fateme Ahmadi Studio",
+    "openMenu": "Open navigation",
+    "closeMenu": "Close navigation",
+    "contact": "Contact",
+    "themeToggle": {
+      "light": "Switch to light mode",
+      "dark": "Switch to dark mode"
+    }
+  },
+  "localeSwitcher": {
+    "switch": "Switch language",
+    "en": "EN",
+    "fa": "فارسی"
+  },
+  "footer": {
+    "tagline": "Creative Direction",
+    "headline": "Ready for an identity with a bilingual heartbeat?",
+    "description": "Brand strategy, visual identity, and performant websites for ambitious teams across the globe.",
+    "cta": "Get a Quote",
+    "email": "Email",
+    "social": {
+      "instagram": "Instagram",
+      "behance": "Behance",
+      "dribbble": "Dribbble",
+      "linkedin": "LinkedIn"
+    },
+    "copyright": "(c) 2025 Fateme Ahmadi. All rights reserved."
   },
   "seo": {
     "home": {
-      "title": "Fateme Ahmadi – Brand Identity & Web Design",
-      "description": "I design clean brand identities and fast, SEO-friendly websites built with React/Next.js. Based in Iran, serving global clients."
+      "title": "Fateme Ahmadi — Brand Identity & Web Design",
+      "description": "I design elevated bilingual brand identities and fast, SEO-friendly websites built with Next.js."
     }
   }
 }

@@ -1,48 +1,55 @@
-import "../globals.css";
+import { ReactNode } from "react";
 import { NextIntlClientProvider } from "next-intl";
+import { setRequestLocale } from "next-intl/server";
 
-// Small helper; we already used this earlier
-function getDirection(locale: string) {
-  return locale === "fa" ? "rtl" : "ltr";
+import { Footer } from "@/components/blocks/Footer";
+import { Header } from "@/components/blocks/Header";
+import { LocaleAttributesUpdater } from "@/components/utility/LocaleAttributesUpdater";
+import { getDirection } from "@/lib/i18n";
+import nextIntlConfig, { AppLocale, locales } from "@/next-intl.config";
+
+import "../globals.css";
+
+type LayoutProps = {
+  children: ReactNode;
+  params: Promise<{ locale: string }>;
+};
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
 }
 
-// Server helper: imports the right JSON file for the locale.
-// This runs on the server → no extra JS sent to the browser.
-async function getMessages(locale: string) {
-  try {
-    // Dynamic import lets bundler split by locale
-    const messages = (await import(`@/messages/${locale}.json`)).default;
-    return messages;
-  } catch {
-    return null; // if missing, we can 404
-  }
-}
+const fallbackLocale = nextIntlConfig.defaultLocale as AppLocale;
+
+const resolveLocale = (locale: string): AppLocale =>
+  locales.includes(locale as AppLocale) ? (locale as AppLocale) : fallbackLocale;
 
 export default async function LocaleLayout({
   children,
   params,
-}: {
-  children: React.ReactNode;
-  params: { locale: string };
-}) {
-  const { locale } = params;
+}: LayoutProps) {
+  const { locale: rawLocale } = await params;
+  const locale = resolveLocale(rawLocale);
+  setRequestLocale(locale);
+
+  const messages = (await import(`@/messages/${locale}.json`)).default;
+
   const dir = getDirection(locale);
 
-  const messages = await getMessages(locale);
-  if (!messages) {
-    // Minimal guard: if locale file is missing, show 404
-    // (You can replace with a redirect or fallback later)
-    return null;
-  }
-
   return (
-    <html lang={locale} dir={dir}>
-      <body className="min-h-dvh antialiased">
-        {/* Makes `useTranslations()` work in any client child */}
-        <NextIntlClientProvider locale={locale} messages={messages}>
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <LocaleAttributesUpdater />
+      <div
+        className="flex min-h-dvh flex-col"
+        data-locale={locale}
+        data-dir={dir}
+      >
+        <Header />
+        <main className="flex-1 px-4 pb-20 pt-24 sm:px-6 lg:px-10">
           {children}
-        </NextIntlClientProvider>
-      </body>
-    </html>
+        </main>
+        <Footer />
+      </div>
+    </NextIntlClientProvider>
   );
 }

@@ -1,4 +1,11 @@
-// Basic configuration for next-intl.
-// It tells the library what locales your app supports.
-export default { locales: ['en','fa'], defaultLocale: 'en' };
+export const locales = ["en", "fa"] as const;
 
+export type AppLocale = (typeof locales)[number];
+
+const config = {
+  locales,
+  defaultLocale: "en" as AppLocale,
+  localeDetection: true,
+};
+
+export default config;
