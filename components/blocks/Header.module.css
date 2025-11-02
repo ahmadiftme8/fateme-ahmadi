@@ -16,7 +16,12 @@
   border-radius: 84px;
   border: 1px solid #b7b7b7;
   background: #d9d9d9;
-
+  position: relative;
+  overflow: hidden;
+  transition: width 0.35s ease, max-width 0.35s ease, padding 0.35s ease,
+    border-radius 0.35s ease, gap 0.35s ease, box-shadow 0.35s ease,
+    background 0.35s ease, border-color 0.35s ease, transform 0.35s ease,
+    max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .avatar {
@@ -116,12 +121,24 @@
 
 .menuButton:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 22px rgba(31, 103, 241, 0.32);
+  
 }
 
 .menuButton:focus-visible {
   outline: 2px solid #0d3fba;
   outline-offset: 3px;
+}
+
+@keyframes menuItemsIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .actions {
@@ -143,7 +160,7 @@
   text-decoration: none;
   font-weight: 600;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  box-shadow: 0 9px 18px rgba(31, 103, 241, 0.25);
+ 
 }
 
 .contactBtn:hover {
@@ -182,26 +199,129 @@
 }
 
 @media (max-width: 720px) {
+  .navOpen {
+    position: fixed;
+    top: 18px;
+    left: 0;
+    right: 0;
+    padding: 0 16px;
+    display: flex;
+    justify-content: center;
+    z-index: 80;
+  }
+
   .bar {
     width: 100%;
     max-width: 360px;
-    gap: 16px;
     padding: 10px 16px;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    max-height: 96px;
+  }
+
+  .barOpen {
+    position: relative;
+    width: calc(100% - 12px);
+    max-width: 320px;
+    padding: 36px 24px 28px;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto auto;
+    gap: 24px 16px;
+    align-items: start;
+    border-radius: 36px;
+    border: 1px solid #b7b7b7;
+    background: #d9d9d9;
+    box-shadow: none;
+    margin: 0 auto;
+    overflow: visible;
+    max-height: 460px;
   }
 
   .avatar {
-    order: 1;
+    grid-column: 1;
+    grid-row: 1;
+    width: 40px;
+    height: 40px;
+  }
+
+  .barOpen .avatar {
+    grid-column: 1;
+    grid-row: 1;
+    width: 52px;
+    height: 52px;
+    box-shadow: 0 12px 26px rgba(31, 103, 241, 0.15);
   }
 
   .links {
-    order: 3;
-    display: flex;
+    grid-column: 3;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: auto;
     align-items: center;
-    gap: 16px;
-    margin-inline-start: auto;
+    justify-content: start;
+    gap: 12px;
+    margin-inline-start: 0;
+    justify-items: start;
   }
 
   .links .link:not(.localeLink) {
+    display: none;
+  }
+
+  .linksOpen {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    margin-inline-start: 0;
+    opacity: 0;
+    transform: translateY(-8px);
+    animation: menuItemsIn 0.35s ease forwards;
+  }
+
+  .linksOpen .link:not(.localeLink) {
+    display: inline-flex;
+  }
+
+  .linksOpen .localeLink {
+    display: none;
+  }
+
+  .linksOpen .link {
+    font-size: 18px;
+    line-height: 1.35;
+    color: #1f67f1;
+    letter-spacing: 0.01em;
+    position: relative;
+    padding-inline-start: 0;
+  }
+
+  .linksOpen .link span {
+    display: inline;
+  }
+
+  .linksOpen .linkHome {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .linksOpen .linkHome::before {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ea5039;
+  }
+
+  .linksOpen .linkActive::after {
     display: none;
   }
 
@@ -217,12 +337,27 @@
   .menuButton {
     display: grid;
     place-items: center;
+    grid-column: 4;
+    grid-row: 1;
+    justify-self: end;
+  }
+
+  .barOpen .menuButton {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+    
+  }
+
+  .barOpen .menuButton:hover {
+    transform: none;
   }
 
   .actions {
-    order: 2;
-    flex: 1;
-    justify-content: center;
+    grid-column: 2;
+    grid-row: 1;
+    justify-content: flex-start;
+    align-items: center;
   }
 
   .contactBtn {
@@ -246,13 +381,60 @@
   .contactLabelMobile {
     display: inline;
   }
+
+  .actionsMenu {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    width: 100%;
+    justify-content: center;
+    margin-top: 0;
+  }
+
+  .actionsMenu .contactBtn {
+    width: 100%;
+    padding: 16px 0;
+    border-radius: 32px;
+    background: linear-gradient(135deg, #1f67f1 0%, #3e7bff 100%);
+    color: #ffffff;
+   
+    transition: background 0.2s ease, box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .actionsMenu .contactBtn:hover {
+    color: #ffffff;
+    transform: translateY(-1px);
+    
+  }
+
+  .actionsMenu .contactLabelDesktop {
+    display: inline;
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .actionsMenu .contactLabelMobile {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar {
+    transition: none;
+  }
+
+  .linksOpen {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (max-width: 500px) {
   .bar {
-    max-width:90%;
-    gap: 12px;
+    max-width: 90%;
     padding: 10px 12px;
+    gap: 10px;
   }
 
   .avatar {
@@ -260,17 +442,17 @@
     height: 40px;
   }
 
-  .links {
-    gap: 12px;
+  .barOpen .avatar {
+    width: 48px;
+    height: 48px;
   }
 
-
-  .linkActive ::before{
-    width: 100px;
+  .links {
+    column-gap: 10px;
   }
 
   .localeLink::after {
-    width: 40px;
+    width: 36px;
   }
 
   .menuButton {
@@ -283,7 +465,7 @@
   }
 
   .actions {
-    flex: 0 1 auto;
+    justify-content: flex-start;
   }
 
   .contactBtn {
@@ -294,8 +476,28 @@
     letter-spacing: 0;
     font-family: var(--font-poppins);
     font-weight: 100;
-     color: #525252;
+    color: #525252;
     font-size: 14px;
+  }
+
+  .barOpen {
+    max-width: calc(100% - 32px);
+    padding: 15px 20px 24px;
+    height: fit-content;
+    max-height: 420px;
+  }
+  .linksOpen{
+    justify-content: center;
+    align-items: center;
+
+  }
+  .linksOpen .link {
+    font-size: 17px;
+    
+  }
+
+  .actionsMenu .contactBtn {
+    padding: 12px 0;
   }
 }
 
