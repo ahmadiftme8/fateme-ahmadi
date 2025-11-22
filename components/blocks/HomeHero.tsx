@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
@@ -169,8 +169,9 @@ export function HomeHero() {
                 <div className={styles.serviceBody}>
                   <div className={styles.serviceHeader}>
                     <h3 className={styles.serviceName}>{service.title}</h3>
-                    <span aria-hidden className={styles.serviceArrow} />
+                    
                   </div>
+                  
 
                   <ul className={styles.serviceList}>
                     {service.items.map((item) => (
@@ -178,16 +179,20 @@ export function HomeHero() {
                     ))}
                   </ul>
                 </div>
+                <span aria-hidden className={styles.serviceArrow} />
               </div>
             ))}
           </div>
+            <div className={styles.ctabtndiv}>
 
-          <button className={styles.serviceCta} type="button">
+              <button className={styles.serviceCta} type="button">
             Get Started
             <span aria-hidden className={styles.serviceCtaArrow}>
               {"\u21AA"}
             </span>
           </button>
+            </div>
+          
         </div>
       </section>
     </>
