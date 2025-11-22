@@ -184,6 +184,69 @@
  
 }
 
+.pulseWrapper {
+  display: none;
+  position: relative;
+  margin-inline-start: 8px;
+}
+
+.pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #87c826;
+  position: relative;
+  display: inline-block;
+  box-shadow: 0 0 0 0 rgba(135, 200, 38, 0.45);
+  animation: pulseDot 1.6s ease-out infinite;
+}
+
+.pulse::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(135, 200, 38, 0.5);
+  transform: translate(-50%, -50%) scale(1);
+  box-shadow: 0 0 0 0 rgba(135, 200, 38, 0.4);
+  animation: pulseGlow 1.6s ease-out infinite;
+  transform-origin: center;
+  z-index: 0;
+}
+
+@keyframes pulseGlow {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.6;
+    box-shadow: 0 0 0 0 rgba(135, 200, 38, 0.4);
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(5.5);
+    opacity: 0;
+    box-shadow: 0 0 0 10px rgba(135, 200, 38, 0);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  opacity: 0;
+    box-shadow: 0 0 0 0 rgba(135, 200, 38, 0);
+  }
+}
+
+@keyframes pulseDot {
+  0% {
+    box-shadow: 0 0 0 0 rgba(135, 200, 38, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(135, 200, 38, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(135, 200, 38, 0);
+  }
+}
+
 @media (max-width: 1100px) {
   .bar {
     gap: 32px;
@@ -384,7 +447,13 @@
   }
 
   .contactLabelMobile {
-    display: inline;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .pulseWrapper {
+    display: inline-flex;
+    align-items: center;
   }
 
   .actionsMenu {
@@ -412,6 +481,9 @@
     
   }
 
+
+
+
   .actionsMenu .contactLabelDesktop {
     display: inline;
     font-size: 18px;
@@ -433,6 +505,15 @@
     opacity: 1;
     transform: none;
   }
+
+  .pulse::after {
+    animation: none;
+  }
+
+  .pulse {
+    animation: none;
+    box-shadow: none;
+  }
 }
 
 @media (max-width: 500px) {
@@ -441,6 +522,7 @@
     max-width: 90%;
     padding: 10px 12px;
     gap: 10px;
+    row-gap: 0;
   }
 
   .avatar {
@@ -490,6 +572,7 @@
     max-width: calc(100% - 32px);
     padding: 15px 20px 24px;
     max-height: var(--header-bar-expanded);
+    row-gap: 32px;
   }
   .linksOpen{
     justify-content: center;
@@ -508,4 +591,10 @@
 
 :global(html[dir="rtl"]) .links {
   direction: rtl;
+}
+
+:global(html[lang="fa"]) .links .link,
+:global(html[lang="fa"]) .localeText,
+:global(html[lang="fa"]) .contactLabelMobile {
+  letter-spacing: normal;
 }

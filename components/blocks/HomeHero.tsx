@@ -1,15 +1,59 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { motion, useReducedMotion } from "framer-motion";
 
 import styles from "./HomeHero.module.css";
 
 export function HomeHero() {
   const t = useTranslations("hero");
+  const locale = useLocale();
   const reduceMotion = useReducedMotion();
+  const isFa = locale === "fa";
+
+  const services = [
+    {
+      id: 1,
+      title: "Graphic Design",
+      items: [
+        "Logo and brand identity design",
+        "Social media graphics and ad creatives",
+        "Infographics and data visualization",
+        "Custom illustrations and icons",
+      ],
+    },
+    {
+      id: 2,
+      title: "Web Development",
+      items: [
+        "Logo and brand identity design",
+        "Social media graphics and ad creatives",
+        "Infographics and data visualization",
+        "Custom illustrations and icons",
+      ],
+    },
+    {
+      id: 3,
+      title: "UI/UX Design",
+      items: [
+        "Logo and brand identity design",
+        "Social media graphics and ad creatives",
+        "Infographics and data visualization",
+        "Custom illustrations and icons",
+      ],
+    },
+    {
+      id: 4,
+      title: "Video Editing",
+      items: [
+        "Logo and brand identity design",
+        "Social media graphics and ad creatives",
+        "Infographics and data visualization",
+        "Custom illustrations and icons",
+      ],
+    },
+  ];
 
   const easeOutCurve = [0.22, 1, 0.36, 1] as const;
 
@@ -32,72 +76,120 @@ export function HomeHero() {
   });
 
   return (
-    <section className={styles.hero}>
-      <div className={styles.container}>
-        <motion.div
-          initial="initial"
-          animate="animate"
-          className={styles.heroWrap}
-        >
-          <motion.div variants={textVariants(0.1)} className={styles.heroLeft}>
-            <span className={styles.heroName}>{t("name")}</span>
-            <span className={styles.heroRoleDesigner}>{t("designer")}</span>
-            <span className={styles.heroRolesMobile} aria-hidden="true">
-              <span>{t("designer")}</span>
-              <span className={styles.heroAmpersand}>&</span>
-              <span>{t("developer")}</span>
-            </span>
-          </motion.div>
-
-          <motion.div variants={imageVariants} className={styles.heroCard}>
-            <div className={styles.heroImageFrame}>
-              <Image
-                src="/fateme-pic.png"
-                alt={t("imageAlt")}
-                fill
-                sizes="304px"
-                priority
-                className={styles.heroImage}
-              />
-            </div>
-            <Link
-              href="/fateme-pic.png"
-              className={styles.cvBadge}
-              download
-              aria-label={t("downloadCv")}
+    <>
+      <section className={styles.hero}>
+        <div className={styles.container}>
+          <motion.div
+            initial="initial"
+            animate="animate"
+            className={styles.heroWrap}
+          >
+            <motion.div
+              variants={textVariants(0.1)}
+              className={styles.heroLeft}
             >
-              <svg
-                className={styles.cvIcon}
-                viewBox="0 0 64 64"
-                aria-hidden="true"
-              >
-                <path d="M32 6a4 4 0 0 1 4 4v22.34l6.63-6.63a4 4 0 0 1 5.66 5.66l-14 14a4 4 0 0 1-5.66 0l-14-14a4 4 0 1 1 5.66-5.66L28 32.34V10a4 4 0 0 1 4-4zM16 54a4 4 0 0 1 0-8h32a4 4 0 0 1 0 8z" />
-              </svg>
-              <span>{t("cvBadge")}</span>
-            </Link>
+              <span className={styles.heroName}>{t("name")}</span>
+              {isFa ? (
+                <span className={styles.heroRoleCombined}>
+                  {t("designerDeveloper")}
+                </span>
+              ) : (
+                <>
+                  <span className={styles.heroRoleDesigner}>{t("designer")}</span>
+                  <span className={styles.heroRolesMobile} aria-hidden="true">
+                    <span>{t("designer")}</span>
+                    <span className={styles.heroAmpersand}>&</span>
+                    <span>{t("developer")}</span>
+                  </span>
+                </>
+              )}
+            </motion.div>
+
+            <motion.div variants={imageVariants} className={styles.heroCard}>
+              <div className={styles.heroImageFrame}>
+                <Image
+                  src="/fateme-pic.png"
+                  alt={t("imageAlt")}
+                  fill
+                  sizes="304px"
+                  priority
+                  className={styles.heroImage}
+                />
+              </div>
+            </motion.div>
+
+            <motion.div
+              variants={textVariants(0.18)}
+              className={styles.heroRight}
+            >
+              {!isFa && (
+                <span className={styles.heroRoleDeveloper}>
+                  {t("developer")}
+                </span>
+              )}
+              <div className={styles.heroDesc}>
+                <p>{t("descriptionPrimary")}</p>
+                <p>{t("descriptionSecondary")}</p>
+              </div>
+            </motion.div>
           </motion.div>
 
-          <motion.div variants={textVariants(0.18)} className={styles.heroRight}>
-            <span className={styles.heroRoleDeveloper}>{t("developer")}</span>
-            <div className={styles.heroDesc}>
-              <p>{t("descriptionPrimary")}</p>
-              <p>{t("descriptionSecondary")}</p>
-            </div>
-          </motion.div>
-        </motion.div>
+          <div className={styles.scrollIndicator} aria-hidden="true">
+            <span className={styles.scrollLine} />
+            <span className={styles.scrollLabel}>SCROLL</span>
+          </div>
 
-        <div className={styles.scrollIndicator} aria-hidden="true">
-          <span className={styles.scrollLine} />
-          <span className={styles.scrollLabel}>SCROLL</span>
+          <motion.div
+            className={styles.star}
+            initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.7 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, ease: easeOutCurve, delay: 0.3 }}
+          />
         </div>
 
-        <motion.div
-          className={styles.star}
-          initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.7 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: easeOutCurve, delay: 0.3 }}
-        />
-      </div>
-    </section>
+        <div className={styles.postHero}>
+          <p className={styles.postHeroText}>
+            I'm Fatemeh, a multidisciplinary designer and front-end developer
+            creating impactful digital experiences, visuals, and products for
+            brands and businesses for over 7 years.
+          </p>
+        </div>
+      </section>
+
+      <section className={styles.servicesSection}>
+        <div className={styles.servicesContainer}>
+          <h2 className={styles.servicesTitle}>My Services</h2>
+
+          <div className={styles.servicesGrid}>
+            {services.map((service) => (
+              <div key={service.id} className={styles.serviceCard}>
+                <div className={styles.serviceNumber}>{service.id}</div>
+                <div className={styles.serviceDivider} aria-hidden="true" />
+
+                <div className={styles.serviceBody}>
+                  <div className={styles.serviceHeader}>
+                    <h3 className={styles.serviceName}>{service.title}</h3>
+                    <span aria-hidden className={styles.serviceArrow} />
+                  </div>
+
+                  <ul className={styles.serviceList}>
+                    {service.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <button className={styles.serviceCta} type="button">
+            Get Started
+            <span aria-hidden className={styles.serviceCtaArrow}>
+              {"\u21AA"}
+            </span>
+          </button>
+        </div>
+      </section>
+    </>
   );
 }

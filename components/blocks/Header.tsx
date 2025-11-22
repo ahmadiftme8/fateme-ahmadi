@@ -110,6 +110,9 @@ export function Header() {
 
   const nextLocale = locale === "fa" ? "en" : "fa";
   const localeHref = getLocalizedPath(pathname, nextLocale);
+  const localeTextClass = `${styles.localeText} ${
+    nextLocale === "fa" ? "font-vazirmatn" : ""
+  }`;
 
   useEffect(() => {
     setIsMenuOpen(false);
@@ -273,7 +276,7 @@ export function Header() {
             onClick={handleCloseMenu}
             className={`${styles.link} ${styles.linkActive} ${styles.localeLink}`}
           >
-            <span className={styles.localeText}>
+            <span className={localeTextClass}>
               <span>{nextLocale === "fa" ? "\u0641\u0627\u0631\u0633\u06cc" : "EN"}</span>
             </span>
           </Link>
@@ -380,6 +383,9 @@ export function Header() {
             </span>
             <span className={styles.contactLabelMobile} aria-hidden="true">
               Available&nbsp;For&nbsp;Work
+              <span className={styles.pulseWrapper} aria-hidden="true">
+                <span className={styles.pulse} />
+              </span>
             </span>
           </Link>
         </div>

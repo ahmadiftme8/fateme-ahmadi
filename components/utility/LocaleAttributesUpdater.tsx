@@ -20,6 +20,8 @@ export function LocaleAttributesUpdater() {
     body.setAttribute("dir", dir);
     body.dataset.locale = locale;
     body.dataset.dir = dir;
+    body.classList.toggle("font-vazirmatn", locale === "fa");
+    body.classList.toggle("font-poppins", locale !== "fa");
   }, [locale]);
 
   return null;

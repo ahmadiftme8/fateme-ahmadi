@@ -2,7 +2,7 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { cookies, headers } from "next/headers";
-import { Big_Shoulders, Poppins, Vazirmatn } from "next/font/google";
+import { Big_Shoulders, Poppins } from "next/font/google";
 import { ReactNode } from "react";
 
 import { getDirection } from "@/lib/i18n";
@@ -19,12 +19,6 @@ const bigShoulders = Big_Shoulders({
   subsets: ["latin"],
   weight: "700",
   variable: "--font-big-shoulders",
-  display: "swap",
-});
-
-const vazirmatn = Vazirmatn({
-  subsets: ["arabic"],
-  variable: "--font-vazirmatn",
   display: "swap",
 });
 
@@ -66,12 +60,15 @@ export default async function RootLayout({
 }) {
   const locale = await detectLocale();
   const dir = getDirection(locale);
+  const bodyFontClass = locale === "fa" ? "font-vazirmatn" : "font-poppins";
 
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
       <body
-        className={`${poppins.variable} ${vazirmatn.variable} ${bigShoulders.variable} min-h-dvh antialiased font-poppins`}
+        className={`${poppins.variable} ${bigShoulders.variable} min-h-dvh antialiased ${bodyFontClass}`}
         data-theme="light"
+        data-locale={locale}
+        data-dir={dir}
       >
         {children}
       </body>

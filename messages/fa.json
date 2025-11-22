@@ -1,8 +1,9 @@
 {
   "hero": {
     "name": "فاطمه احمدی",
-    "designer": "طراح",
-    "developer": "توسعه‌دهنده",
+    "designer": "طراح گرافیک",
+    "developer": "برنامه نویس",
+    "designerDeveloper": "طراح گرافیک و برنامه نویس",
     "descriptionPrimary": "از سال ۲۰۱۹ در حال خلق و توسعه تجربه‌های دیجیتال هستم",
     "descriptionSecondary": "و از سال ۲۰۲۲ تولید محتوای ویدیویی انجام می‌دهم",
     "downloadCv": "دانلود رزومه",

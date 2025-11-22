@@ -1,5 +1,37 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/Vazirmatn/Vazirmatn-Arabic-400.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/Vazirmatn/Vazirmatn-Arabic-500.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/Vazirmatn/Vazirmatn-Arabic-600.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/Vazirmatn/Vazirmatn-Arabic-700.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
 :root {
   color-scheme: light;
   --color-background: #d9d9d9;
@@ -71,20 +103,63 @@ button {
   font-family: var(--font-big-shoulders), "Big Shoulders Display", sans-serif;
 }
 
+.font-vazirmatn {
+  font-family: "Vazirmatn", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+}
+
 ::selection {
   background-color: var(--color-primary);
   color: #ffffff;
 }
 
 
-@media  (max-width: 500px) {
+@media (max-width: 500px) {
   body {
-  font-family: var(--font-poppins), system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
-  text-rendering: optimizeLegibility;
-  background-image: none;
-  background-color: var(--color-background);
-  background-size: 32px 32px;
+    font-family: var(--font-poppins), system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", sans-serif;
+    text-rendering: optimizeLegibility;
+    background-image: none;
+    background-color: var(--color-background);
+    background-size: 32px 32px;
+  }
 }
-  
+
+html[lang="fa"] body {
+  font-family: "Vazirmatn", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  letter-spacing: normal;
+}
+
+html[lang="fa"] :where(p) {
+  line-height: 1.8;
+  letter-spacing: normal;
+}
+
+html[lang="fa"] :where(.font-poppins, .font-big-shoulders, .links, .link, .localeText, .contactLabelMobile, .contactLabelDesktop, .contactBtn, .actionsMenu .contactBtn) {
+  font-family: "Vazirmatn", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+html[lang="fa"] [class*="tracking-"] {
+  letter-spacing: normal;
+}
+
+html[lang="fa"] :where(ul, ol) {
+  padding-inline-start: 1.5rem;
+  padding-inline-end: 0;
+}
+
+html[lang="fa"] :where(code, pre, kbd, samp, .force-ltr) {
+  direction: ltr;
+  unicode-bidi: embed;
+  text-align: left;
+}
+
+html[lang="fa"] :where(a[href^="http"], a[href^="https"], time, .numeric) {
+  direction: ltr;
+  unicode-bidi: embed;
+  text-align: left;
 }
