@@ -1,6 +1,8 @@
 .nav {
-  position: sticky;
+  position: fixed;
   top: 18px;
+  left: 0;
+  right: 0;
   z-index: 50;
   padding: 0 16px;
 }
@@ -10,10 +12,10 @@
   align-items: center;
   gap: 56px;
   width: fit-content;
-  height: 60;
+  min-height: 60px;
   margin: 0 auto;
   padding: 0px 0px;
-  border-radius: 84px;
+  border-radius: 36px;
   border: 1px solid #b7b7b7;
   background: #d9d9d9;
   position: relative;
@@ -22,6 +24,7 @@
     border-radius 0.35s ease, gap 0.35s ease, box-shadow 0.35s ease,
     background 0.35s ease, border-color 0.35s ease, transform 0.35s ease,
     max-height 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: max-height;
 }
 
 .avatar {
@@ -211,6 +214,8 @@
   }
 
   .bar {
+    --header-bar-collapsed: 96px;
+    --header-bar-expanded: 460px;
     width: 100%;
     max-width: 360px;
     padding: 10px 16px;
@@ -219,7 +224,7 @@
     align-items: center;
     gap: 12px;
     position: relative;
-    max-height: 96px;
+    max-height: var(--header-bar-collapsed);
   }
 
   .barOpen {
@@ -236,8 +241,8 @@
     background: #d9d9d9;
     box-shadow: none;
     margin: 0 auto;
-    overflow: visible;
-    max-height: 460px;
+    overflow: hidden;
+    max-height: var(--header-bar-expanded);
   }
 
   .avatar {
@@ -432,6 +437,7 @@
 
 @media (max-width: 500px) {
   .bar {
+    --header-bar-expanded: 420px;
     max-width: 90%;
     padding: 10px 12px;
     gap: 10px;
@@ -483,8 +489,7 @@
   .barOpen {
     max-width: calc(100% - 32px);
     padding: 15px 20px 24px;
-    height: fit-content;
-    max-height: 420px;
+    max-height: var(--header-bar-expanded);
   }
   .linksOpen{
     justify-content: center;
