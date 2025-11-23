@@ -53,7 +53,7 @@ export default function Services() {
   return (
     <section className={styles.servicesSection}>
       <div className={styles.servicesContainer}>
-        <h2 className={styles.servicesTitle}>My Services</h2>
+        <h2 className="sectionTitle">My Services</h2>
 
         <div className={styles.servicesGrid}>
           {services.map((service) => (
