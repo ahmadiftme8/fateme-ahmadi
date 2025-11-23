@@ -1,0 +1,229 @@
+.featuredProjects {
+  background-color: #f7f7f7;
+}
+
+.featuredProjects__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.featuredProjects__title {
+  font-family: "Big Shoulders Text", sans-serif;
+  font-weight: 800;
+  font-size: 90px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  text-align: center;
+  color: #1f67f1;
+  letter-spacing: 0.5px;
+}
+
+.featuredProjects__categories {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.featuredProjects__categoryList {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.featuredProjects__category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.6;
+  text-transform: uppercase;
+  text-decoration: underline;
+  color: #797979;
+  transition: color 0.2s ease;
+}
+
+.featuredProjects__category--active {
+  color: #1f67f1;
+}
+
+.featuredProjects__categoryIcon {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.featuredProjects__categoryLabel {
+  text-align: center;
+}
+
+.featuredProjects__subcategories {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 17px;
+  flex-wrap: nowrap;
+}
+
+.featuredProjects__pill {
+  height: 43px;
+  padding: 0 16px;
+  border-radius: 41px;
+  border: 1px solid #1f67f1;
+  background: transparent;
+  color: #1f67f1;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.featuredProjects__pill:hover {
+  background-color: #e8f0ff;
+}
+
+.featuredProjects__pill--active {
+  background-color: #1f67f1;
+  color: #d9d9d9;
+  border-color: #1f67f1;
+}
+
+.featuredProjects__galleryRow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 46px;
+}
+
+.featuredProjects__arrow {
+  width: 94px;
+  height: 94px;
+  border-radius: 50%;
+  border: 1px solid #dcdcdc;
+  background: transparent;
+  color: #1f67f1;
+  font-size: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.featuredProjects__arrow:hover {
+  background-color: #e8f0ff;
+  border-color: #1f67f1;
+}
+
+.featuredProjects__grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 44px 43px;
+}
+
+.featuredProjects__gridItem {
+  width: 100%;
+  aspect-ratio: 495 / 361;
+  background: #e5e5e5;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.featuredProjects__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .featuredProjects__title {
+    font-size: 48px;
+    line-height: 1.1;
+  }
+
+  .featuredProjects__categoryList {
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .featuredProjects__category {
+    font-size: 20px;
+  }
+
+  .featuredProjects__subcategories {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .featuredProjects__pill {
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .featuredProjects__galleryRow {
+    gap: 24px;
+  }
+
+  .featuredProjects__arrow {
+    width: 72px;
+    height: 72px;
+    font-size: 30px;
+  }
+
+  .featuredProjects__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+  }
+}
+
+@media (max-width: 600px) {
+  .featuredProjects__container {
+    padding: 60px 16px;
+    gap: 24px;
+  }
+
+  .featuredProjects__title {
+    font-size: 32px;
+  }
+
+  .featuredProjects__categoryList {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .featuredProjects__subcategories {
+    justify-content: center;
+  }
+
+  .featuredProjects__galleryRow {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .featuredProjects__arrow {
+    display: none;
+  }
+
+  .featuredProjects__grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}

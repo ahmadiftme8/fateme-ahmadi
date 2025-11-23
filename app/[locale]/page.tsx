@@ -1,4 +1,6 @@
 import { HomeHero } from "@/components/blocks/HomeHero";
+import FeaturedProjects from "@/components/blocks/FeaturedProjects";
+import Services from "@/components/blocks/Services";
 import { getTranslations } from "next-intl/server";
 
 type PageParams = {
@@ -25,5 +27,11 @@ export async function generateMetadata({ params }: PageParams) {
 }
 
 export default function HomePage() {
-  return <HomeHero />;
+  return (
+    <>
+      <HomeHero />
+      <Services />
+      <FeaturedProjects />
+    </>
+  );
 }
