@@ -25,7 +25,7 @@
   align-items: center;
   justify-content: center;
   gap: 63px;
-  padding: 75px 0 0;
+  padding: 0px 0 0;
   margin: 0;
   list-style: none;
   flex-wrap: wrap;
@@ -42,7 +42,7 @@
   font-size: 24px;
   line-height: 43px;
   text-transform: uppercase;
-  text-decoration: underline;
+  
   color: #797979;
   transition: color 0.2s ease;
   flex: none;
@@ -59,11 +59,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
+   border-radius: 50%; 
 }
 
 .featuredProjects__categoryLabel {
   text-align: center;
   width: 100%;
+  border-bottom: 3px solid currentColor; /* Creates a thicker, closer underline */
+  padding-bottom: 2px; /* Adjust spacing between text and underline */
+  border-bottom: 3px solid rgba(121, 121, 121, 0.301); /* 50% opacity for inactive */
+  
+}
+
+.featuredProjects__category--active .featuredProjects__categoryLabel {
+  border-bottom: 3px solid #1f67f1; /* Full opacity for active */
 }
 
 .featuredProjects__categoryList li:nth-child(1) {
