@@ -65,17 +65,27 @@
 .featuredProjects__categoryLabel {
   text-align: center;
   width: 100%;
+  display: inline-block;
   border-bottom: 3px solid currentColor; /* Creates a thicker, closer underline */
   padding-bottom: 2px; /* Adjust spacing between text and underline */
   border-bottom: 3px solid rgba(121, 121, 121, 0.301); /* 50% opacity for inactive */
+  white-space: nowrap;
   
+}
+
+.featuredProjects__categoryLabelFull {
+  display: inline;
+}
+
+.featuredProjects__categoryLabelShort {
+  display: none;
 }
 
 .featuredProjects__category--active .featuredProjects__categoryLabel {
   border-bottom: 3px solid #1f67f1; /* Full opacity for active */
 }
 
-.featuredProjects__categoryList li:nth-child(1) {
+/* .featuredProjects__categoryList li:nth-child(1) {
   width: 205px;
   min-height: 113px;
 }
@@ -93,7 +103,7 @@
 .featuredProjects__categoryList li:nth-child(4) {
   width: 178px;
   min-height: 113px;
-}
+} */
 
 .featuredProjects__subcategories {
   display: flex;
@@ -179,9 +189,64 @@
   display: block;
 }
 
+.featuredProjects__title {
+}
+
+.featuredProjects__worksWrapper {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.featuredProjects__fadeOverlay {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 160px;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(217, 217, 217, 0) 0%, #d9d9d9 89.42%);
+}
+
+.featuredProjects__loadMoreWrapper {
+  display: none;
+  justify-content: center;
+  width: 100%;
+}
+
+.featuredProjects__loadMoreButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 300px;
+  height: 43px;
+  border-radius: 61px;
+  background: #1f67f1;
+  color: #d9d9d9;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 43px;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+}
+
+.featuredProjects__loadMoreIcon {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 2px solid rgba(217, 217, 217, 0.6);
+  border-top-color: #d9d9d9;
+}
+
 @media (max-width: 900px) {
   .featuredProjects__categoryList {
-    gap: 32px;
+    gap: 0px;
     flex-wrap: wrap;
   }
 
@@ -215,24 +280,132 @@
   }
 }
 
-@media (max-width: 600px) {
-  .featuredProjects__container {
-    padding: 60px 16px;
-    gap: 24px;
+@media (max-width: 800px) {
+  .featuredProjects__categories {
+    justify-content: center;
   }
 
   .featuredProjects__categoryList {
-    flex-direction: column;
-    gap: 16px;
+    flex-direction: row;
+    width: 88%;
+   
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 0px;
+    padding: 0;
+    margin: 0 auto;
   }
 
-  .featuredProjects__subcategories {
+  .featuredProjects__categoryList li {
+    width: auto;
+    min-height: 81px;
+  }
+
+  .featuredProjects__category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 32px 0 0;
+    font-size: 14px;
+    line-height: 43px;
+    text-transform: uppercase;
+    color: #797979;
+  }
+
+  .featuredProjects__categoryIcon {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+    border-radius: 999px;
+  }
+
+  .featuredProjects__categoryIcon svg,
+  .featuredProjects__categoryIcon img {
+    width: 100%;
+    height: 100%;
+    fill: #797979;
+  }
+
+  .featuredProjects__categoryLabel {
+    display: inline-block;
+    width: auto;
+    min-width: max-content;
+    height: 43px;
+    line-height: 43px;
+    text-align: center;
+    border-bottom: 2px solid rgba(121, 121, 121, 0.6);
+    padding-bottom: 2px;
+    color: #797979;
+    text-decoration: none;
+  }
+
+  .featuredProjects__categoryLabelFull {
+    display: none;
+  }
+
+  .featuredProjects__categoryLabelShort {
+    display: inline;
+  }
+
+  .featuredProjects__category--active .featuredProjects__categoryIcon {
+    background: #1f67f1;
+  }
+
+  .featuredProjects__category--active .featuredProjects__categoryIcon svg,
+  .featuredProjects__category--active .featuredProjects__categoryIcon img {
+    fill: #ffffff;
+  }
+
+  .featuredProjects__category--active .featuredProjects__categoryLabel {
+    color: #1f67f1;
+    border-bottom-color: #1f67f1;
+  }
+}
+
+@media (max-width: 600px) {
+  .featuredProjects__container {
+    max-width: 390px;
+    padding: 48px 16px;
+    gap: 20px;
+    margin: 0 auto;
+  }
+
+
+
+  .featuredProjects__subcategories {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 12px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    padding: 0 16px 20px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .featuredProjects__subcategories::-webkit-scrollbar {
+    display: none;
+  }
+
+  .featuredProjects__pill {
+    height: 38px;
+    padding: 6px 10px;
+    border-radius: 46px;
+    font-size: 11px;
+    line-height: 13px;
+    white-space: nowrap;
+    flex: 0 0 auto;
   }
 
   .featuredProjects__galleryRow {
     flex-direction: column;
     gap: 20px;
+    align-items: center;
   }
 
   .featuredProjects__arrow {
@@ -240,7 +413,34 @@
   }
 
   .featuredProjects__grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 27px;
+    max-width: 297px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .featuredProjects__gridItem {
+    max-width: 297px;
+    width: 100%;
+    aspect-ratio: 297 / 216;
+    margin: 0 auto;
+  }
+
+  .featuredProjects__worksWrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .featuredProjects__fadeOverlay {
+    display: block;
+  }
+
+  .featuredProjects__loadMoreWrapper {
+    display: flex;
   }
 }
+
+
+

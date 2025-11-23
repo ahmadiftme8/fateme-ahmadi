@@ -42,7 +42,7 @@ export default function FeaturedProjects() {
   return (
     <section id="featured-projects" className={styles.featuredProjects}>
       <div className={styles.featuredProjects__container}>
-        <h2 className="sectionTitle">Featured Projects</h2>
+        <h2 className={`${styles.featuredProjects__title} sectionTitle`}>Featured Projects</h2>
 
         <nav className={styles.featuredProjects__categories} aria-label="Featured project categories">
           <ul className={styles.featuredProjects__categoryList}>
@@ -87,16 +87,19 @@ export default function FeaturedProjects() {
             <span aria-hidden="true">‹</span>
           </button>
 
-          <div className={styles.featuredProjects__grid}>
-            {galleryItems.map((item) => (
-              <div key={item.id} className={styles.featuredProjects__gridItem}>
-                <img
-                  src={item.imageSrc}
-                  alt={`Featured project ${item.id}`}
-                  className={styles.featuredProjects__image}
-                />
-              </div>
-            ))}
+          <div className={styles.featuredProjects__worksWrapper}>
+            <div className={styles.featuredProjects__grid}>
+              {galleryItems.map((item) => (
+                <div key={item.id} className={styles.featuredProjects__gridItem}>
+                  <img
+                    src={item.imageSrc}
+                    alt={`Featured project ${item.id}`}
+                    className={styles.featuredProjects__image}
+                  />
+                </div>
+              ))}
+            </div>
+            <div className={styles.featuredProjects__fadeOverlay} aria-hidden="true" />
           </div>
 
           <button
@@ -105,6 +108,13 @@ export default function FeaturedProjects() {
             aria-label="Next projects"
           >
             <span aria-hidden="true">›</span>
+          </button>
+        </div>
+
+        <div className={styles.featuredProjects__loadMoreWrapper}>
+          <button type="button" className={styles.featuredProjects__loadMoreButton}>
+            <span className={styles.featuredProjects__loadMoreIcon} aria-hidden="true" />
+            <span>Load More</span>
           </button>
         </div>
       </div>
