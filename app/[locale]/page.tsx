@@ -1,6 +1,8 @@
 import { HomeHero } from "@/components/blocks/HomeHero";
 import FeaturedProjects from "@/components/blocks/FeaturedProjects";
 import Services from "@/components/blocks/Services";
+import TrustedBy from "@/components/blocks/TrustedBy";
+import FAQ from "@/components/blocks/FAQ";
 import { getTranslations } from "next-intl/server";
 
 type PageParams = {
@@ -32,6 +34,8 @@ export default function HomePage() {
       <HomeHero />
       <Services />
       <FeaturedProjects />
+      <TrustedBy />
+      <FAQ />
     </>
   );
 }

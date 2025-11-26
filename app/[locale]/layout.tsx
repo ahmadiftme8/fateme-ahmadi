@@ -45,7 +45,7 @@ export default async function LocaleLayout({
         data-dir={dir}
       >
         <Header />
-        <main className="flex-1 px-4 pb-20 pt-24 sm:px-6 lg:px-10">
+        <main className="flex-1  pb-20 pt-24 ">
           {children}
         </main>
         <Footer />

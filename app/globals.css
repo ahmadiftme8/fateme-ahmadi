@@ -63,6 +63,7 @@ body {
   background-color: var(--color-background);
   color: var(--color-foreground);
   transition: background-color 0.35s ease, color 0.35s ease;
+  
 }
 
 body {
@@ -72,6 +73,7 @@ body {
   background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 32px 32px;
+  
 }
 
 body[data-theme="dark"] {
