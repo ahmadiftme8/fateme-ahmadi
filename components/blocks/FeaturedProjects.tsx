@@ -5,6 +5,7 @@ import styles from "./FeaturedProjects.module.css";
 type Category = {
   id: string;
   label: string;
+  shortLabel: string;
   active: boolean;
   Icon: (props: { active?: boolean }) => JSX.Element;
 };
@@ -15,10 +16,10 @@ type GalleryItem = {
 };
 
 const categories: Category[] = [
-  { id: "graphic-design", label: "Graphic Design", active: true, Icon: GraphicDesignIcon },
-  { id: "web-development", label: "Web Development", active: false, Icon: WebDevIcon },
-  { id: "ui-ux-design", label: "UI/UX Design", active: false, Icon: UiUxIcon },
-  { id: "video-editing", label: "Video Editing", active: false, Icon: VideoEditingIcon },
+  { id: "graphic-design", label: "Graphic Design", shortLabel: "Graphic", active: true, Icon: GraphicDesignIcon },
+  { id: "web-development", label: "Web Development", shortLabel: "Web", active: false, Icon: WebDevIcon },
+  { id: "ui-ux-design", label: "UI/UX Design", shortLabel: "UI/UX", active: false, Icon: UiUxIcon },
+  { id: "video-editing", label: "Video Editing", shortLabel: "Video", active: false, Icon: VideoEditingIcon },
 ];
 
 const subcategories = [
@@ -57,7 +58,10 @@ export default function FeaturedProjects() {
                 <span className={styles.featuredProjects__categoryIcon} aria-hidden="true">
                   <category.Icon active={category.active} />
                 </span>
-                <span className={styles.featuredProjects__categoryLabel}>{category.label}</span>
+                <span className={styles.featuredProjects__categoryLabel} aria-label={category.label}>
+                  <span className={styles.featuredProjects__categoryLabelFull}>{category.label}</span>
+                  <span className={styles.featuredProjects__categoryLabelShort}>{category.shortLabel}</span>
+                </span>
               </li>
             ))}
           </ul>
