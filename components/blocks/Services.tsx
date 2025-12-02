@@ -80,9 +80,7 @@ export default function Services() {
         <div className={styles.ctabtndiv}>
           <button className={styles.serviceCta} type="button">
             Get Started
-            <span aria-hidden className={styles.serviceCtaArrow}>
-              {"\u21AA"}
-            </span>
+            
           </button>
         </div>
       </div>

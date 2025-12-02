@@ -12,10 +12,14 @@
 }
 
 .postHero {
-  max-width: 1180px;
-  margin: 24px auto 0;
+
+margin-top: 70px;
   padding: 0 24px;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
 }
 
 .postHeroText {
@@ -25,6 +29,8 @@
   font-style: normal;
   font-weight: 300;
   font-size: 18px;
+  max-width: 600px;
+  text-align: center;
   
 }
 
@@ -33,6 +39,7 @@
   align-items: center;
   grid-template-columns: minmax(0, 1fr) minmax(0, 304px) minmax(0, 1fr);
   gap: clamp(16px, 2.5vw, 24px);
+  position: relative;
 }
 
 @media (max-width: 980px) {
@@ -52,6 +59,8 @@
 }
 
 .heroName {
+  position: absolute;
+  bottom: 240px;
   font-family: var(--font-big-shoulders), "Big Shoulders", sans-serif;
   font-weight: 900;
   text-transform: uppercase;
@@ -65,7 +74,7 @@
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  font-size: 120px;
+  font-size: 100px;
   line-height: 1;
   margin-top: 4px;
 }
@@ -123,7 +132,7 @@
 
 .heroCard {
   position: relative;
-  width: 100%;
+  width: 80%;
   max-width: 304px;
   aspect-ratio: 304 / 456;
   border-radius: 65px;
@@ -159,7 +168,7 @@
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  font-size: 120px;
+  font-size: 100px;
   line-height: 1;
   margin: -6px 0 0;
 }
@@ -168,9 +177,17 @@
   max-width: 460px;
   font-family: var(--font-big-shoulders), "Big Shoulders", sans-serif;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 1.45;
-  text-align: start;
+  font-size: 16px;
+  
+  text-align: right;
+  position: absolute;
+  bottom: 75px;
+  display: flex;
+
+  align-self: end;
+  flex-direction: column;
+ 
+  
 }
 
 .heroDesc p {
@@ -178,7 +195,8 @@
 }
 
 .heroDesc p + p {
-  margin-top: 6px;
+  margin-top: 0px;
+  text-align: right;
 }
 
 @media (max-width: 980px) {
@@ -286,7 +304,7 @@
 
 
   .heroName {
-  
+  position: unset;
   font-size: 46px;
   padding: 0;
     margin: 0;
@@ -328,6 +346,7 @@
 
 .star {
   display: flex;
+  margin-top: 70px;
 
   justify-self: center;
   width: 64px;

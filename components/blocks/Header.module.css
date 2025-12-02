@@ -49,7 +49,7 @@
 .links {
   display: flex;
   align-items: flex-end;
-  gap: 55px;
+  gap: 20px;
   font-family: var(--font-poppins), "Poppins", sans-serif;
 }
 
@@ -91,7 +91,7 @@
 }
 
 .localeLink::after {
-  width: 100px;
+  width: 45px;
 }
 
 .localeText {
