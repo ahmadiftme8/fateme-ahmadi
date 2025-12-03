@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
+import { useScrollContext } from "@/components/utility/ScrollContext";
 import styles from "./FeaturedProjects.module.css";
 
 type Category = {
@@ -54,89 +55,193 @@ const ChevronRightIcon = () => (
 
 export default function FeaturedProjects() {
   const [activeCategory, setActiveCategory] = useState("graphic-design");
+  const { setIsSticky, isSticky } = useScrollContext();
+  const sectionRef = useRef<HTMLElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [wrapperHeight, setWrapperHeight] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const { scrollY } = useScroll();
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 720);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (wrapperRef.current) {
+      setWrapperHeight(wrapperRef.current.offsetHeight);
+    }
+  }, [isMobile]);
+
+  useMotionValueEvent(scrollY, "change", () => {
+    if (!isMobile || !wrapperRef.current || !sectionRef.current) {
+      if (isSticky) setIsSticky(false);
+      return;
+    }
+
+    const wrapperRect = wrapperRef.current.getBoundingClientRect();
+    const sectionRect = sectionRef.current.getBoundingClientRect();
+
+    // Header height offset (approx 70px)
+    const headerOffset = 70;
+    // Buffer to prevent flickering (hysteresis)
+    const buffer = 15;
+
+    // User wants early revert when "Trusted By" (next section) enters or reaches middle of screen.
+    // sectionRect.bottom is effectively the top of the next section.
+    // We revert when sectionRect.bottom moves up to the middle of the viewport.
+    const exitThreshold = window.innerHeight / 2;
+
+    if (isSticky) {
+      // Logic to turn OFF sticky
+      // 1. Scrolled back up past the trigger point (with buffer)
+      const scrolledBackUp = wrapperRect.top > (headerOffset + buffer);
+
+      // 2. Scrolled past the exit threshold (with buffer)
+      // Revert when the section bottom is above the middle of the screen
+      const scrolledPast = sectionRect.bottom <= (exitThreshold - buffer);
+
+      if (scrolledBackUp || scrolledPast) {
+        setIsSticky(false);
+      }
+    } else {
+      // Logic to turn ON sticky
+      // Strictly when we hit the offset and are within the section
+      const hitTrigger = wrapperRect.top <= headerOffset;
+      // Ensure we are still "above" the exit threshold
+      const withinSection = sectionRect.bottom > (exitThreshold + buffer);
+
+      if (hitTrigger && withinSection) {
+        setIsSticky(true);
+      }
+    }
+  });
 
   return (
-    <section id="featured-projects" className={styles.featuredProjects}>
+    <section ref={sectionRef} id="featured-projects" className={styles.featuredProjects}>
       <div className={styles.featuredProjects__container}>
         <h2 className={`${styles.featuredProjects__title} sectionTitle`}>Featured Projects</h2>
 
-        <nav className={styles.featuredProjects__categories} aria-label="Featured project categories">
-          <ul className={styles.featuredProjects__categoryList}>
-            {categories.map((category) => {
-              const isActive = activeCategory === category.id;
-              return (
-                <motion.li
-                  key={category.id}
-                  className={`${styles.featuredProjects__category} ${isActive ? styles["featuredProjects__category--active"] : ""
-                    }`}
-                  aria-current={isActive ? "true" : undefined}
-                  onClick={() => setActiveCategory(category.id)}
-                  initial={false}
-                  animate={isActive ? "active" : "inactive"}
-                  whileHover="hover"
-                  style={{ cursor: "pointer", position: "relative" }}
-                >
-                  <motion.span
-                    className={styles.featuredProjects__categoryIcon}
-                    aria-hidden="true"
-                    variants={{
-                      active: { color: "#1f67f1" },
-                      inactive: { color: "#797979" },
-                      hover: { color: "#1f67f1" }
-                    }}
-                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                  >
-                    <category.Icon />
-                  </motion.span>
-
-                  <motion.span
-                    className={styles.featuredProjects__categoryLabel}
-                    aria-label={category.label}
-                    variants={{
-                      active: { color: "#1f67f1" },
-                      inactive: { color: "#797979" },
-                      hover: { color: "#1f67f1" }
-                    }}
-                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                  >
-                    <span className={styles.featuredProjects__categoryLabelFull}>{category.label}</span>
-                    <span className={styles.featuredProjects__categoryLabelShort}>{category.shortLabel}</span>
-
-                    {isActive && (
-                      <motion.div
-                        layoutId="underline"
-                        className={styles.featuredProjects__activeUnderline}
-                        style={{
-                          position: "absolute",
-                          bottom: "-2px", // Align with the static border
-                          left: 0,
-                          right: 0,
-                          height: "3px",
-                          backgroundColor: "#1f67f1",
-                          zIndex: 10
+        <div
+          ref={wrapperRef}
+          style={{
+            height: isSticky && isMobile ? wrapperHeight : "auto",
+            width: "100%",
+            position: "relative",
+            zIndex: 40
+          }}
+        >
+          <motion.div
+            animate={isSticky && isMobile ? {
+              position: "fixed",
+              top: 61, // Matches headerOffset
+              left: 0,
+              right: 0,
+              backgroundColor: "#d9d9d9", // Matching global background
+              paddingBottom: 10,
+              paddingTop: 10,
+              boxShadow: "0 4px 10px rgba(0,0,0,0.05)",
+              zIndex: 40,
+              borderBottom: "1px solid rgba(0,0,0,0.05)"
+            } : {
+              position: "relative",
+              top: 0,
+              backgroundColor: "rgba(217, 217, 217, 0)",
+              paddingBottom: 0,
+              paddingTop: 0,
+              boxShadow: "none",
+              zIndex: 1,
+              borderBottom: "1px solid rgba(0,0,0,0)"
+            }}
+            transition={{ duration: 0.3 }}
+          >
+            <nav className={styles.featuredProjects__categories} aria-label="Featured project categories">
+              <ul className={styles.featuredProjects__categoryList}>
+                {categories.map((category) => {
+                  const isActive = activeCategory === category.id;
+                  return (
+                    <motion.li
+                      key={category.id}
+                      className={`${styles.featuredProjects__category} ${isActive ? styles["featuredProjects__category--active"] : ""
+                        }`}
+                      aria-current={isActive ? "true" : undefined}
+                      onClick={() => setActiveCategory(category.id)}
+                      initial={false}
+                      animate={isActive ? "active" : "inactive"}
+                      whileHover="hover"
+                      style={{ cursor: "pointer", position: "relative" }}
+                    >
+                      <motion.span
+                        className={styles.featuredProjects__categoryIcon}
+                        aria-hidden="true"
+                        variants={{
+                          active: { color: "#1f67f1" },
+                          inactive: { color: "#797979" },
+                          hover: { color: "#1f67f1" }
                         }}
                         transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                      />
-                    )}
-                  </motion.span>
-                </motion.li>
-              );
-            })}
-          </ul>
-        </nav>
+                      >
+                        <category.Icon />
+                      </motion.span>
 
-        <div className={styles.featuredProjects__subcategories} role="list">
-          {subcategories.map((subcategory) => (
-            <button
-              key={subcategory.id}
-              type="button"
-              className={`${styles.featuredProjects__pill} ${subcategory.active ? styles["featuredProjects__pill--active"] : ""
-                }`}
-              aria-pressed={subcategory.active}
-            >
-              {subcategory.label}
-            </button>
-          ))}
+                      <motion.span
+                        className={styles.featuredProjects__categoryLabel}
+                        aria-label={category.label}
+                        variants={{
+                          active: { color: "#1f67f1" },
+                          inactive: { color: "#797979" },
+                          hover: { color: "#1f67f1" }
+                        }}
+                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                      >
+                        <span className={styles.featuredProjects__categoryLabelFull}>{category.label}</span>
+                        <span className={styles.featuredProjects__categoryLabelShort}>{category.shortLabel}</span>
+
+                        {isActive && (
+                          <motion.div
+                            layoutId="underline"
+                            className={styles.featuredProjects__activeUnderline}
+                            style={{
+                              position: "absolute",
+                              bottom: "-2px", // Align with the static border
+                              left: 0,
+                              right: 0,
+                              height: "3px",
+                              left: "14px",
+                              width: "70%",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              alignSelf: "center",
+                              backgroundColor: "#1f67f1",
+                              zIndex: 10
+                            }}
+                            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                          />
+                        )}
+                      </motion.span>
+                    </motion.li>
+                  );
+                })}
+              </ul>
+            </nav>
+
+            <div className={styles.featuredProjects__subcategories} role="list">
+              {subcategories.map((subcategory) => (
+                <button
+                  key={subcategory.id}
+                  type="button"
+                  className={`${styles.featuredProjects__pill} ${subcategory.active ? styles["featuredProjects__pill--active"] : ""
+                    }`}
+                  aria-pressed={subcategory.active}
+                >
+                  {subcategory.label}
+                </button>
+              ))}
+            </div>
+          </motion.div>
         </div>
 
         <div className={styles.featuredProjects__galleryRow}>

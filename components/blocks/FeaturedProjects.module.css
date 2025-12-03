@@ -49,6 +49,7 @@
 
 .featuredProjects__category--active {
   color: #1f67f1;
+ 
 }
 
 .featuredProjects__categoryIcon {
@@ -267,6 +268,10 @@
   .featuredProjects__categoryList li {
     width: auto;
     min-height: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
   }
 
   .featuredProjects__category {
@@ -308,8 +313,8 @@
     display: inline-block;
     width: auto;
     min-width: max-content;
-    height: 26px;
-    line-height: 18px;
+    height: 20px;
+    line-height:8px;
     text-align: center;
     padding-bottom: 2px;
     text-decoration: none;
@@ -318,11 +323,11 @@
   .featuredProjects__subcategories {
     width: 100%;
     justify-content: flex-start;
-    gap: 12px;
+    gap: 6px;
     overflow-x: auto;
     flex-wrap: nowrap;
     white-space: nowrap;
-    padding: 0 16px 20px;
+    padding: 16px 16px 8px;
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
@@ -333,10 +338,10 @@
 
   .featuredProjects__pill {
     height: 38px;
-    padding: 6px 10px;
+    padding: 0px 8px;
     border-radius: 46px;
-    font-size: 11px;
-    line-height: 13px;
+    font-size: 10px;
+    line-height: 8px;
     white-space: nowrap;
     flex: 0 0 auto;
   }

@@ -5,6 +5,7 @@ import { setRequestLocale } from "next-intl/server";
 import { Footer } from "@/components/blocks/Footer";
 import { Header } from "@/components/blocks/Header";
 import { LocaleAttributesUpdater } from "@/components/utility/LocaleAttributesUpdater";
+import { ScrollProvider } from "@/components/utility/ScrollContext";
 import { getDirection } from "@/lib/i18n";
 import nextIntlConfig, { AppLocale, locales } from "@/next-intl.config";
 
@@ -38,18 +39,20 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
-      <LocaleAttributesUpdater />
-      <div
-        className="flex min-h-dvh flex-col"
-        data-locale={locale}
-        data-dir={dir}
-      >
-        <Header />
-        <main className="flex-1  pb-20 pt-24 ">
-          {children}
-        </main>
-        <Footer />
-      </div>
+      <ScrollProvider>
+        <LocaleAttributesUpdater />
+        <div
+          className="flex min-h-dvh flex-col"
+          data-locale={locale}
+          data-dir={dir}
+        >
+          <Header />
+          <main className="flex-1  pb-20 pt-24 ">
+            {children}
+          </main>
+          <Footer />
+        </div>
+      </ScrollProvider>
     </NextIntlClientProvider>
   );
 }
