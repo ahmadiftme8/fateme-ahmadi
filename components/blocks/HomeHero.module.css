@@ -13,7 +13,7 @@
 
 .postHero {
 
-margin-top: 70px;
+  margin-top: 70px;
   padding: 0 24px;
   text-align: center;
   display: flex;
@@ -31,7 +31,7 @@ margin-top: 70px;
   font-size: 18px;
   max-width: 600px;
   text-align: center;
-  
+
 }
 
 .heroWrap {
@@ -126,7 +126,7 @@ margin-top: 70px;
 @media (max-width: 980px) {
   .heroCard {
     order: 1;
-    
+
   }
 }
 
@@ -138,8 +138,8 @@ margin-top: 70px;
   border-radius: 65px;
   overflow: visible;
   margin: 0 auto;
-  background: #d9d9d9 center/cover no-repeat;
-  box-shadow: 0 28px 60px rgba(18, 18, 18, 0.18);
+
+
 }
 
 .heroImageFrame {
@@ -148,7 +148,27 @@ margin-top: 70px;
   height: 100%;
   border-radius: inherit;
   overflow: hidden;
+
+
 }
+
+
+
+@supports (corner-shape: squircle) {
+  .heroCard {
+    corner-shape: squircle;
+    border-radius: 65px;
+
+  }
+}
+
+
+@supports (-webkit-corner-shape: squircle) {
+  .heroCard {
+    -webkit-corner-shape: squircle; /* For webkit-based browsers like older Safari */
+  }
+}
+
 
 .heroImage {
   object-fit: cover;
@@ -178,7 +198,7 @@ margin-top: 70px;
   font-family: var(--font-big-shoulders), "Big Shoulders", sans-serif;
   font-weight: 500;
   font-size: 16px;
-  
+
   text-align: right;
   position: absolute;
   bottom: 75px;
@@ -186,15 +206,15 @@ margin-top: 70px;
 
   align-self: end;
   flex-direction: column;
- 
-  
+
+
 }
 
 .heroDesc p {
   margin: 0;
 }
 
-.heroDesc p + p {
+.heroDesc p+p {
   margin-top: 0px;
   text-align: right;
 }
@@ -263,11 +283,9 @@ margin-top: 70px;
   .scrollLine {
     width: 2px;
     height: 52px;
-    background: linear-gradient(
-      180deg,
-      rgba(31, 103, 241, 0.6) 0%,
-      rgba(31, 103, 241, 0.1) 100%
-    );
+    background: linear-gradient(180deg,
+        rgba(31, 103, 241, 0.6) 0%,
+        rgba(31, 103, 241, 0.1) 100%);
     border-radius: 999px;
   }
 
@@ -297,21 +315,21 @@ margin-top: 70px;
   }
 
   .heroRoleCombined {
-    font-size:22px;
+    font-size: 22px;
     margin-top: 0px;
     margin-bottom: 12px;
   }
 
 
   .heroName {
-  position: unset;
-  font-size: 46px;
-  padding: 0;
+    position: unset;
+    font-size: 46px;
+    padding: 0;
     margin: 0;
     gap: 0;
 
 
-}
+  }
 
   .heroRolesMobile {
     font-size: 24px;
@@ -319,7 +337,7 @@ margin-top: 70px;
     gap: 6px;
     padding: 0;
     margin: 0;
-    
+
   }
 
   .heroAmpersand {
@@ -351,7 +369,8 @@ margin-top: 70px;
   justify-self: center;
   width: 64px;
   height: 64px;
-  background: #1F67F1; /* همون رنگ fill خود SVG */
+  background: #1F67F1;
+  /* همون رنگ fill خود SVG */
 
   -webkit-clip-path: path("M32 0L35.8954 12.7983C38.1277 20.1325 43.8675 25.8723 51.2017 28.1046L64 32L51.2016 35.8954C43.8675 38.1277 38.1277 43.8675 35.8954 51.2017L32 64L28.1046 51.2017C25.8723 43.8675 20.1325 38.1277 12.7983 35.8954L0 32L12.7983 28.1046C20.1325 25.8723 25.8723 20.1325 28.1046 12.7983L32 0Z");
   clip-path: path("M32 0L35.8954 12.7983C38.1277 20.1325 43.8675 25.8723 51.2017 28.1046L64 32L51.2016 35.8954C43.8675 38.1277 38.1277 43.8675 35.8954 51.2017L32 64L28.1046 51.2017C25.8723 43.8675 20.1325 38.1277 12.7983 35.8954L0 32L12.7983 28.1046C20.1325 25.8723 25.8723 20.1325 28.1046 12.7983L32 0Z");
@@ -406,7 +425,5 @@ margin-top: 70px;
 }
 
 @media (prefers-color-scheme: dark) {
-  .heroCard {
-    background: #0c0c0c;
-  }
+  .heroCard {}
 }
