@@ -165,7 +165,8 @@
 
 @supports (-webkit-corner-shape: squircle) {
   .heroCard {
-    -webkit-corner-shape: squircle; /* For webkit-based browsers like older Safari */
+    -webkit-corner-shape: squircle;
+    /* For webkit-based browsers like older Safari */
   }
 }
 
@@ -367,13 +368,18 @@
   margin-top: 70px;
 
   justify-self: center;
-  width: 64px;
-  height: 64px;
-  background: #1F67F1;
-  /* همون رنگ fill خود SVG */
+  width: 50px;
+  height: 50px;
 
-  -webkit-clip-path: path("M32 0L35.8954 12.7983C38.1277 20.1325 43.8675 25.8723 51.2017 28.1046L64 32L51.2016 35.8954C43.8675 38.1277 38.1277 43.8675 35.8954 51.2017L32 64L28.1046 51.2017C25.8723 43.8675 20.1325 38.1277 12.7983 35.8954L0 32L12.7983 28.1046C20.1325 25.8723 25.8723 20.1325 28.1046 12.7983L32 0Z");
-  clip-path: path("M32 0L35.8954 12.7983C38.1277 20.1325 43.8675 25.8723 51.2017 28.1046L64 32L51.2016 35.8954C43.8675 38.1277 38.1277 43.8675 35.8954 51.2017L32 64L28.1046 51.2017C25.8723 43.8675 20.1325 38.1277 12.7983 35.8954L0 32L12.7983 28.1046C20.1325 25.8723 25.8723 20.1325 28.1046 12.7983L32 0Z");
+
+
+
+
+}
+
+.star svg {
+  width: 100%;
+  height: 100%;
 }
 
 :global(html[dir="rtl"]) .heroWrap {

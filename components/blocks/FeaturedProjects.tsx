@@ -57,10 +57,13 @@ export default function FeaturedProjects() {
   const [activeCategory, setActiveCategory] = useState("graphic-design");
   const { setIsSticky, isSticky } = useScrollContext();
   const sectionRef = useRef<HTMLElement>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const [wrapperHeight, setWrapperHeight] = useState(0);
+  const topSentinelRef = useRef<HTMLDivElement>(null);
+  const bottomSentinelRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const { scrollY } = useScroll();
+
+  // Refs to track sentinel states synchronously in the observer callback
+  const topPassed = useRef(false);
+  const bottomPassed = useRef(false);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth <= 720);
@@ -70,89 +73,71 @@ export default function FeaturedProjects() {
   }, []);
 
   useEffect(() => {
-    if (wrapperRef.current) {
-      setWrapperHeight(wrapperRef.current.offsetHeight);
-    }
-  }, [isMobile]);
-
-  useMotionValueEvent(scrollY, "change", () => {
-    if (!isMobile || !wrapperRef.current || !sectionRef.current) {
-      if (isSticky) setIsSticky(false);
+    if (!isMobile) {
+      setIsSticky(false);
       return;
     }
 
-    const wrapperRect = wrapperRef.current.getBoundingClientRect();
-    const sectionRect = sectionRef.current.getBoundingClientRect();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const isTop = entry.target === topSentinelRef.current;
+          const isBottom = entry.target === bottomSentinelRef.current;
 
-    // Header height offset (approx 70px)
-    const headerOffset = 70;
-    // Buffer to prevent flickering (hysteresis)
-    const buffer = 15;
+          // Check if the sentinel is above the sticky line (approx 61px)
+          // We use 62px as a threshold to be safe
+          const isAboveLine = entry.boundingClientRect.top <= 62;
 
-    // User wants early revert when "Trusted By" (next section) enters or reaches middle of screen.
-    // sectionRect.bottom is effectively the top of the next section.
-    // We revert when sectionRect.bottom moves up to the middle of the viewport.
-    const exitThreshold = window.innerHeight / 2;
+          if (isTop) {
+            topPassed.current = isAboveLine;
+          } else if (isBottom) {
+            bottomPassed.current = isAboveLine;
+          }
+        });
 
-    if (isSticky) {
-      // Logic to turn OFF sticky
-      // 1. Scrolled back up past the trigger point (with buffer)
-      const scrolledBackUp = wrapperRect.top > (headerOffset + buffer);
-
-      // 2. Scrolled past the exit threshold (with buffer)
-      // Revert when the section bottom is above the middle of the screen
-      const scrolledPast = sectionRect.bottom <= (exitThreshold - buffer);
-
-      if (scrolledBackUp || scrolledPast) {
-        setIsSticky(false);
+        // We are sticky if we have passed the top but NOT passed the bottom
+        setIsSticky(topPassed.current && !bottomPassed.current);
+      },
+      {
+        threshold: [0, 1],
+        rootMargin: "-61px 0px 0px 0px", // Offset for the sticky position
       }
-    } else {
-      // Logic to turn ON sticky
-      // Strictly when we hit the offset and are within the section
-      const hitTrigger = wrapperRect.top <= headerOffset;
-      // Ensure we are still "above" the exit threshold
-      const withinSection = sectionRect.bottom > (exitThreshold + buffer);
+    );
 
-      if (hitTrigger && withinSection) {
-        setIsSticky(true);
-      }
-    }
-  });
+    if (topSentinelRef.current) observer.observe(topSentinelRef.current);
+    if (bottomSentinelRef.current) observer.observe(bottomSentinelRef.current);
+
+    return () => observer.disconnect();
+  }, [isMobile, setIsSticky]);
 
   return (
     <section ref={sectionRef} id="featured-projects" className={styles.featuredProjects}>
       <div className={styles.featuredProjects__container}>
         <h2 className={`${styles.featuredProjects__title} sectionTitle`}>Featured Projects</h2>
 
+        {/* Top Sentinel to trigger sticky ON */}
+        <div ref={topSentinelRef} style={{ height: "1px", width: "100%", marginTop: "-1px" }} />
+
         <div
-          ref={wrapperRef}
           style={{
-            height: isSticky && isMobile ? wrapperHeight : "auto",
             width: "100%",
-            position: "relative",
+            position: isMobile ? "sticky" : "relative",
+            top: isMobile ? "61px" : "0", // Sticky offset
             zIndex: 40
           }}
         >
           <motion.div
             animate={isSticky && isMobile ? {
-              position: "fixed",
-              top: 61, // Matches headerOffset
-              left: 0,
-              right: 0,
               backgroundColor: "#d9d9d9", // Matching global background
               paddingBottom: 10,
               paddingTop: 10,
               boxShadow: "0 4px 10px rgba(0, 0, 0, 0.12)",
-              zIndex: 40,
               borderBottom: "1px solid rgba(0, 0, 0, 0.06)"
             } : {
-              position: "relative",
-              top: 0,
               backgroundColor: "rgba(217, 217, 217, 0)",
               paddingBottom: 0,
               paddingTop: 0,
               boxShadow: "none",
-              zIndex: 1,
               borderBottom: "1px solid rgba(0,0,0,0)"
             }}
             transition={{ duration: 0.3 }}
@@ -305,6 +290,9 @@ export default function FeaturedProjects() {
             <span>Load More</span>
           </button>
         </div>
+
+        {/* Bottom Sentinel to trigger sticky OFF */}
+        <div ref={bottomSentinelRef} style={{ height: "1px", width: "100%" }} />
       </div>
     </section>
   );

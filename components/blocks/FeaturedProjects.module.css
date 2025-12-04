@@ -388,8 +388,8 @@
 
 @media (max-width: 600px) {
   .featuredProjects__container {
-    max-width: 390px;
-    padding: 48px 16px;
+    min-width: 100%;
+    padding: 0;
     gap: 20px;
     margin: 0 auto;
   }
