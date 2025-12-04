@@ -142,9 +142,9 @@ export default function FeaturedProjects() {
               backgroundColor: "#d9d9d9", // Matching global background
               paddingBottom: 10,
               paddingTop: 10,
-              boxShadow: "0 4px 10px rgba(0,0,0,0.05)",
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.12)",
               zIndex: 40,
-              borderBottom: "1px solid rgba(0,0,0,0.05)"
+              borderBottom: "1px solid rgba(0, 0, 0, 0.06)"
             } : {
               position: "relative",
               top: 0,

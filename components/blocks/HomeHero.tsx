@@ -105,10 +105,10 @@ export function HomeHero() {
         </div>
 
         <div className={styles.postHero}>
-          <p className={styles.postHeroText}>
-            I'm Fatemeh, a multidisciplinary designer and front-end developer
+          <p className={styles.postHeroText}>{`I'm Fatemeh, a multidisciplinary designer and front-end developer
             creating impactful digital experiences, visuals, and products for
-            brands and businesses for over 7 years.
+            brands and businesses for over 7 years.`}
+
           </p>
         </div>
       </section>
