@@ -206,7 +206,6 @@ export default function FeaturedProjects() {
                             style={{
                               position: "absolute",
                               bottom: "-2px", // Align with the static border
-                              left: 0,
                               right: 0,
                               height: "3px",
                               left: "14px",
