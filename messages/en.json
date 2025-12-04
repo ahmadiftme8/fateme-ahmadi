@@ -38,13 +38,18 @@
     "description": "Brand strategy, visual identity, and performant websites for ambitious teams across the globe.",
     "cta": "Get a Quote",
     "email": "Email",
+    "myPortfolio": "My Portfolio",
+    "collaborate": "Collaborate",
+    "aboutMe": "About Me",
+    "emailMe": "Email Me",
+    "cv": "CV",
     "social": {
       "instagram": "Instagram",
       "behance": "Behance",
       "dribbble": "Dribbble",
       "linkedin": "LinkedIn"
     },
-    "copyright": "(c) 2025 Fateme Ahmadi. All rights reserved."
+    "copyright": "All Rights Reserved for @Fateme"
   },
   "seo": {
     "home": {

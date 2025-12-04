@@ -15,9 +15,9 @@ const poppins = Poppins({
   display: "swap",
 });
 
-const bigShoulders = Big_Shoulders({
+const bigShouldersDisplay = Big_Shoulders({
   subsets: ["latin"],
-  weight: "700",
+  weight: ["700", "800", "900"],
   variable: "--font-big-shoulders",
   display: "swap",
 });
@@ -65,7 +65,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
       <body
-        className={`${poppins.variable} ${bigShoulders.variable} min-h-dvh antialiased ${bodyFontClass}`}
+        className={`${poppins.variable} ${bigShouldersDisplay.variable} min-h-dvh antialiased ${bodyFontClass}`}
         data-theme="light"
         data-locale={locale}
         data-dir={dir}

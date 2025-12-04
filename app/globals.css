@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@100..900&display=swap');
 @import "tailwindcss";
 
 @font-face {
@@ -39,6 +40,7 @@
   --color-primary: #1f67f1;
   --color-accent: #ea5039;
   --grid-line: rgba(18, 18, 18, 0.08);
+  --font-big-shoulders-text: "Big Shoulders Text", sans-serif;
 }
 
 [data-theme="dark"] {
@@ -63,7 +65,7 @@ body {
   background-color: var(--color-background);
   color: var(--color-foreground);
   transition: background-color 0.35s ease, color 0.35s ease;
-  
+
 }
 
 body {
@@ -73,7 +75,7 @@ body {
   background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 32px 32px;
-  
+
 }
 
 body[data-theme="dark"] {

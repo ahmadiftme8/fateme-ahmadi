@@ -1,0 +1,228 @@
+/* --- Variables for easy maintenance --- */
+.footerSection {
+    --blue-bg: #1F67F1;
+    --orange-accent: #EA5B37;
+    --white: #FFFFFF;
+    --font-title: var(--font-big-shoulders-text), 'Big Shoulders Text', sans-serif;
+    --font-display: var(--font-big-shoulders), 'Big Shoulders Display', sans-serif;
+    --font-body: var(--font-poppins), 'Poppins', sans-serif;
+
+    position: relative;
+    background-color: var(--blue-bg);
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 20px 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* --- Floating CV Badge --- */
+.cvBadge {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 118px;
+    height: 118px;
+    background-color: var(--orange-accent);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #F6F6F6;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.cvText {
+    font-family: sans-serif;
+    font-weight: 500;
+    font-size: 35px;
+    line-height: 1;
+    margin-top: 5px;
+    text-transform: uppercase;
+}
+
+/* --- Typography: Name --- */
+.footerTitle {
+    font-family: var(--font-title);
+    font-weight: 900;
+    font-size: clamp(3rem, 8vw, 97px);
+    text-align: center;
+    margin: 0 0 60px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+/* --- Navigation Buttons (Grid Layout) --- */
+.footerNav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1100px;
+    width: 100%;
+    margin-bottom: 80px;
+}
+
+.pillBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    height: 80px;
+
+    border: 2px solid var(--white);
+    border-radius: 129px;
+    background: transparent;
+    color: var(--white);
+    text-decoration: none;
+
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 36px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+
+    transition: all 0.3s ease;
+}
+
+.pillBtn:hover {
+    background-color: var(--white);
+    color: var(--blue-bg);
+}
+
+@media (min-width: 768px) {
+    .pillBtn {
+        width: calc(40% - 30px);
+    }
+}
+
+/* --- Social Icons --- */
+.socialLinks {
+    display: flex;
+    flex-direction: row;
+    gap: 44px;
+    margin-bottom: 60px;
+}
+
+.socialIcon {
+    color: var(--white);
+    font-size: 40px;
+    text-decoration: none;
+    transition: transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.socialIcon:hover {
+    transform: scale(1.1);
+}
+
+/* --- Copyright --- */
+.copyright {
+    font-family: var(--font-body);
+    font-weight: 275;
+    font-size: 18px;
+    opacity: 0.9;
+    text-align: center;
+    margin: 0;
+}
+
+/* RTL Support */
+[dir="rtl"] .footerTitle {
+    font-family: var(--font-title);
+    /* Or Vazirmatn if preferred for title in FA, but design implies English title? The screenshot shows "FATEME AHMADI" in English even if site is FA? Or maybe it should be translated. The translation file has FA title. I will stick to font-title for now, but maybe override for FA if needed. */
+}
+
+[dir="rtl"] .cvText {
+    font-family: "Vazirmatn", sans-serif;
+}
+
+[dir="rtl"] .pillBtn {
+    font-family: var(--font-display);
+    /* Or Vazirmatn */
+}
+
+/* --- Mobile Responsive Styles (Max-width: 768px) --- */
+@media (max-width: 768px) {
+
+    /* 1. Adjust Container Padding */
+    .footerSection {
+        padding: 80px 20px 30px;
+        /* Less padding, keeping top space for badge */
+    }
+
+    /* 2. Shrink the Floating Badge */
+    .cvBadge {
+        width: 82px;
+        height: 82px;
+    }
+
+    .cvText {
+        font-size: 23px;
+        /* Smaller text inside badge */
+    }
+
+    .cvBadge svg {
+        width: 20px;
+        /* Scale down the icon */
+        height: 20px;
+    }
+
+    /* 3. Hide the Big Title (Per your design) */
+    .footerTitle {
+        display: none;
+    }
+
+    /* 4. Vertical Button Layout */
+    .footerNav {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+        margin-bottom: 40px;
+        width: 100%;
+    }
+
+    .pillBtn {
+        width: 100%;
+        max-width: 300px;
+        /* Fixed width from design */
+        height: 55px;
+        /* Smaller height */
+        font-size: 28px;
+        /* Smaller font */
+    }
+
+    /* 5. Social Links with Borders */
+    .socialLinks {
+        width: 100%;
+        /* Full width to make borders stretch */
+        justify-content: center;
+        padding: 22px 0;
+        /* Vertical spacing inside the borders */
+
+        /* The specific blue border lines from Figma */
+        border-top: 2px solid #3F7CEF;
+        border-bottom: 2px solid #3F7CEF;
+        margin-bottom: 40px;
+    }
+
+    .socialIcon {
+        font-size: 28px;
+        /* Smaller icons for mobile */
+    }
+
+    /* 6. Smaller Copyright Text */
+    .copyright {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+}
