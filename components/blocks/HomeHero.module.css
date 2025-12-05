@@ -363,6 +363,32 @@
   }
 }
 
+
+@media (max-width: 375px) {
+ 
+  .heroCard{
+    max-width: 140px;
+    border-radius: 32px;
+    stroke: none;
+
+  }
+  .heroName{
+    font-size: 32px;
+    margin-bottom: -8px;
+  }
+  .heroRoleCombined{
+    font-size: 20px;
+    line-height: 1;
+    margin-top: -10px;
+    padding: 0;
+  }
+
+  .heroAmpersand{
+    font-size: 40px;
+  }
+
+}
+
 .star {
   display: flex;
   margin-top: 70px;

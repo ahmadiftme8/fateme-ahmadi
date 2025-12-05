@@ -187,3 +187,7 @@ html[lang="fa"] :where(a[href^="http"], a[href^="https"], time, .numeric) {
   unicode-bidi: embed;
   text-align: left;
 }
+
+@theme {
+  --breakpoint-xs: 376px; /* یعنی از 376px به بالا */
+}
