@@ -69,6 +69,7 @@ export default async function RootLayout({
         data-theme="light"
         data-locale={locale}
         data-dir={dir}
+        suppressHydrationWarning
       >
         {children}
       </body>

@@ -1,5 +1,6 @@
 import { HomeHero } from "@/components/blocks/HomeHero";
 import FeaturedProjects from "@/components/blocks/FeaturedProjects";
+// Trigger rebuild
 import Services from "@/components/blocks/Services";
 import TrustedBy from "@/components/blocks/TrustedBy";
 import FAQ from "@/components/blocks/FAQ";
@@ -28,12 +29,16 @@ export async function generateMetadata({ params }: PageParams) {
   };
 }
 
-export default function HomePage() {
+import { getSheetData } from "@/lib/googleSheets";
+
+export default async function HomePage() {
+  const projects = await getSheetData();
+
   return (
     <>
       <HomeHero />
       <Services />
-      <FeaturedProjects />
+      <FeaturedProjects projects={projects} />
       <TrustedBy />
       <FAQ />
     </>

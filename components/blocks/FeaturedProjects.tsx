@@ -53,7 +53,7 @@ const ChevronRightIcon = () => (
   </svg>
 );
 
-export default function FeaturedProjects() {
+export default function FeaturedProjects({ projects = [] }: { projects?: any[] }) {
   const [activeCategory, setActiveCategory] = useState("graphic-design");
   const { setIsSticky, isSticky } = useScrollContext();
   const sectionRef = useRef<HTMLElement>(null);
@@ -109,6 +109,24 @@ export default function FeaturedProjects() {
 
     return () => observer.disconnect();
   }, [isMobile, setIsSticky]);
+
+  // Filter projects based on active category
+  // Using 'category_main' column from Sheet matching our category IDs or Labels
+  // Fallback to galleryItems if no projects provided
+  const displayItems = projects && projects.length > 0
+    ? projects.filter(p => {
+      // Logic: Check if 'category_main' column matches activeCategory id or label
+      const cat = (p.category_main || "").toLowerCase();
+      const activeId = activeCategory.toLowerCase();
+      const activeLabel = categories.find(c => c.id === activeCategory)?.label.toLowerCase() || "";
+
+      // Match if category string contains the ID (e.g. "graphic-design") 
+      // OR the Label (e.g. "graphic design")
+      // OR simply checks normalization (replacing spaces with hyphens)
+
+      return cat.includes(activeId) || cat.includes(activeLabel) || cat === activeId || cat === activeLabel;
+    })
+    : activeCategory === "graphic-design" ? galleryItems : []; // Keep fallback for now or remove if strictly dynamic
 
   return (
     <section ref={sectionRef} id="featured-projects" className={styles.featuredProjects}>
@@ -239,22 +257,25 @@ export default function FeaturedProjects() {
 
           <div className={styles.featuredProjects__worksWrapper}>
             <AnimatePresence mode="wait">
-              {activeCategory === "graphic-design" ? (
+              {displayItems.length > 0 ? (
                 <motion.div
-                  key="graphic-design"
+                  key={activeCategory}
                   className={styles.featuredProjects__grid}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3 }}
                 >
-                  {galleryItems.map((item) => (
-                    <div key={item.id} className={styles.featuredProjects__gridItem}>
+                  {displayItems.map((item, index) => (
+                    <div key={item.id || index} className={styles.featuredProjects__gridItem}>
                       <img
-                        src={item.imageSrc}
-                        alt={`Featured project ${item.id}`}
+                        src={item.thumbnail_img || item.imageSrc || item.URL}
+                        alt={item.title || item.Title || `Featured project ${index}`}
                         className={styles.featuredProjects__image}
                       />
+                      {(item.title || item.Title || item.name) && (
+                        <div className={styles.featuredProjects__itemTitle}>{item.title || item.Title || item.name}</div>
+                      )}
                     </div>
                   ))}
                 </motion.div>
@@ -268,7 +289,7 @@ export default function FeaturedProjects() {
                   transition={{ duration: 0.3 }}
                   style={{ minHeight: "361px", display: "flex", alignItems: "center", justifyContent: "center" }}
                 >
-                  {/* Empty state as requested */}
+                  <p>No projects found for {categories.find(c => c.id === activeCategory)?.label}</p>
                 </motion.div>
               )}
             </AnimatePresence>

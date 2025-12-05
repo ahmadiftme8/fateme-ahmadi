@@ -7,5 +7,5 @@ export default createMiddleware(nextIntlConfig);
 
 export const config = {
   // Apply to all paths except static files or Next internals
-  matcher: ['/((?!_next|.*\\..*).*)']
+  matcher: ['/((?!api|_next|.*\\..*).*)']
 };
