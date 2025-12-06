@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useScrollContext } from "@/components/utility/ScrollContext";
 import styles from "./FeaturedProjects.module.css";
 
@@ -12,9 +12,19 @@ type Category = {
   Icon: (props: { className?: string }) => React.JSX.Element;
 };
 
-type GalleryItem = {
-  id: number;
-  imageSrc: string;
+type Project = {
+  id?: string | number;
+  category_main?: string;
+  link?: string;
+  thumbnail_img?: string;
+  imageSrc?: string;
+  URL?: string;
+  title?: string;
+  Title?: string;
+  name?: string;
+  excerpt?: string;
+  description?: string;
+  [key: string]: unknown;
 };
 
 const categories: Category[] = [
@@ -32,7 +42,7 @@ const subcategories = [
   { id: "ai-conceptual", label: "AI-Assisted & Conceptual Works", active: false },
 ];
 
-const galleryItems: GalleryItem[] = [
+const galleryItems: Project[] = [
   { id: 1, imageSrc: "/images/featured-1.jpg" },
   { id: 2, imageSrc: "/images/featured-2.jpg" },
   { id: 3, imageSrc: "/images/featured-3.jpg" },
@@ -53,7 +63,7 @@ const ChevronRightIcon = () => (
   </svg>
 );
 
-export default function FeaturedProjects({ projects = [] }: { projects?: any[] }) {
+export default function FeaturedProjects({ projects = [] }: { projects?: Project[] }) {
   const [activeCategory, setActiveCategory] = useState("graphic-design");
   const { setIsSticky, isSticky } = useScrollContext();
   const sectionRef = useRef<HTMLElement>(null);
