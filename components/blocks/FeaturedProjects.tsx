@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { useScrollContext } from "@/components/utility/ScrollContext";
 import styles from "./FeaturedProjects.module.css";
 
@@ -313,9 +314,11 @@ export default function FeaturedProjects({ projects = [] }: { projects?: Project
                   >
                     {displayItems.map((item, index) => (
                       <div key={item.id || index} className={styles.featuredProjects__gridItem}>
-                        <img
-                          src={item.thumbnail_img || item.imageSrc || item.URL}
+                        <Image
+                          src={item.thumbnail_img || item.imageSrc || item.URL || ""}
                           alt={item.title || item.Title || `Featured project ${index}`}
+                          fill
+                          sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 355px"
                           className={styles.featuredProjects__image}
                         />
                         {(item.title || item.Title || item.name) && (
