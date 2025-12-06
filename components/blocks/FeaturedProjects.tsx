@@ -130,7 +130,9 @@ export default function FeaturedProjects({ projects = [] }: { projects?: any[] }
 
   return (
     <section ref={sectionRef} id="featured-projects" className={styles.featuredProjects}>
-      <div className={styles.featuredProjects__container}>
+      <div
+        className={styles.featuredProjects__container}
+      >
         <h2 className={`${styles.featuredProjects__title} sectionTitle`}>Featured Projects</h2>
 
         {/* Top Sentinel to trigger sticky ON */}
@@ -209,16 +211,12 @@ export default function FeaturedProjects({ projects = [] }: { projects?: any[] }
                             style={{
                               position: "absolute",
                               bottom: "-2px", // Align with the static border
-                              right: 0,
+                              left: 0,
+                              width: "100%",
                               height: "3px",
-                              left: "14px",
-                              width: "70%",
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              alignSelf: "center",
                               backgroundColor: "#1f67f1",
-                              zIndex: 10
+                              zIndex: 10,
+                              borderRadius: "2px"
                             }}
                             transition={{ type: "spring", stiffness: 400, damping: 30 }}
                           />
@@ -230,80 +228,118 @@ export default function FeaturedProjects({ projects = [] }: { projects?: any[] }
               </ul>
             </nav>
 
-            <div className={styles.featuredProjects__subcategories} role="list">
-              {subcategories.map((subcategory) => (
-                <button
-                  key={subcategory.id}
-                  type="button"
-                  className={`${styles.featuredProjects__pill} ${subcategory.active ? styles["featuredProjects__pill--active"] : ""
-                    }`}
-                  aria-pressed={subcategory.active}
-                >
-                  {subcategory.label}
-                </button>
-              ))}
-            </div>
+            {activeCategory !== 'web-development' && (
+              <div className={styles.featuredProjects__subcategories} role="list">
+                {subcategories.map((subcategory) => (
+                  <button
+                    key={subcategory.id}
+                    type="button"
+                    className={`${styles.featuredProjects__pill} ${subcategory.active ? styles["featuredProjects__pill--active"] : ""
+                      }`}
+                    aria-pressed={subcategory.active}
+                  >
+                    {subcategory.label}
+                  </button>
+                ))}
+              </div>
+            )}
           </motion.div>
         </div>
 
-        <div className={styles.featuredProjects__galleryRow}>
-          <button
-            type="button"
-            className={`${styles.featuredProjects__arrow} ${styles["featuredProjects__arrow--left"]}`}
-            aria-label="Previous projects"
-          >
-            <ChevronLeftIcon />
-          </button>
-
-          <div className={styles.featuredProjects__worksWrapper}>
-            <AnimatePresence mode="wait">
+        {activeCategory === 'web-development' ? (
+          <div className={styles.webDevGalleryContainer}>
+            <div className={`${styles.webDevArrow} ${styles.webDevArrowLeft}`}>&lt;</div>
+            <div className={styles.webDevProjectsGrid}>
               {displayItems.length > 0 ? (
-                <motion.div
-                  key={activeCategory}
-                  className={styles.featuredProjects__grid}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {displayItems.map((item, index) => (
-                    <div key={item.id || index} className={styles.featuredProjects__gridItem}>
-                      <img
-                        src={item.thumbnail_img || item.imageSrc || item.URL}
-                        alt={item.title || item.Title || `Featured project ${index}`}
-                        className={styles.featuredProjects__image}
-                      />
-                      {(item.title || item.Title || item.name) && (
-                        <div className={styles.featuredProjects__itemTitle}>{item.title || item.Title || item.name}</div>
-                      )}
+                displayItems.map((item, index) => (
+                  <a
+                    key={item.id || index}
+                    href={item.link || "#"}
+                    className={styles.webDevThumbnailContainer}
+                  >
+                    <div
+                      className={styles.webDevThumbnailContent}
+                      style={{ backgroundImage: `url(${item.thumbnail_img || item.imageSrc || item.URL})` }}
+                    >
+                      <div className={styles.webDevBlackGradient}></div>
+                      <div className={styles.webDevOpenIcon}>
+                        <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M13.5 0C6.04216 0 0 6.04946 0 13.5C0 20.9505 6.04216 27 13.5 27C20.9578 27 27 20.9578 27 13.5C27 6.04216 20.9578 0 13.5 0ZM18.4038 18.9073H16.5284V11.7997L8.46486 19.8632L7.13676 18.5351L15.2003 10.4789H8.1V8.60351H18.4038V18.9073Z" fill="white" />
+                        </svg>
+                      </div>
+                      <div className={styles.webDevTextContent}>
+                        <div className={styles.webDevLabelName}>{item.title || item.Title || item.name || "Project Name"}</div>
+                        <div className={styles.webDevLabelDescription}>{item.excerpt || item.description || "Project Description"}</div>
+                      </div>
                     </div>
-                  ))}
-                </motion.div>
+                  </a>
+                ))
               ) : (
-                <motion.div
-                  key="empty"
-                  className={styles.featuredProjects__grid}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3 }}
-                  style={{ minHeight: "361px", display: "flex", alignItems: "center", justifyContent: "center" }}
-                >
-                  <p>No projects found for {categories.find(c => c.id === activeCategory)?.label}</p>
-                </motion.div>
+                <div style={{ padding: '40px', textAlign: 'center', width: '100%', color: '#797979' }}>No projects found for Web Development</div>
               )}
-            </AnimatePresence>
-            <div className={styles.featuredProjects__fadeOverlay} aria-hidden="true" />
+            </div>
+            <div className={`${styles.webDevArrow} ${styles.webDevArrowRight}`}>&gt;</div>
           </div>
+        ) : (
+          <div className={styles.featuredProjects__galleryRow}>
+            <button
+              type="button"
+              className={`${styles.featuredProjects__arrow} ${styles["featuredProjects__arrow--left"]}`}
+              aria-label="Previous projects"
+            >
+              <ChevronLeftIcon />
+            </button>
 
-          <button
-            type="button"
-            className={`${styles.featuredProjects__arrow} ${styles["featuredProjects__arrow--right"]}`}
-            aria-label="Next projects"
-          >
-            <ChevronRightIcon />
-          </button>
-        </div>
+            <div className={styles.featuredProjects__worksWrapper}>
+              <AnimatePresence mode="wait">
+                {displayItems.length > 0 ? (
+                  <motion.div
+                    key={activeCategory}
+                    className={styles.featuredProjects__grid}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {displayItems.map((item, index) => (
+                      <div key={item.id || index} className={styles.featuredProjects__gridItem}>
+                        <img
+                          src={item.thumbnail_img || item.imageSrc || item.URL}
+                          alt={item.title || item.Title || `Featured project ${index}`}
+                          className={styles.featuredProjects__image}
+                        />
+                        {(item.title || item.Title || item.name) && (
+                          <div className={styles.featuredProjects__itemTitle}>{item.title || item.Title || item.name}</div>
+                        )}
+                      </div>
+                    ))}
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="empty"
+                    className={styles.featuredProjects__grid}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                    style={{ minHeight: "361px", display: "flex", alignItems: "center", justifyContent: "center" }}
+                  >
+                    <p>No projects found for {categories.find(c => c.id === activeCategory)?.label}</p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              <div className={styles.featuredProjects__fadeOverlay} aria-hidden="true" />
+            </div>
+
+            <button
+              type="button"
+              className={`${styles.featuredProjects__arrow} ${styles["featuredProjects__arrow--right"]}`}
+              aria-label="Next projects"
+            >
+              <ChevronRightIcon />
+            </button>
+          </div>
+        )}
 
         <div className={styles.featuredProjects__loadMoreWrapper}>
           <button type="button" className={styles.featuredProjects__loadMoreButton}>
