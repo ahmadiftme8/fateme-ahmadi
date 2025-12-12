@@ -15,22 +15,49 @@ export function HomeHero() {
   const easeOutCurve = [0.22, 1, 0.36, 1] as const;
 
   const imageVariants = {
-    initial: { opacity: 0, y: reduceMotion ? 0 : 28 },
+    initial: { scale: reduceMotion ? 1 : 0, opacity: 0 },
     animate: {
+      scale: 1,
       opacity: 1,
-      y: 0,
-      transition: { duration: 0.7, ease: easeOutCurve, delay: 0.2 },
+      transition: {
+        type: "spring" as const,
+        stiffness: 260,
+        damping: 20,
+      },
     },
   };
 
-  const textVariants = (delay: number) => ({
-    initial: { opacity: 0, y: reduceMotion ? 0 : 24 },
+  const leftVariants = {
+    initial: { x: reduceMotion ? 0 : -100, opacity: 0 },
     animate: {
+      x: 0,
       opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: easeOutCurve, delay },
+      transition: { duration: 0.8, ease: easeOutCurve },
     },
-  });
+  };
+
+  const rightVariants = {
+    initial: { x: reduceMotion ? 0 : 100, opacity: 0 },
+    animate: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: 0.8, ease: easeOutCurve },
+    },
+  };
+
+  const badgeVariants = {
+    initial: { scale: 0, opacity: 0 },
+    animate: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        type: "spring" as const,
+        stiffness: 260,
+        damping: 20,
+        delay: 0.5,
+      },
+    },
+  };
 
   return (
     <>
@@ -42,7 +69,7 @@ export function HomeHero() {
             className={styles.heroWrap}
           >
             <motion.div
-              variants={textVariants(0.1)}
+              variants={leftVariants}
               className={styles.heroLeft}
             >
               <span className={styles.heroName}>{t("name")}</span>
@@ -73,7 +100,7 @@ export function HomeHero() {
                   className={styles.heroImage}
                 />
               </div>
-              <div className={styles.badge} aria-hidden="true">
+              <motion.div className={styles.badge} variants={badgeVariants} aria-hidden="true">
                 <span className={styles.badgeText}>Hi</span>
                 <div className={styles.badgeIcon}>
                   <svg
@@ -86,11 +113,11 @@ export function HomeHero() {
                     />
                   </svg>
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
 
             <motion.div
-              variants={textVariants(0.18)}
+              variants={rightVariants}
               className={styles.heroRight}
             >
               {!isFa && (
