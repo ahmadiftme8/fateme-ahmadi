@@ -142,47 +142,12 @@ export function HomeHero() {
                 <g mask="url(#cs_mask_1_star-8)">
                   <path fill="#fff" d="M200 0H0v200h200V0z" />
                   <path
-                    fill="url(#paint0_linear_star-8)"
-                    fillOpacity="0.55"
+                    fill="#EA5039"
                     d="M200 0H0v200h200V0z"
                   />
-                  <g filter="url(#filter0_f_748_star-8)">
-                    <path fill="#06F" d="M213 69H93v141h120V69z" />
-                  </g>
                 </g>
               </g>
               <defs>
-                <filter
-                  id="filter0_f_748_star-8"
-                  width="245"
-                  height="266"
-                  x="30.5"
-                  y="6.5"
-                  colorInterpolationFilters="sRGB"
-                  filterUnits="userSpaceOnUse"
-                >
-                  <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                  <feBlend
-                    in="SourceGraphic"
-                    in2="BackgroundImageFix"
-                    result="shape"
-                  />
-                  <feGaussianBlur
-                    result="effect1_foregroundBlur_748_star-8"
-                    stdDeviation="31.25"
-                  />
-                </filter>
-                <linearGradient
-                  id="paint0_linear_star-8"
-                  x1="162"
-                  x2="49.5"
-                  y1="38"
-                  y2="150.5"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stopColor="#FF1F00" />
-                  <stop offset="1" stopColor="#FF58E4" />
-                </linearGradient>
                 <clipPath id="cs_clip_1_star-8">
                   <path fill="#fff" d="M0 0H200V200H0z" />
                 </clipPath>
