@@ -490,3 +490,117 @@
 @media (prefers-color-scheme: dark) {
   /* .heroCard {} */
 }
+
+/* --- Profile Badge --- */
+.badge {
+  position: absolute;
+  left: -32px;
+ bottom: 60px;
+  width: 65px;
+  height: 65px;
+  background-color: #EA5039;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.badgeText {
+  position: absolute;
+  color: #fff;
+  font-family: var(--font-poppins), sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  transform: translateY(0);
+  animation: textSlide 5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+}
+
+.badgeIcon {
+  position: absolute;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(160%);
+  animation: iconSlide 5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+}
+
+.badgeIcon svg {
+  width: 100%;
+  height: 100%;
+  fill: #fff;
+  transform-origin: bottom center;
+  animation: handWave 5s ease-in-out infinite;
+}
+
+@keyframes textSlide {
+
+  0%,
+  15% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  25%,
+  85% {
+    transform: translateY(-150%);
+    opacity: 0;
+  }
+
+  95%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes iconSlide {
+
+  0%,
+  20% {
+    transform: translateY(160%);
+  }
+
+  30%,
+  80% {
+    transform: translateY(0);
+  }
+
+  90%,
+  100% {
+    transform: translateY(160%);
+  }
+}
+
+@keyframes handWave {
+
+  0%,
+  35% {
+    transform: rotate(0deg);
+  }
+
+  40% {
+    transform: rotate(15deg);
+  }
+
+  45% {
+    transform: rotate(-10deg);
+  }
+
+  50% {
+    transform: rotate(15deg);
+  }
+
+  55% {
+    transform: rotate(-10deg);
+  }
+
+  60%,
+  100% {
+    transform: rotate(0deg);
+  }
+}
