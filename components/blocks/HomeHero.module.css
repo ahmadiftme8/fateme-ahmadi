@@ -14,13 +14,20 @@
 
 .postHero {
   /* Mobile Base */
-  margin-top: 40px;
+  margin-top: 60px;
   padding: 0 24px;
   text-align: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-self: center;
   align-items: center;
+}
+
+.quoteIcon {
+  width: 60px;
+  height: auto;
+  margin-bottom: 24px;
 }
 
 .postHeroText {
@@ -218,6 +225,7 @@
   align-items: center;
   gap: 12px;
   margin: 12px 0 0;
+  margin-top: 50px;
 }
 
 .scrollTrack {
@@ -258,18 +266,7 @@
   color: #4a4a4a;
 }
 
-.star {
-  display: flex;
-  width: 50px;
-  height: 50px;
-  margin: 24px auto 0;
-  /* Mobile */
-}
 
-.star svg {
-  width: 100%;
-  height: 100%;
-}
 
 
 /* ========================================= */
@@ -360,9 +357,7 @@
     letter-spacing: 0.4em;
   }
 
-  .star {
-    margin-top: 70px;
-  }
+
 }
 
 
@@ -495,7 +490,7 @@
 .badge {
   position: absolute;
   left: -32px;
- bottom: 60px;
+  bottom: 60px;
   width: 65px;
   height: 65px;
   background-color: #EA5039;

@@ -112,89 +112,23 @@ export function HomeHero() {
             <span className={styles.scrollLabel}>SCROLL</span>
           </div>
 
-          <motion.div
-            className={styles.star}
-            initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.7 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, ease: easeOutCurve, delay: 0.3 }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 200 200"
-              className="coolshapes star-8"
-            >
-              <g clipPath="url(#cs_clip_1_star-8)">
-                <mask
-                  id="cs_mask_1_star-8"
-                  style={{ maskType: "alpha" }}
-                  width="200"
-                  height="200"
-                  x="0"
-                  y="0"
-                  maskUnits="userSpaceOnUse"
-                >
-                  <path
-                    fill="#fff"
-                    d="M100 0c12.424 62.382 37.256 87.456 100 100-62.759 12.544-87.591 37.618-100 100-12.424-62.382-37.256-87.471-100-100C62.758 87.456 87.591 62.382 100 0z"
-                  />
-                </mask>
-                <g mask="url(#cs_mask_1_star-8)">
-                  <path fill="#fff" d="M200 0H0v200h200V0z" />
-                  <path
-                    fill="#EA5039"
-                    d="M200 0H0v200h200V0z"
-                  />
-                </g>
-              </g>
-              <defs>
-                <clipPath id="cs_clip_1_star-8">
-                  <path fill="#fff" d="M0 0H200V200H0z" />
-                </clipPath>
-                <filter
-                  id="cs_noise_1_star-8"
-                  width="100%"
-                  height="100%"
-                  x="0%"
-                  y="0%"
-                  filterUnits="objectBoundingBox"
-                >
-                  <feTurbulence
-                    baseFrequency="0.6"
-                    numOctaves="5"
-                    result="out1"
-                    seed="4"
-                  />
-                  <feComposite
-                    in="out1"
-                    in2="SourceGraphic"
-                    operator="in"
-                    result="out2"
-                  />
-                  <feBlend
-                    in="SourceGraphic"
-                    in2="out2"
-                    mode="overlay"
-                    result="out3"
-                  />
-                </filter>
-              </defs>
-              <g
-                style={{ mixBlendMode: "overlay" }}
-                mask="url(#cs_mask_1_star-8)"
-              >
-                <path
-                  fill="gray"
-                  stroke="transparent"
-                  d="M200 0H0v200h200V0z"
-                  filter="url(#cs_noise_1_star-8)"
-                />
-              </g>
-            </svg>
-          </motion.div>
+
         </div>
 
         <div className={styles.postHero}>
+          <svg
+            id="Layer_2"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 29.91 27.37"
+            className={styles.quoteIcon}
+          >
+            <g id="Layer_2-2" data-name="Layer 2">
+              <path
+                fill="#ea5039"
+                d="m13.97,21.54c0,3.88-2.42,5.82-7.25,5.82-2.89,0-4.8-.76-5.72-2.28-.67-1.06-1.01-3.12-1.01-6.19,0-5.75.44-9.79,1.32-12.12C2.81,2.86,5.91.69,10.64.26v3.44c-2.79.28-4.66,1.61-5.61,3.97-.53,1.34-.87,3.78-1.01,7.3,6.63,0,9.95,2.19,9.95,6.56Zm15.93-.26c0,3.88-2.4,5.82-7.2,5.82-2.89,0-4.8-.76-5.72-2.28-.71-1.13-1.06-3.19-1.06-6.19,0-5.72.44-9.74,1.32-12.07,1.52-3.92,4.62-6.1,9.32-6.56v3.44c-2.72.32-4.57,1.68-5.56,4.08-.56,1.41-.92,3.81-1.06,7.2,6.63,0,9.95,2.19,9.95,6.56Z"
+              />
+            </g>
+          </svg>
           <p className={styles.postHeroText}>{`I'm Fatemeh, a multidisciplinary designer and front-end developer
             creating impactful digital experiences, visuals, and products for
             brands and businesses for over 7 years.`}
