@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
 
 import styles from "./HomeHero.module.css";
 
@@ -11,25 +12,41 @@ export function HomeHero() {
   const locale = useLocale();
   const reduceMotion = useReducedMotion();
   const isFa = locale === "fa";
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 981);
+    };
+
+    // Initial check
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const easeOutCurve = [0.22, 1, 0.36, 1] as const;
 
   const imageVariants = {
-    initial: { scale: reduceMotion ? 1 : 0, opacity: 0 },
+    initial: { filter: "blur(15px)", opacity: 0 },
     animate: {
-      scale: 1,
+      filter: "blur(0px)",
       opacity: 1,
       transition: {
-        type: "spring" as const,
-        stiffness: 260,
-        damping: 20,
+        duration: 2,
+        ease: "easeOut" as const,
+        delay: 0.2,
       },
     },
   };
 
   const leftVariants = {
-    initial: { x: reduceMotion ? 0 : -100, opacity: 0 },
+    initial: isMobile
+      ? { y: 60, x: 0, opacity: 0 }
+      : { x: reduceMotion ? 0 : -100, y: 0, opacity: 0 },
     animate: {
+      y: 0,
       x: 0,
       opacity: 1,
       transition: { duration: 0.8, ease: easeOutCurve },
@@ -59,17 +76,30 @@ export function HomeHero() {
     },
   };
 
+  const containerRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const autoBlur = useTransform(scrollYProgress, [0, 1], ["blur(0px)", "blur(10px)"]);
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.5]);
+
   return (
     <>
-      <section className={styles.hero}>
+      <section className={styles.hero} ref={containerRef}>
         <div className={styles.container}>
           <motion.div
             initial="initial"
             animate="animate"
+            style={{ filter: autoBlur, opacity }}
             className={styles.heroWrap}
           >
             <motion.div
+              key={isMobile ? "mobile" : "desktop"}
               variants={leftVariants}
+              initial="initial"
+              animate="animate"
               className={styles.heroLeft}
             >
               <span className={styles.heroName}>{t("name")}</span>
