@@ -9,7 +9,7 @@
   /* Mobile Base */
   min-width: 100%;
   padding: 0;
-  gap: 20px;
+  gap: 0px;
 }
 
 /* --- Categories (Mobile) --- */
@@ -241,6 +241,7 @@
 
 /* --- Web Dev Gallery (Mobile Base) --- */
 .webDevGalleryContainer {
+  margin-top: 25px;
   display: flex;
   flex-direction: column;
   /* Stacked on mobile */
