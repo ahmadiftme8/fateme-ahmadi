@@ -14,19 +14,23 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 120px 20px 40px;
+    /* Mobile Padding */
+    padding: 80px 20px 30px;
     width: 100%;
     box-sizing: border-box;
 }
 
-/* --- Floating CV Badge --- */
+/* --- Floating CV Badge (Mobile Base) --- */
 .cvBadge {
     position: absolute;
     top: 0;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 118px;
-    height: 118px;
+
+    /* Mobile Size */
+    width: 82px;
+    height: 82px;
+
     background-color: var(--orange-accent);
     border-radius: 50%;
     display: flex;
@@ -42,10 +46,17 @@
 .cvText {
     font-family: sans-serif;
     font-weight: 500;
-    font-size: 35px;
+    /* Mobile Size */
+    font-size: 23px;
     line-height: 1;
     margin-top: 5px;
     text-transform: uppercase;
+}
+
+.cvBadge svg {
+    /* Mobile Icon Size */
+    width: 20px;
+    height: 20px;
 }
 
 /* --- Typography: Name --- */
@@ -57,26 +68,32 @@
     margin: 0 0 60px 0;
     text-transform: uppercase;
     letter-spacing: 0.02em;
+
+    /* Hidden on Mobile by default */
+    display: none;
 }
 
-/* --- Navigation Buttons (Grid Layout) --- */
+/* --- Navigation Buttons (Mobile Base) --- */
 .footerNav {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    /* Mobile: Column */
+    flex-direction: column;
+    align-items: center;
     gap: 30px;
-    max-width: 1100px;
     width: 100%;
-    margin-bottom: 80px;
+    max-width: 1100px;
+    margin-bottom: 40px;
 }
 
 .pillBtn {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    /* Mobile Dimensions */
     width: 100%;
-    max-width: 500px;
-    height: 80px;
+    max-width: 300px;
+    height: 55px;
 
     border: 2px solid var(--white);
     border-radius: 129px;
@@ -86,7 +103,8 @@
 
     font-family: var(--font-display);
     font-weight: 900;
-    font-size: 36px;
+    font-size: 28px;
+    /* Mobile Font */
     letter-spacing: 0.06em;
     text-transform: uppercase;
 
@@ -98,23 +116,26 @@
     color: var(--blue-bg);
 }
 
-@media (min-width: 768px) {
-    .pillBtn {
-        width: calc(40% - 30px);
-    }
-}
-
-/* --- Social Icons --- */
+/* --- Social Icons (Mobile Base) --- */
 .socialLinks {
     display: flex;
     flex-direction: row;
+
+    /* Mobile: Full width with borders */
+    width: 100%;
+    justify-content: center;
+    padding: 22px 0;
+    border-top: 2px solid #3F7CEF;
+    border-bottom: 2px solid #3F7CEF;
+    margin-bottom: 40px;
     gap: 44px;
-    margin-bottom: 60px;
+    /* Default gap, can adjust if needed for small screens */
 }
 
 .socialIcon {
     color: var(--white);
-    font-size: 40px;
+    font-size: 28px;
+    /* Mobile Size */
     text-decoration: none;
     transition: transform 0.2s;
     display: flex;
@@ -130,16 +151,84 @@
 .copyright {
     font-family: var(--font-body);
     font-weight: 275;
-    font-size: 18px;
+    font-size: 14px;
+    /* Mobile Size */
+    line-height: 1.5;
     opacity: 0.9;
     text-align: center;
     margin: 0;
 }
 
+/* ========================================= */
+/* --- DESKTOP BREAKPOINT (min-width: 769px) --- */
+/* ========================================= */
+@media (min-width: 769px) {
+
+    .footerSection {
+        padding: 120px 20px 40px;
+    }
+
+    /* CV Badge Desktop */
+    .cvBadge {
+        width: 118px;
+        height: 118px;
+    }
+
+    .cvText {
+        font-size: 35px;
+    }
+
+    .cvBadge svg {
+        width: 35px;
+        /* Restoring default icon size approx 35 from original MdDownload size=35 prop logic, though SVG css might override it. Original CSS didn't set width/height for desktop SVG, so it relied on inline attribute. I should unset it here. */
+        width: auto;
+        height: auto;
+    }
+
+    /* Title Desktop */
+    .footerTitle {
+        display: block;
+    }
+
+    /* Nav Desktop */
+    .footerNav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 80px;
+        gap: 30px;
+    }
+
+    .pillBtn {
+        font-size: 36px;
+        height: 80px;
+        /* Width calculation from original */
+        width: calc(40% - 30px);
+        max-width: 500px;
+    }
+
+    /* Social Links Desktop */
+    .socialLinks {
+        width: auto;
+        border: none;
+        padding: 0;
+        margin-bottom: 60px;
+        gap: 44px;
+    }
+
+    .socialIcon {
+        font-size: 40px;
+    }
+
+    /* Copyright Desktop */
+    .copyright {
+        font-size: 18px;
+    }
+}
+
 /* RTL Support */
 [dir="rtl"] .footerTitle {
     font-family: var(--font-title);
-    /* Or Vazirmatn if preferred for title in FA, but design implies English title? The screenshot shows "FATEME AHMADI" in English even if site is FA? Or maybe it should be translated. The translation file has FA title. I will stick to font-title for now, but maybe override for FA if needed. */
 }
 
 [dir="rtl"] .cvText {
@@ -148,81 +237,4 @@
 
 [dir="rtl"] .pillBtn {
     font-family: var(--font-display);
-    /* Or Vazirmatn */
-}
-
-/* --- Mobile Responsive Styles (Max-width: 768px) --- */
-@media (max-width: 768px) {
-
-    /* 1. Adjust Container Padding */
-    .footerSection {
-        padding: 80px 20px 30px;
-        /* Less padding, keeping top space for badge */
-    }
-
-    /* 2. Shrink the Floating Badge */
-    .cvBadge {
-        width: 82px;
-        height: 82px;
-    }
-
-    .cvText {
-        font-size: 23px;
-        /* Smaller text inside badge */
-    }
-
-    .cvBadge svg {
-        width: 20px;
-        /* Scale down the icon */
-        height: 20px;
-    }
-
-    /* 3. Hide the Big Title (Per your design) */
-    .footerTitle {
-        display: none;
-    }
-
-    /* 4. Vertical Button Layout */
-    .footerNav {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-        margin-bottom: 40px;
-        width: 100%;
-    }
-
-    .pillBtn {
-        width: 100%;
-        max-width: 300px;
-        /* Fixed width from design */
-        height: 55px;
-        /* Smaller height */
-        font-size: 28px;
-        /* Smaller font */
-    }
-
-    /* 5. Social Links with Borders */
-    .socialLinks {
-        width: 100%;
-        /* Full width to make borders stretch */
-        justify-content: center;
-        padding: 22px 0;
-        /* Vertical spacing inside the borders */
-
-        /* The specific blue border lines from Figma */
-        border-top: 2px solid #3F7CEF;
-        border-bottom: 2px solid #3F7CEF;
-        margin-bottom: 40px;
-    }
-
-    .socialIcon {
-        font-size: 28px;
-        /* Smaller icons for mobile */
-    }
-
-    /* 6. Smaller Copyright Text */
-    .copyright {
-        font-size: 14px;
-        line-height: 1.5;
-    }
 }

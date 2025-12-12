@@ -92,7 +92,9 @@ export function HomeHero() {
           </motion.div>
 
           <div className={styles.scrollIndicator} aria-hidden="true">
-            <span className={styles.scrollLine} />
+            <div className={styles.scrollTrack}>
+              <div className={styles.scrollThumb} />
+            </div>
             <span className={styles.scrollLabel}>SCROLL</span>
           </div>
 

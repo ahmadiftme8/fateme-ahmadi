@@ -41,6 +41,12 @@
   --color-accent: #ea5039;
   --grid-line: rgba(18, 18, 18, 0.08);
   --font-big-shoulders-text: "Big Shoulders Text", sans-serif;
+
+  /* Fluid Typography Scale */
+  --font-size-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --font-size-h1: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+  --font-size-h2: clamp(2rem, 4vw + 1rem, 3.5rem);
+  --font-size-h3: clamp(1.75rem, 3vw + 1rem, 2.5rem);
 }
 
 [data-theme="dark"] {
@@ -65,7 +71,7 @@ body {
   background-color: var(--color-background);
   color: var(--color-foreground);
   transition: background-color 0.35s ease, color 0.35s ease;
-
+  font-size: var(--font-size-base);
 }
 
 body {
@@ -75,7 +81,6 @@ body {
   background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 32px 32px;
-
 }
 
 body[data-theme="dark"] {
@@ -87,16 +92,19 @@ body[data-theme="dark"] {
 a {
   color: inherit;
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 img,
 svg {
   display: block;
   max-width: 100%;
+  height: auto;
 }
 
 button {
   font: inherit;
+  touch-action: manipulation;
 }
 
 .font-poppins {
@@ -113,23 +121,19 @@ button {
 }
 
 .sectionTitle {
-  margin: 0 0 50px;
+  margin: 0 0 clamp(30px, 5vw, 50px);
   text-align: center;
   font-family: var(--font-big-shoulders), "Big Shoulders Text", sans-serif;
   font-weight: 800;
   text-transform: uppercase;
-  font-size: clamp(2.4rem, 4.6vw, 3.6rem);
+  font-size: var(--font-size-h2);
   color: var(--blue, #1f67f1);
   letter-spacing: 0.01em;
+  width: 100%;
 }
 
-@media (max-width: 768px) {
-  .sectionTitle {
-    font-weight: 900;
-    font-size: 38px;
-    width: 100%;
-    margin: 0 auto clamp(1.4rem, 4vw, 1.9rem);
-  }
+@media (min-width: 768px) {
+  /* Desktop overrides if any specific distinct behavior needed not covered by clamps */
 }
 
 ::selection {
@@ -189,5 +193,6 @@ html[lang="fa"] :where(a[href^="http"], a[href^="https"], time, .numeric) {
 }
 
 @theme {
-  --breakpoint-xs: 376px; /* یعنی از 376px به بالا */
+  --breakpoint-xs: 376px;
+  /* یعنی از 376px به بالا */
 }

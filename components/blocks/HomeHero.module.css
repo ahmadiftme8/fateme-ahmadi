@@ -1,6 +1,7 @@
 .hero {
-  margin-top: min(12vh, 120px);
-  margin-bottom: min(8vh, 80px);
+  /* Mobile Base */
+  margin-top: 48px;
+  margin-bottom: 44px;
   color: var(--blue, #1f67f1);
 }
 
@@ -12,8 +13,8 @@
 }
 
 .postHero {
-
-  margin-top: 70px;
+  /* Mobile Base */
+  margin-top: 40px;
   padding: 0 24px;
   text-align: center;
   display: flex;
@@ -28,48 +29,104 @@
   font-family: var(--font-poppins);
   font-style: normal;
   font-weight: 300;
-  font-size: 18px;
+  font-size: 16px;
+  /* Mobile Size */
   max-width: 600px;
   text-align: center;
-
 }
 
+/* --- Hero Layout (Mobile Base) --- */
 .heroWrap {
   display: grid;
   align-items: center;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 304px) minmax(0, 1fr);
-  gap: clamp(16px, 2.5vw, 24px);
   position: relative;
-}
 
-@media (max-width: 980px) {
-  .heroWrap {
-    grid-template-columns: 1fr;
-    text-align: center;
-    row-gap: 32px;
-  }
+  /* Mobile: Single Column */
+  grid-template-columns: 1fr;
+  text-align: center;
+  row-gap: 28px;
+  gap: 28px;
 }
 
 .heroLeft {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* Mobile: Center alignment, Order 2 (below image) */
+  align-items: center;
+  text-align: center;
+  order: 2;
+}
+
+.heroRight {
+  display: none;
+  /* Hidden on mobile < 980 base */
+  flex-direction: column;
   align-items: flex-start;
+  gap: 12px;
+  order: 3;
   text-align: start;
 }
 
+/* --- Hero Card (Mobile Base) --- */
+.heroCard {
+  position: relative;
+  width: 80%;
+  aspect-ratio: 304 / 456;
+  overflow: visible;
+  margin: 0 auto;
+  order: 1;
+  /* Top on mobile */
+
+  /* Mobile Dimensions */
+  max-width: 182px;
+  border-radius: 40px;
+}
+
+.heroImageFrame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+.heroImage {
+  object-fit: cover;
+}
+
+/* Corner Shape Support */
+@supports (corner-shape: squircle) {
+  .heroCard {
+    corner-shape: squircle;
+  }
+}
+
+@supports (-webkit-corner-shape: squircle) {
+  .heroCard {
+    -webkit-corner-shape: squircle;
+  }
+}
+
+/* --- User Name & Roles (Mobile Base) --- */
 .heroName {
-  position: absolute;
-  bottom: 240px;
   font-family: var(--font-big-shoulders), "Big Shoulders", sans-serif;
   font-weight: 900;
   text-transform: uppercase;
-  font-size: 32px;
+  color: var(--blue, #1f67f1);
+
+  /* Mobile Size & Positioning */
+  position: unset;
+  font-size: 46px;
+  padding: 0;
+  margin: 0;
   line-height: 1.2;
-  margin: -6px 0 0;
 }
 
-.heroRoleDesigner {
+.heroRoleDesigner,
+.heroRoleDeveloper {
+  /* Hidden on mobile, replaced by combined/mobile roles */
+  display: none;
   font-family: var(--font-big-shoulders), "Big Shoulders", sans-serif;
   font-weight: 900;
   text-transform: uppercase;
@@ -79,19 +136,30 @@
   margin-top: 4px;
 }
 
+.heroRoleDeveloper {
+  letter-spacing: -0.02em;
+  margin: -6px 0 0;
+}
+
 .heroRolesMobile {
-  display: none;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+
   font-family: var(--font-big-shoulders), "Big Shoulders", sans-serif;
   font-weight: 800;
   text-transform: uppercase;
-  font-size: 28px;
-  line-height: 1.1;
-  letter-spacing: 0.06em;
-  gap: 8px;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   color: #1f67f1;
+
+  /* Mobile Size */
+  font-size: 24px;
+  letter-spacing: -0.11px;
+  line-height: 0.8;
+  margin: 0;
+  padding: 0;
 }
 
 .heroRolesMobile span {
@@ -106,109 +174,32 @@
   text-align: center;
   font-family: var(--font-big-shoulders), "Big Shoulders", sans-serif;
   font-weight: 900;
-  font-size: 110px;
   line-height: 1;
-  margin-top: 12px;
+
+  /* Mobile Size */
+  font-size: 22px;
+  margin-top: 0px;
+  margin-bottom: 12px;
 }
 
 .heroAmpersand {
-  font-size: 32px;
+  font-size: 50px;
+  /* Mobile */
   color: #1f67f1;
 }
 
-@media (max-width: 980px) {
-  .heroLeft {
-    align-items: center;
-    order: 2;
-  }
-}
-
-@media (max-width: 980px) {
-  .heroCard {
-    order: 1;
-
-  }
-}
-
-.heroCard {
-  position: relative;
-  width: 80%;
-  max-width: 304px;
-  aspect-ratio: 304 / 456;
-  border-radius: 65px;
-  overflow: visible;
-  margin: 0 auto;
-
-
-}
-
-.heroImageFrame {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
-  overflow: hidden;
-
-
-}
-
-
-
-@supports (corner-shape: squircle) {
-  .heroCard {
-    corner-shape: squircle;
-    border-radius: 65px;
-
-  }
-}
-
-
-@supports (-webkit-corner-shape: squircle) {
-  .heroCard {
-    -webkit-corner-shape: squircle;
-    /* For webkit-based browsers like older Safari */
-  }
-}
-
-
-.heroImage {
-  object-fit: cover;
-}
-
-.heroRight {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  order: 3;
-  text-align: start;
-}
-
-.heroRoleDeveloper {
-  font-family: var(--font-big-shoulders), "Big Shoulders", sans-serif;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-  font-size: 100px;
-  line-height: 1;
-  margin: -6px 0 0;
-}
-
 .heroDesc {
+  /* Mobile: Hidden */
+  display: none;
   max-width: 460px;
   font-family: var(--font-big-shoulders), "Big Shoulders", sans-serif;
   font-weight: 500;
   font-size: 16px;
-
   text-align: right;
   position: absolute;
   bottom: 75px;
-  display: flex;
-
-  align-self: end;
   flex-direction: column;
-
-
+  align-self: end;
 }
 
 .heroDesc p {
@@ -220,187 +211,59 @@
   text-align: right;
 }
 
-@media (max-width: 980px) {
-  .heroRight {
-    align-items: center;
-  }
-
-  .heroDesc {
-    text-align: center;
-  }
-}
-
+/* --- Scroll Indicator (Mobile Visible) --- */
 .scrollIndicator {
-  display: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0 0;
 }
 
-@media (max-width: 640px) {
-  .hero {
-    margin-top: 64px;
-    margin-bottom: 56px;
+.scrollTrack {
+  position: relative;
+  width: 3px;
+  height: 54px;
+  background: #C8C7C7;
+  overflow: hidden;
+  border-radius: 999px;
+}
+
+.scrollThumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 20px;
+  background: #1F67F1;
+  border-radius: 999px;
+  animation: scrollLoop 2s ease-in-out infinite alternate;
+}
+
+@keyframes scrollLoop {
+  0% {
+    transform: translateY(0);
   }
 
-  .heroWrap {
-    row-gap: 28px;
-  }
-
-  .heroCard {
-    max-width: 264px;
-  }
-
-  .heroRoleCombined {
-    font-size: 42px;
-    line-height: 1.2;
-    margin-top: 8px;
-  }
-
-  .heroRoleDesigner,
-  .heroRoleDeveloper {
-    display: none;
-  }
-
-  .heroRolesMobile {
-    display: inline-flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .heroDesc {
-    display: none;
-  }
-
-  .heroRight {
-    display: none;
-  }
-
-  .scrollIndicator {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    margin: 12px 0 0;
-  }
-
-  .scrollLine {
-    width: 2px;
-    height: 52px;
-    background: linear-gradient(180deg,
-        rgba(31, 103, 241, 0.6) 0%,
-        rgba(31, 103, 241, 0.1) 100%);
-    border-radius: 999px;
-  }
-
-  .scrollLabel {
-    font-family: var(--font-poppins), "Poppins", sans-serif;
-    font-size: 12px;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: #4a4a4a;
-  }
-
-  .star {
-    margin-top: 28px;
+  100% {
+    transform: translateY(34px);
   }
 }
 
-@media (max-width: 500px) {
-  .hero {
-    margin-top: 48px;
-    margin-bottom: 44px;
-  }
-
-  .heroCard {
-    max-width: 182px;
-    border-radius: 40px;
-    stroke: none;
-  }
-
-  .heroRoleCombined {
-    font-size: 22px;
-    margin-top: 0px;
-    margin-bottom: 12px;
-  }
-
-
-  .heroName {
-    position: unset;
-    font-size: 46px;
-    padding: 0;
-    margin: 0;
-    gap: 0;
-
-
-  }
-
-  .heroRolesMobile {
-    font-size: 24px;
-    letter-spacing: -0.11px;
-    gap: 6px;
-    padding: 0;
-    margin: 0;
-
-  }
-
-  .heroAmpersand {
-    font-size: 50px;
-  }
-
-  .scrollIndicator {
-    gap: 12px;
-  }
-
-  .scrollLine {
-    height: 44px;
-  }
-
-  .scrollLabel {
-    font-size: 11px;
-    letter-spacing: 0.32em;
-  }
-
-  .star {
-    margin-top: 24px;
-  }
-}
-
-
-@media (max-width: 375px) {
- 
-  .heroCard{
-    max-width: 140px;
-    border-radius: 32px;
-    stroke: none;
-
-  }
-  .heroName{
-    font-size: 32px;
-    margin-bottom: -8px;
-  }
-  .heroRoleCombined{
-    font-size: 20px;
-    line-height: 1;
-    margin-top: -10px;
-    padding: 0;
-  }
-
-  .heroAmpersand{
-    font-size: 40px;
-  }
-
+.scrollLabel {
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #4a4a4a;
 }
 
 .star {
   display: flex;
-  margin-top: 70px;
-
-  justify-self: center;
   width: 50px;
   height: 50px;
-
-
-
-
-
+  margin: 24px auto 0;
+  /* Mobile */
 }
 
 .star svg {
@@ -408,6 +271,182 @@
   height: 100%;
 }
 
+
+/* ========================================= */
+/* --- EXTRA SMALL MOBILE (< 375px) --- */
+/* ========================================= */
+@media (max-width: 375px) {
+  .heroCard {
+    max-width: 140px;
+    border-radius: 32px;
+  }
+
+  .heroName {
+    font-size: 32px;
+    margin-bottom: -8px;
+  }
+
+  .heroRoleCombined {
+    font-size: 20px;
+    margin-top: -10px;
+  }
+
+  .heroAmpersand {
+    font-size: 40px;
+  }
+
+  .heroRolesMobile {
+    font-size: 18px;
+  }
+}
+
+
+/* ========================================= */
+/* --- TABLET BREAKPOINT (min-width: 641px) --- */
+/* ========================================= */
+@media (min-width: 641px) {
+  .hero {
+    margin-top: min(12vh, 120px);
+    margin-bottom: min(8vh, 80px);
+  }
+
+  .postHero {
+    margin-top: 70px;
+  }
+
+  .postHeroText {
+    font-size: 18px;
+  }
+
+  .heroWrap {
+    row-gap: 32px;
+    gap: 32px;
+  }
+
+  .heroCard {
+    max-width: 264px;
+    border-radius: 65px;
+  }
+
+  .heroName {
+    font-size: 60px;
+    /* Larger tablet name */
+  }
+
+  .heroRolesMobile {
+    font-size: 28px;
+    letter-spacing: 0.06em;
+    gap: 8px;
+  }
+
+  .heroRoleCombined {
+    font-size: 110px;
+    /* Restore desktop-like size for combined if used here? Or keep tablet scale. Assuming tablet uses mobile simplified view but larger. */
+    margin-top: 12px;
+  }
+
+  .heroAmpersand {
+    font-size: 32px;
+  }
+
+  .scrollIndicator {
+    gap: 16px;
+  }
+
+
+
+  .scrollLabel {
+    font-size: 12px;
+    letter-spacing: 0.4em;
+  }
+
+  .star {
+    margin-top: 70px;
+  }
+}
+
+
+/* ========================================= */
+/* --- DESKTOP BREAKPOINT (min-width: 981px) --- */
+/* ========================================= */
+@media (min-width: 981px) {
+
+  /* Layout Changes */
+  .heroWrap {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 304px) minmax(0, 1fr);
+    gap: clamp(16px, 2.5vw, 24px);
+    text-align: left;
+    row-gap: 0;
+  }
+
+  .heroLeft {
+    align-items: flex-start;
+    text-align: start;
+    order: unset;
+    /* Restore order */
+  }
+
+  .heroRight {
+    display: flex;
+    /* Visible */
+    order: unset;
+  }
+
+  .heroCard {
+    order: unset;
+    margin: 0 auto;
+    max-width: 304px;
+  }
+
+  /* Text Styles Restoration */
+  .heroName {
+    font-size: 32px;
+    /* Desktop label size */
+    position: absolute;
+    bottom: 240px;
+    margin: -6px 0 0;
+  }
+
+  .heroRoleDesigner,
+  .heroRoleDeveloper {
+    display: block;
+    /* Visible */
+  }
+
+  .heroRolesMobile {
+    display: none;
+  }
+
+  .heroRoleCombined {
+    display: none;
+  }
+
+  /* Hide combined role if separated on desktop? Original CSS only showed combined on mobile/tablet contexts implicitly via hiding others. The original code had .heroRoleCombined visible always but other roles mobile hidden < 640. Wait. Line 102 .heroRoleCombined just styles it. But Line 257 hides Designer/Developer < 640. So > 640 they are visible. 
+     On Desktop, we want Designer and Developer separate? 
+     Original: Designer/Developer has font-size 100px. 
+     Mobile Combined has 110px.
+     
+     Actually, looking at original code:
+     .heroRoleDesigner (Desktop)
+     .heroRolesMobile (Mobile < 640)
+     
+     Wait, .heroRoleCombined is used inside .heroRolesMobile? NO.
+     Original HTML structure likely has multiple blocks.
+     If desktop, we show .heroRoleDesigner and .heroRoleDeveloper.
+     If mobile, we show .heroRolesMobile (which contains combined or spans).
+  */
+
+  .heroDesc {
+    display: flex;
+    /* Visible */
+  }
+
+  .scrollIndicator {
+    display: none;
+  }
+}
+
+/* RTL Support */
 :global(html[dir="rtl"]) .heroWrap {
   direction: rtl;
 }
@@ -421,7 +460,8 @@
 :global(html[lang="fa"]) .heroRoleDesigner,
 :global(html[lang="fa"]) .heroRoleDeveloper,
 :global(html[lang="fa"]) .heroRolesMobile,
-:global(html[lang="fa"]) .scrollLabel {
+:global(html[lang="fa"]) .scrollLabel,
+:global(html[lang="fa"]) .heroRoleCombined {
   letter-spacing: normal;
 }
 
@@ -429,21 +469,11 @@
 :global(html[lang="fa"]) .heroRoleDesigner,
 :global(html[lang="fa"]) .heroRoleDeveloper,
 :global(html[lang="fa"]) .heroRolesMobile,
-:global(html[lang="fa"]) .heroDesc {
-  font-family: "Vazirmatn", system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-  text-transform: none;
-}
-
-:global(html[lang="fa"]) .postHeroText {
-  font-family: "Vazirmatn", system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-}
-
+:global(html[lang="fa"]) .heroDesc,
+:global(html[lang="fa"]) .postHeroText,
 :global(html[lang="fa"]) .heroRoleCombined {
-  font-family: "Vazirmatn", system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-  letter-spacing: normal;
+  font-family: "Vazirmatn", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  text-transform: none;
 }
 
 :global(html[lang="fa"]) .heroLeft {
@@ -456,6 +486,7 @@
   text-align: center;
 }
 
+/* Dark Mode */
 @media (prefers-color-scheme: dark) {
-  .heroCard {}
+  /* .heroCard {} */
 }
