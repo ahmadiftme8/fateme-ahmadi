@@ -85,7 +85,7 @@ export default function WheelCarousel({ projects }: WheelCarouselProps) {
     };
 
     return (
-        <div className="w-full relative overflow-hidden py-10 flex flex-col gap-8">
+        <div className="w-full relative overflow-hidden pt-0 pb-10 flex flex-col gap-0">
             {/* Carousel Track */}
             <div
                 ref={containerRef}
