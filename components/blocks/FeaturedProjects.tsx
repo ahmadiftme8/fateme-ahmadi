@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useScrollContext } from "@/components/utility/ScrollContext";
 import styles from "./FeaturedProjects.module.css";
+import WheelCarousel from "./WheelCarousel";
 
 type Category = {
   id: string;
@@ -223,40 +224,8 @@ export default function FeaturedProjects({ projects = [] }: { projects?: Project
           </motion.div>
         </div>
 
-        <div className={styles.webDevGalleryContainer}>
-          <div className={`${styles.webDevArrow} ${styles.webDevArrowLeft}`}>&lt;</div>
-          <div className={styles.webDevProjectsGrid}>
-            {displayItems.length > 0 ? (
-              displayItems.map((item, index) => (
-                <a
-                  key={item.id || index}
-                  href={item.link || "#"}
-                  className={styles.webDevThumbnailContainer}
-                >
-                  <div
-                    className={styles.webDevThumbnailContent}
-                    style={{ backgroundImage: `url(${item.thumbnail_img || item.imageSrc || item.URL})` }}
-                  >
-                    <div className={styles.webDevBlackGradient}></div>
-                    <div className={styles.webDevOpenIcon}>
-                      <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M13.5 0C6.04216 0 0 6.04946 0 13.5C0 20.9505 6.04216 27 13.5 27C20.9578 27 27 20.9578 27 13.5C27 6.04216 20.9578 0 13.5 0ZM18.4038 18.9073H16.5284V11.7997L8.46486 19.8632L7.13676 18.5351L15.2003 10.4789H8.1V8.60351H18.4038V18.9073Z" fill="white" />
-                      </svg>
-                    </div>
-                    <div className={styles.webDevTextContent}>
-                      <div className={styles.webDevLabelName}>{item.title || item.Title || item.name || "Project Name"}</div>
-                      <div className={styles.webDevLabelDescription}>{item.excerpt || item.description || "Project Description"}</div>
-                    </div>
-                  </div>
-                </a>
-              ))
-            ) : (
-              <div style={{ padding: '40px', textAlign: 'center', width: '100%', color: '#797979' }}>
-                No projects found for {categories.find(c => c.id === activeCategory)?.label}
-              </div>
-            )}
-          </div>
-          <div className={`${styles.webDevArrow} ${styles.webDevArrowRight}`}>&gt;</div>
+        <div className="w-full">
+          <WheelCarousel projects={displayItems} />
         </div>
 
         {/* Bottom Sentinel to trigger sticky OFF */}
