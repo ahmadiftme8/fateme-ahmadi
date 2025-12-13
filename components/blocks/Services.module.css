@@ -2,6 +2,7 @@
 
   padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 6vw, 2.5rem)
     clamp(4rem, 10vw, 7rem);
+    margin-bottom: 50px;
 }
 
 @media (min-width: 900px) {
@@ -296,7 +297,7 @@
     font-weight: 800;
     font-size: clamp(0.9rem, 2.8vw, 1.05rem);
     letter-spacing: 0.04em;
-    margin-top: clamp(1.8rem, 5vw, 2.4rem);
+    margin-top: clamp(0rem, 5vw, 0rem);
   
     position: relative;
   }
