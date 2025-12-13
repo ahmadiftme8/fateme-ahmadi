@@ -7,7 +7,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { useScrollContext } from "@/components/utility/ScrollContext";
+
 import styles from "./Header.module.css";
 
 const NAV_ITEMS = [
@@ -35,7 +35,6 @@ const getLocalizedPath = (pathname: string, locale: string) => {
 };
 
 export function Header() {
-  const { isSticky } = useScrollContext();
   const locale = useLocale();
   const tNav = useTranslations("navigation");
   const tHeader = useTranslations("header");
@@ -65,9 +64,7 @@ export function Header() {
     }
 
     // Prevent body padding update when sticky to avoid layout shifts (scroll jumping)
-    if (isSticky && isMobileViewport) {
-      return;
-    }
+
 
     const offset = collapsedOffsetRef.current || computeNavOffset();
 
@@ -77,7 +74,7 @@ export function Header() {
 
     const offsetValue = Math.round(offset);
     document.body.style.paddingTop = `${offsetValue}px`;
-  }, [computeNavOffset, isSticky, isMobileViewport]);
+  }, [computeNavOffset, isMobileViewport]);
 
   const updateCollapsedOffset = useCallback(() => {
     if (isMenuOpenRef.current) {
@@ -248,12 +245,6 @@ export function Header() {
       paddingLeft: 16,
       paddingRight: 16,
       transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }
-    },
-    sticky: {
-      top: 0,
-      paddingLeft: 0,
-      paddingRight: 0,
-      transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }
     }
   };
 
@@ -269,18 +260,6 @@ export function Header() {
       borderLeftWidth: 1,
       borderRightWidth: 1,
       transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }
-    },
-    sticky: {
-      borderRadius: 0,
-      maxWidth: "100%",
-      marginTop: 0,
-      marginBottom: 0,
-      width: "100%",
-      borderBottomWidth: 1,
-      borderTopWidth: 0,
-      borderLeftWidth: 0,
-      borderRightWidth: 0,
-      transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }
     }
   };
 
@@ -290,7 +269,7 @@ export function Header() {
       className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ""}`}
       aria-label={tHeader("title")}
       initial={false}
-      animate={isMobileViewport ? (isSticky ? "sticky" : "default") : undefined}
+      animate={isMobileViewport ? "default" : undefined}
       variants={navVariants}
     >
       <motion.div
@@ -307,29 +286,7 @@ export function Header() {
           />
         </div>
 
-        <AnimatePresence>
-          {isSticky && isMobileViewport && (
-            <motion.span
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -10 }}
-              transition={{ duration: 0.3 }}
-              style={{
-                position: "absolute",
-                left: "64px", // Avatar width + gap
-                fontSize: "18px",
-                fontWeight: "600",
-                color: "#404040",
-                textTransform: "uppercase",
-                whiteSpace: "nowrap",
-                fontFamily: 'var(--font-big-shoulders), "Big Shoulders Text", sans-serif',
-                letterSpacing: "0.02em"
-              }}
-            >
-              Featured Projects
-            </motion.span>
-          )}
-        </AnimatePresence>
+
 
         <div
           className={styles.links}
@@ -449,9 +406,6 @@ export function Header() {
 
         <div
           className={`${styles.actions} ${isMenuOpen ? styles.actionsMenu : ""}`}
-          style={{
-            display: isSticky && isMobileViewport && !isMenuOpen ? "none" : undefined
-          }}
         >
           <Link
             href={`/${locale}/quote`}

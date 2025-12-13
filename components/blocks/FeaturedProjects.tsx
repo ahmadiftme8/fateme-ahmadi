@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { useScrollContext } from "@/components/utility/ScrollContext";
+
 import styles from "./FeaturedProjects.module.css";
 import WheelCarousel from "./WheelCarousel";
 
@@ -49,60 +49,7 @@ const galleryItems: Project[] = [
 
 export default function FeaturedProjects({ projects = [] }: { projects?: Project[] }) {
   const [activeCategory, setActiveCategory] = useState("graphic-design");
-  const { setIsSticky, isSticky } = useScrollContext();
-  const sectionRef = useRef<HTMLElement>(null);
-  const topSentinelRef = useRef<HTMLDivElement>(null);
-  const bottomSentinelRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
 
-  // Refs to track sentinel states synchronously in the observer callback
-  const topPassed = useRef(false);
-  const bottomPassed = useRef(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 720);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  useEffect(() => {
-    if (!isMobile) {
-      setIsSticky(false);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const isTop = entry.target === topSentinelRef.current;
-          const isBottom = entry.target === bottomSentinelRef.current;
-
-          // Check if the sentinel is above the sticky line (approx 61px)
-          // We use 62px as a threshold to be safe
-          const isAboveLine = entry.boundingClientRect.top <= 62;
-
-          if (isTop) {
-            topPassed.current = isAboveLine;
-          } else if (isBottom) {
-            bottomPassed.current = isAboveLine;
-          }
-        });
-
-        // We are sticky if we have passed the top but NOT passed the bottom
-        setIsSticky(topPassed.current && !bottomPassed.current);
-      },
-      {
-        threshold: [0, 1],
-        rootMargin: "-61px 0px 0px 0px", // Offset for the sticky position
-      }
-    );
-
-    if (topSentinelRef.current) observer.observe(topSentinelRef.current);
-    if (bottomSentinelRef.current) observer.observe(bottomSentinelRef.current);
-
-    return () => observer.disconnect();
-  }, [isMobile, setIsSticky]);
 
   // Filter projects based on active category
   // Using 'category_main' column from Sheet matching our category IDs or Labels
@@ -123,31 +70,22 @@ export default function FeaturedProjects({ projects = [] }: { projects?: Project
     : activeCategory === "graphic-design" ? galleryItems : []; // Keep fallback for now or remove if strictly dynamic
 
   return (
-    <section ref={sectionRef} id="featured-projects" className={styles.featuredProjects}>
+    <section id="featured-projects" className={styles.featuredProjects}>
       <div
         className={styles.featuredProjects__container}
       >
         <h2 className={`${styles.featuredProjects__title} sectionTitle`}>Featured Projects</h2>
 
-        {/* Top Sentinel to trigger sticky ON */}
-        <div ref={topSentinelRef} style={{ height: "1px", width: "100%", marginTop: "-1px" }} />
-
         <div
           style={{
             width: "100%",
-            position: isMobile ? "sticky" : "relative",
-            top: isMobile ? "61px" : "0", // Sticky offset
+            position: "relative",
             zIndex: 40
           }}
         >
           <motion.div
-            animate={isSticky && isMobile ? {
-              backgroundColor: "#d9d9d9", // Matching global background
-              paddingBottom: 10,
-              paddingTop: 10,
-              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.12)",
-              borderBottom: "1px solid rgba(0, 0, 0, 0.06)"
-            } : {
+            initial={false}
+            animate={{
               backgroundColor: "rgba(217, 217, 217, 0)",
               paddingBottom: 0,
               paddingTop: 0,
@@ -229,7 +167,7 @@ export default function FeaturedProjects({ projects = [] }: { projects?: Project
         </div>
 
         {/* Bottom Sentinel to trigger sticky OFF */}
-        <div ref={bottomSentinelRef} style={{ height: "1px", width: "100%" }} />
+
       </div>
     </section>
   );
