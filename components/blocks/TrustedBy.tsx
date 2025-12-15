@@ -60,7 +60,13 @@ function CarouselRow({ brands, direction }: { brands: typeof trustedBrands, dire
           {brand.svgCode ? (
             <div
               className={styles.svgWrapper}
-              dangerouslySetInnerHTML={{ __html: brand.svgCode }}
+              // Inject explicit width/height and inline styles for Safari compatibility
+              dangerouslySetInnerHTML={{
+                __html: brand.svgCode
+                  .replace(/id\s*=\s*["']Layer_1["']/g, "")
+                  .replace(/<svg/, '<svg width="100%" height="100%" preserveAspectRatio="xMidYMid meet"')
+                  .replace(/class\s*=\s*["']cls-1["']/g, 'style="fill: #33518c; stroke-width: 0px;"'),
+              }}
             />
           ) : brand.logoSrc ? (
             <Image
