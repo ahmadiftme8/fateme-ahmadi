@@ -26,26 +26,28 @@ const faqData = [
 
 export default function FAQ() {
     return (
-        <section className={styles.faqSection}>
-            <div className={styles.faqHeader}>
-                <h2 className={styles.faqTitle}>Frequently Asked Questions</h2>
-                <p className={styles.faqDescription}>
+        <div className={styles['faq-container']}>
+            <div className={styles['faq-header']}>
+                <h2 className={styles['faq-title']}>
+                    <span className={styles['title-mobile']}>FAQ</span>
+                    <span className={styles['title-desktop']}>FREQUENTLY ASKED QUESTIONS</span>
+                </h2>
+                <p className={styles['faq-description']}>
                     Here are answers to some of the most common questions I receive as a
                     freelance designer. If you don’t see your question here, feel free to
                     reach out—I’m happy to help!
                 </p>
             </div>
-
-            <div className={styles.faqList}>
+            <div className={styles['faq-list']}>
                 {faqData.map((item) => (
-                    <div key={item.id} className={styles.faqItem}>
-                        <span className={styles.questionText}>
+                    <div key={item.id} className={styles['faq-item']}>
+                        <span className={styles['question-text']}>
                             {item.id}. {item.question}
                         </span>
-                        <span className={styles.arrowIcon}></span>
+                        <div className={styles['chevron']}></div>
                     </div>
                 ))}
             </div>
-        </section>
+        </div>
     );
 }

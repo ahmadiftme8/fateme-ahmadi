@@ -1,114 +1,148 @@
 /* IMPORTS: Add the fonts used in your design */
 @import url('https://fonts.googleapis.com/css2?family=Antonio:wght@400&family=Big+Shoulders+Text:wght@800&family=Inter:wght@400&display=swap');
 
-/* --- Main Container --- */
-.faqSection {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    /* Pushes text left and questions right */
-    align-items: flex-start;
-    gap: 6rem;
-    /* Roughly the 100px+ gap from design, but flexible */
+/* IMPORTS: Add the fonts used in your design */
+@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@400&family=Big+Shoulders+Text:wght@800&family=Inter:wght@400&display=swap');
 
-    /* Layout constraints */
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 100px 5%;
-    /* Adds breathing room on the sides */
-    box-sizing: border-box;
-}
-
-/* --- Left Side: Text --- */
-.faqHeader {
-    flex: 1;
-    /* Takes up 1 share of the space */
-    max-width: 640px;
-    /* Stops text from getting too wide to read */
+.faq-container {
+    width: 100%;
+    max-width: 320px;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 2rem;
+    padding: 0 16px;
 }
 
-.faqTitle {
+/* Header Section */
+.faq-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Title */
+.faq-title {
     font-family: 'Big Shoulders Text', sans-serif;
     font-weight: 800;
-    font-size: clamp(50px, 6vw, 90px);
-    /* Responsive font size */
-    line-height: 1.1;
+    font-size: 39px;
+    line-height: 1.2;
     text-transform: uppercase;
     color: #1F67F1;
-    /* The Blue color */
-    margin: 0;
+    margin-bottom: 40px;
 }
 
-.faqDescription {
+.title-mobile {
+    display: block;
+}
+
+.title-desktop {
+    display: none;
+}
+
+/* Description */
+.faq-description {
+    display: none;
+    /* Hidden on mobile */
     font-family: 'Inter', sans-serif;
     font-weight: 400;
-    font-size: 24px;
-    /* 33px is very large for web body text, 24px is cleaner */
-    line-height: 1.4;
+    font-size: 16px;
+    line-height: 1.5;
     color: #121212;
-    margin: 0;
+    margin-top: 24px;
 }
 
-/* --- Right Side: Questions --- */
-.faqList {
-    flex: 1.2;
-    /* Takes up slightly more space than the header */
+/* List */
+.faq-list {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.faqItem {
+.faq-item {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    /* Centers text and arrow vertically */
-    padding: 30px 0;
-    border-bottom: 3px solid #B3B3B3;
+    align-items: flex-start;
+    padding: 16px 0;
+    border-bottom: 1px solid #B4B4B4;
     cursor: pointer;
-    /* Shows user it is clickable */
-    transition: all 0.3s ease;
 }
 
-.faqItem:hover {
-    border-color: #1F67F1;
-    /* Nice hover effect matching your blue */
-}
-
-.questionText {
-    font-family: 'Antonio', sans-serif;
+.question-text {
+    font-family: 'Inter', sans-serif;
     font-weight: 400;
-    font-size: clamp(24px, 2.5vw, 37px);
-    /* Responsive font size */
+    font-size: 13px;
+    line-height: 1.4;
     color: #121212;
-    line-height: 1.2;
+    padding-right: 15px;
 }
 
-/* CSS-only Arrow (No image needed) */
-.arrowIcon {
-    width: 15px;
-    height: 15px;
-    border-right: 3px solid #121212;
-    border-bottom: 3px solid #121212;
+.chevron {
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid #121212;
+    border-bottom: 2px solid #121212;
     transform: rotate(45deg);
-    /* Creates the downward V shape */
-    margin-left: 20px;
+    margin-top: 4px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
 }
 
-/* --- Mobile Responsiveness --- */
-@media (max-width: 1024px) {
-    .faqSection {
-        flex-direction: column;
-        /* Stack them on top of each other */
-        gap: 60px;
+/* Desktop Styles */
+@media (min-width: 1024px) {
+    .faq-container {
+        max-width: 1200px;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 80px;
+        padding: 50px 20px;
     }
 
-    .faqHeader,
-    .faqList {
-        width: 100%;
-        max-width: 100%;
+    .faq-header {
+        align-items: flex-start;
+        text-align: left;
+        flex: 0 0 40%;
+    }
+
+    .faq-title {
+        font-size: 60px;
+        line-height: 1.1;
+        margin-bottom: 0;
+    }
+
+    .title-mobile {
+        display: none;
+    }
+
+    .title-desktop {
+        display: block;
+    }
+
+    .faq-description {
+        display: block;
+        font-size: 18px;
+        max-width: 400px;
+    }
+
+    .faq-list {
+        flex: 0 0 50%;
+    }
+
+    .faq-item {
+        padding: 24px 0;
+    }
+
+    .question-text {
+        font-size: 18px;
+    }
+
+    .chevron {
+        width: 12px;
+        height: 12px;
+        margin-top: 6px;
     }
 }
