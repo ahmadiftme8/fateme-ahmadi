@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { motion, useMotionValue, useAnimation, PanInfo, animate, useMotionValueEvent } from "framer-motion";
+import { motion, useMotionValue, PanInfo, animate, useMotionValueEvent } from "framer-motion";
 import Image from "next/image";
 import { FaDribbble } from "react-icons/fa";
 
@@ -150,7 +150,6 @@ export default function WheelCarousel({ projects }: WheelCarouselProps) {
                                 <WheelCard
                                     project={project}
                                     isActive={virtualIndex === centerIndex}
-                                    isNeighbor={Math.abs(virtualIndex - centerIndex) === 1}
                                     onClick={() => handleCardClick(virtualIndex)}
                                 />
                             </div>
@@ -168,7 +167,7 @@ export default function WheelCarousel({ projects }: WheelCarouselProps) {
     );
 }
 
-function WheelCard({ project, isActive, isNeighbor, onClick }: { project: Project, isActive: boolean, isNeighbor: boolean, onClick: () => void }) {
+function WheelCard({ project, isActive, onClick }: { project: Project, isActive: boolean, onClick: () => void }) {
     // Styles preserved exactly
 
     if (project.isDribbble) {

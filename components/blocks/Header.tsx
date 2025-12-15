@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 
 import styles from "./Header.module.css";
@@ -74,7 +74,7 @@ export function Header() {
 
     const offsetValue = Math.round(offset);
     document.body.style.paddingTop = `${offsetValue}px`;
-  }, [computeNavOffset, isMobileViewport]);
+  }, [computeNavOffset]);
 
   const updateCollapsedOffset = useCallback(() => {
     if (isMenuOpenRef.current) {

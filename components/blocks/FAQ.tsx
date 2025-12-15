@@ -82,7 +82,7 @@ const faqData = [
             <>
                 <strong>Yes!</strong> I want you to love the final product. My standard contracts include two to three rounds of revisions.
                 <br /><br />
-                During a "round," you can provide a list of edits, and I will implement them all at once. If additional revisions are needed beyond the included rounds, they can be completed at my standard hourly rate. This ensures we stay on track and within budget.
+                During a &quot;round,&quot; you can provide a list of edits, and I will implement them all at once. If additional revisions are needed beyond the included rounds, they can be completed at my standard hourly rate. This ensures we stay on track and within budget.
             </>
         )
     }

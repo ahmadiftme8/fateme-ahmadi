@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 import styles from "./FeaturedProjects.module.css";
 import WheelCarousel from "./WheelCarousel";
