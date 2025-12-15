@@ -64,17 +64,25 @@
 
 .faq-item {
     display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #B4B4B4;
+    padding: 16px 0;
+}
+
+.question-header {
+    display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 16px 0;
-    border-bottom: 1px solid #B4B4B4;
     cursor: pointer;
+    width: 100%;
 }
 
 .question-text {
     font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: 13px;
+    font-weight: 600;
+    /* Bolder as requested */
+    font-size: 14px;
+    /* Slightly increased */
     line-height: 1.4;
     color: #121212;
     padding-right: 15px;
@@ -89,6 +97,27 @@
     margin-top: 4px;
     flex-shrink: 0;
     transition: transform 0.3s ease;
+}
+
+/* Rotate state */
+.rotate {
+    transform: rotate(225deg);
+    /* Arrow points up */
+}
+
+/* Answer Styles */
+.answer-container {
+    overflow: hidden;
+}
+
+.answer-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #4a4a4a;
+    /* Slightly lighter for contrast */
+    padding-top: 12px;
 }
 
 /* Desktop Styles */
@@ -138,6 +167,10 @@
 
     .question-text {
         font-size: 18px;
+    }
+
+    .answer-text {
+        font-size: 16px;
     }
 
     .chevron {
