@@ -41,6 +41,12 @@
     color: #F6F6F6;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     z-index: 10;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cvBadge:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .cvText {

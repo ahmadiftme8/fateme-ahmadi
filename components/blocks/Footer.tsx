@@ -17,7 +17,7 @@ export function Footer() {
   return (
     <footer className={styles.footerSection} id="contact">
       {/* Floating CV Badge */}
-      <a href="/cv.pdf" className={styles.cvBadge} target="_blank" rel="noopener noreferrer">
+      <a href="/documents/Fatemeh Ahmadi - Designer and Developer.pdf" className={styles.cvBadge} download="Fatemeh Ahmadi - Designer and Developer.pdf">
         <MdDownload size={35} />
         <span className={styles.cvText}>{t("cv")}</span>
       </a>
