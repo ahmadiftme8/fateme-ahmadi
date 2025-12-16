@@ -72,16 +72,15 @@ export default function Services() {
                   ))}
                 </ul>
               </div>
-              <span aria-hidden className={styles.serviceArrow} />
+              {/* <span aria-hidden className={styles.serviceArrow} /> */}
             </div>
           ))}
         </div>
 
         <div className={styles.ctabtndiv}>
-          <button className={styles.serviceCta} type="button">
+          <a className={styles.serviceCta} href="#contact">
             Get Started
-            
-          </button>
+          </a>
         </div>
       </div>
     </section>

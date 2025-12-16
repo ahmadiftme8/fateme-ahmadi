@@ -87,7 +87,7 @@ export function HomeHero() {
 
   return (
     <>
-      <section className={styles.hero} ref={containerRef}>
+      <section className={styles.hero} ref={containerRef} id="home">
         <div className={styles.container}>
           <motion.div
             initial="initial"
@@ -172,7 +172,7 @@ export function HomeHero() {
 
         </div>
 
-        <div className={styles.postHero}>
+        <div className={styles.postHero} id="about">
           <svg
             id="Layer_2"
             xmlns="http://www.w3.org/2000/svg"

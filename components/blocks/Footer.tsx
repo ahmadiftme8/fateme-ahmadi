@@ -15,7 +15,7 @@ export function Footer() {
   const t = useTranslations("footer");
 
   return (
-    <footer className={styles.footerSection}>
+    <footer className={styles.footerSection} id="contact">
       {/* Floating CV Badge */}
       <a href="/cv.pdf" className={styles.cvBadge} target="_blank" rel="noopener noreferrer">
         <MdDownload size={35} />
@@ -27,27 +27,27 @@ export function Footer() {
 
       {/* Navigation Pills */}
       <nav className={styles.footerNav}>
+        <a href="https://calendar.app.google/rjUiNwzF5sr7WvCY7" className={styles.pillBtn} target="_blank" rel="noopener noreferrer">Book a free call ☕</a>
         <a href="#portfolio" className={styles.pillBtn}>{t("myPortfolio")}</a>
-        <a href="#collaborate" className={styles.pillBtn}>{t("collaborate")}</a>
+        <a href="mailto:devftme@gmail.com" className={styles.pillBtn}>{t("collaborate")}</a>
         <a href="#about" className={styles.pillBtn}>{t("aboutMe")}</a>
-        <a href="mailto:hello@fatemeahmadi.com" className={styles.pillBtn}>{t("emailMe")}</a>
       </nav>
 
       {/* Social Icons */}
       <div className={styles.socialLinks}>
-        <a href="https://www.linkedin.com/in/fatemeahmadi" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
+        <a href="https://www.linkedin.com/in/fatemeh-ahmadi8/" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
           <FaLinkedin />
         </a>
-        <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
+        <a href="https://wa.me/message/D3NPOSXZLBYAA1?src=qr" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
           <FaWhatsapp />
         </a>
-        <a href="https://t.me/" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
+        <a href="https://t.me/AhmadiFtme" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
           <FaTelegram />
         </a>
-        <a href="https://www.instagram.com/fatemeahmadi" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
+        <a href="https://instagram.com/ahmadiftme" target="_blank" rel="noopener noreferrer" className={styles.socialIcon}>
           <FaInstagram />
         </a>
-        <a href="mailto:hello@fatemeahmadi.com" className={styles.socialIcon}>
+        <a href="mailto:devftme@gmail.com" className={styles.socialIcon}>
           <FaEnvelope />
         </a>
       </div>

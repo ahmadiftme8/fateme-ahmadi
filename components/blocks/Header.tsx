@@ -12,8 +12,8 @@ import styles from "./Header.module.css";
 
 const NAV_ITEMS = [
   { key: "home", segment: "" },
-  { key: "about", segment: "about" },
-  { key: "portfolio", segment: "portfolio" },
+  { key: "about", segment: "#about" },
+  { key: "portfolio", segment: "#portfolio" },
   { key: "blog", segment: "blog" },
 ] as const;
 
@@ -46,6 +46,29 @@ export function Header() {
   const collapsedOffsetRef = useRef<number>(0);
   const isMenuOpenRef = useRef(isMenuOpen);
   const previousBodyPaddingTopRef = useRef<string | null>(null);
+
+  const [activeSection, setActiveSection] = useState<string>("");
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-50% 0px -50% 0px" } // Trigger when section is in middle of viewport
+    );
+
+    const sections = ["home", "about", "portfolio"];
+    sections.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const computeNavOffset = useCallback(() => {
     const navElement = navRef.current;
@@ -101,14 +124,26 @@ export function Header() {
 
   const navLinks = NAV_ITEMS.map(({ key, segment }) => {
     const href = segment ? `/${locale}/${segment}` : `/${locale}`;
+
+    // Determine active state
+    let isActive = false;
+
+    if (key === "home") {
+      // Logic: Active if explicitly "home" section active OR no active section & simple path (fallback)
+      isActive = activeSection === "home" || (pathname === `/${locale}` && !activeSection);
+    } else if (key === "blog") {
+      isActive = pathname.startsWith(`/${locale}/blog`);
+    } else {
+      // For anchor links (about, portfolio)
+      const targetId = segment.replace("#", "");
+      isActive = activeSection === targetId;
+    }
+
     return {
       key,
       label: tNav(key),
       href,
-      isActive:
-        segment === ""
-          ? pathname === href
-          : pathname.startsWith(`/${locale}/${segment}`),
+      isActive,
     };
   });
 
@@ -306,7 +341,7 @@ export function Header() {
             </Link>
           ))}
 
-          <Link
+          {/* <Link
             href={localeHref}
             lang={nextLocale}
             onClick={handleCloseMenu}
@@ -315,7 +350,7 @@ export function Header() {
             <span className={localeTextClass}>
               <span>{nextLocale === "fa" ? "\u0641\u0627\u0631\u0633\u06cc" : "EN"}</span>
             </span>
-          </Link>
+          </Link> */}
         </div>
 
         <motion.div
@@ -408,7 +443,7 @@ export function Header() {
           className={`${styles.actions} ${isMenuOpen ? styles.actionsMenu : ""}`}
         >
           <Link
-            href={`/${locale}/quote`}
+            href={`/${locale}/#contact`}
             className={styles.contactBtn}
             onClick={handleCloseMenu}
             aria-label={`${tHeader("contact")} / Available For Work`}

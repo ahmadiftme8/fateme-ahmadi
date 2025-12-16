@@ -69,7 +69,7 @@ export default function FeaturedProjects({ projects = [] }: { projects?: Project
     : activeCategory === "graphic-design" ? galleryItems : []; // Keep fallback for now or remove if strictly dynamic
 
   return (
-    <section id="featured-projects" className={styles.featuredProjects}>
+    <section id="portfolio" className={styles.featuredProjects}>
       <div
         className={styles.featuredProjects__container}
       >
