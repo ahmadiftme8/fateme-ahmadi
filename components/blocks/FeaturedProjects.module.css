@@ -392,7 +392,7 @@
 @media (min-width: 601px) {
   .featuredProjects__container {
     padding: 80px 24px;
-    gap: 32px;
+    gap: 0px;
     min-width: auto;
   }
 }
@@ -404,7 +404,7 @@
 
   /* --- Categories Desktop --- */
   .featuredProjects__categories {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     margin-top: 0;
   }
 
@@ -418,7 +418,7 @@
   }
 
   .featuredProjects__categoryList li {
-    display: list-item;
+
     /* Reset flex adjustments */
     width: auto;
   }

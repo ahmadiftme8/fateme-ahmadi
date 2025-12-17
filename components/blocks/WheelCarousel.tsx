@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { motion, useMotionValue, PanInfo, animate, useMotionValueEvent } from "framer-motion";
 import Image from "next/image";
-import { FaDribbble } from "react-icons/fa";
+import { FaDribbble, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 type Project = {
     id?: string | number;
@@ -47,20 +47,56 @@ export default function WheelCarousel({ projects }: WheelCarouselProps) {
     const [centerIndex, setCenterIndex] = useState(START_INDEX);
     const x = useMotionValue(0);
     const containerRef = useRef<HTMLDivElement>(null);
+    const [viewWidth, setViewWidth] = useState(0);
+
+    // Update viewWidth on mount and resize
+    useEffect(() => {
+        if (!containerRef.current) return;
+
+        const updateWidth = () => {
+            if (containerRef.current) {
+                setViewWidth(containerRef.current.offsetWidth);
+            }
+        };
+
+        // Initial measure
+        updateWidth();
+
+        const observer = new ResizeObserver(updateWidth);
+        observer.observe(containerRef.current);
+
+        window.addEventListener('resize', updateWidth);
+        return () => {
+            observer.disconnect();
+            window.removeEventListener('resize', updateWidth);
+        };
+    }, []);
 
     // Initial Positioning
     useEffect(() => {
-        const centerOffset = typeof window !== 'undefined' ? window.innerWidth / 2 - CARD_WIDTH / 2 : 0;
+        if (viewWidth === 0) return;
+        const centerOffset = viewWidth / 2 - CARD_WIDTH / 2;
         const initialX = centerOffset - (START_INDEX * itemFullWidth);
         x.set(initialX);
         setCenterIndex(START_INDEX);
-    }, [itemFullWidth, x]);
+        // We only want to run this ONCE when viewWidth is first established/stable or reset
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [itemFullWidth, x]); // Removed viewWidth from deps to prevent reset on resize, handle resize separately if needed? 
+    // Actually, on resize, we DO want to re-center the current index.
+
+    // Listen to resize to maintain relative position of current index
+    useEffect(() => {
+        if (viewWidth === 0) return;
+        const centerOffset = viewWidth / 2 - CARD_WIDTH / 2;
+        const targetX = centerOffset - (centerIndex * itemFullWidth);
+        x.set(targetX);
+    }, [viewWidth, centerIndex, itemFullWidth, x]);
+
 
     // Track active index based on position
     useMotionValueEvent(x, "change", (latest) => {
-        const centerOffset = window.innerWidth / 2 - CARD_WIDTH / 2;
-        // latest = centerOffset - (index * itemFullWidth)
-        // index = (centerOffset - latest) / itemFullWidth
+        if (viewWidth === 0) return;
+        const centerOffset = viewWidth / 2 - CARD_WIDTH / 2;
         const rawIndex = (centerOffset - latest) / itemFullWidth;
         const roundedIndex = Math.round(rawIndex);
 
@@ -71,9 +107,10 @@ export default function WheelCarousel({ projects }: WheelCarouselProps) {
 
     // Handle Drag End with Inertia 
     const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+        if (viewWidth === 0) return;
         const velocity = info.velocity.x;
         const currentX = x.get();
-        const centerOffset = window.innerWidth / 2 - CARD_WIDTH / 2;
+        const centerOffset = viewWidth / 2 - CARD_WIDTH / 2;
 
         const power = 0.2;
         const estimatedEnd = currentX + velocity * power;
@@ -92,7 +129,8 @@ export default function WheelCarousel({ projects }: WheelCarouselProps) {
 
     // Click to center functionality
     const handleCardClick = (index: number) => {
-        const centerOffset = window.innerWidth / 2 - CARD_WIDTH / 2;
+        if (viewWidth === 0) return;
+        const centerOffset = viewWidth / 2 - CARD_WIDTH / 2;
         const targetX = centerOffset - (index * itemFullWidth);
 
         animate(x, targetX, {
@@ -102,9 +140,17 @@ export default function WheelCarousel({ projects }: WheelCarouselProps) {
         });
     };
 
+    // Arrow Navigation
+    const handleNext = () => {
+        handleCardClick(centerIndex + 1);
+    };
+
+    const handlePrev = () => {
+        handleCardClick(centerIndex - 1);
+    };
+
     // Virtualization Logic
-    // We only render cards within a buffer range of the centerIndex
-    const BUFFER = 5; // Render 5 cards on each side (total ~11 cards)
+    const BUFFER = 5;
     const visibleIndices = [];
     for (let i = centerIndex - BUFFER; i <= centerIndex + BUFFER; i++) {
         visibleIndices.push(i);
@@ -114,48 +160,62 @@ export default function WheelCarousel({ projects }: WheelCarouselProps) {
     const activeDotIndex = ((centerIndex % totalItems) + totalItems) % totalItems;
 
     return (
-        <div className="w-full relative overflow-hidden pt-0 pb-10 flex flex-col gap-0">
-            {/* Carousel Track */}
+        <div className="w-full relative pt-0 pb-10 flex flex-col gap-0 lg:max-w-[800px] lg:mx-auto">
+            {/* Desktop Navigation Arrows - Positioned relative to this container */}
+            <button
+                onClick={handlePrev}
+                className="hidden lg:flex absolute top-[190px] -left-[50px] -translate-y-1/2 z-20 w-[60px] h-[60px] items-center justify-center bg-[#e3e3e3] rounded-full border-none text-[#1f67f1] text-4xl cursor-pointer hover:scale-110 transition-transform"
+                aria-label="Previous project"
+            >
+                <FaChevronLeft />
+            </button>
+            <button
+                onClick={handleNext}
+                className="hidden lg:flex absolute top-[190px] -right-[50px] -translate-y-1/2 z-20 w-[60px] h-[60px] items-center justify-center bg-[#e3e3e3] rounded-full border-none text-[#1f67f1] text-4xl cursor-pointer hover:scale-110 transition-transform"
+                aria-label="Next project"
+            >
+                <FaChevronRight />
+            </button>
+
+            {/* Carousel Track Container - Constrained Width on Desktop */}
             <div
                 ref={containerRef}
-                className="w-full h-[450px] flex items-center relative pt-20"
+                className="w-full lg:w-[760px] mx-auto overflow-hidden relative" // 760px ≈ 3 cards (242+11)*3 = 759
             >
-                <motion.div
-                    className="absolute left-0 w-full h-full "
-                    style={{ x }}
-                    drag="x"
-                    dragConstraints={{ left: -5000000, right: 5000000 }} // Huge constraints
-                    onDragEnd={handleDragEnd}
-                    whileTap={{ cursor: "grabbing" }}
+                <div
+                    className="w-full h-[470px] flex items-center relative pt-10"
                 >
-                    {visibleIndices.map((virtualIndex) => {
-                        // Map virtual index to actual project data index (circular)
-                        const projectIndex = ((virtualIndex % totalItems) + totalItems) % totalItems;
-                        const project = projectsWithCta[projectIndex];
+                    <motion.div
+                        className="absolute left-0 w-full h-full"
+                        style={{ x }}
+                        drag="x"
+                        dragConstraints={{ left: -5000000, right: 5000000 }}
+                        onDragEnd={handleDragEnd}
+                        whileTap={{ cursor: "grabbing" }}
+                    >
+                        {visibleIndices.map((virtualIndex) => {
+                            const projectIndex = ((virtualIndex % totalItems) + totalItems) % totalItems;
+                            const project = projectsWithCta[projectIndex];
 
-                        return (
-                            <div
-                                key={virtualIndex} // Use virtualIndex as key to ensure stability
-                                style={{
-                                    position: "absolute",
-                                    left: virtualIndex * itemFullWidth,
-                                    width: CARD_WIDTH,
-                                    // We need to offset the whole track padding if any? 
-                                    // The parent motion.div moves everything, so absolute left combined with x works perfect.
-                                    // Add the initial gap/padding if the design required it, but strict center logic handles it.
-                                    // Original had pl-[11px]. Let's bake that into the centering logic or just ignore if centered.
-                                    // The centering math (window / 2) is robust. 
-                                }}
-                            >
-                                <WheelCard
-                                    project={project}
-                                    isActive={virtualIndex === centerIndex}
-                                    onClick={() => handleCardClick(virtualIndex)}
-                                />
-                            </div>
-                        );
-                    })}
-                </motion.div>
+                            return (
+                                <div
+                                    key={virtualIndex}
+                                    style={{
+                                        position: "absolute",
+                                        left: virtualIndex * itemFullWidth,
+                                        width: CARD_WIDTH,
+                                    }}
+                                >
+                                    <WheelCard
+                                        project={project}
+                                        isActive={virtualIndex === centerIndex}
+                                        onClick={() => handleCardClick(virtualIndex)}
+                                    />
+                                </div>
+                            );
+                        })}
+                    </motion.div>
+                </div>
             </div>
 
             {/* Pagination */}
@@ -284,7 +344,7 @@ function Pagination({ total, active }: { total: number, active: number }) {
                         animate={{
                             width: isActive ? 17 : (isNeighbor ? 9 : 6),
                             height: isActive ? 9 : (isNeighbor ? 9 : 6),
-                            backgroundColor: isActive ? "#505050" : "#EBEBEB"
+                            backgroundColor: isActive ? "#1f67f1" : "#EBEBEB"
                         }}
                     />
                 );
