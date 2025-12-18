@@ -419,7 +419,9 @@ export default function PriceEstimator() {
             <div className="flex flex-col lg:flex-row gap-[20px] lg:gap-[35px] items-start w-full px-[15px] lg:px-0">
                 
                 {/* --- LEFT WIZARD BOX --- */}
-                <div 
+                <motion.div 
+                    layout
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     className="
                         relative 
                         lg:w-[742px] lg:min-h-[319px] 
@@ -432,7 +434,7 @@ export default function PriceEstimator() {
                     "
                 >
                     <div className="flex-1 flex flex-col justify-center w-full">
-                        <AnimatePresence mode="wait">
+                        <AnimatePresence mode="popLayout">
                             
                             {/* STEP 0: CARDS */}
                             {step === 0 && (
@@ -608,7 +610,7 @@ export default function PriceEstimator() {
                             </button>
                          </div>
                     </div>
-                </div>
+                </motion.div>
 
                 {/* --- RIGHT SIDEBAR (Desktop Only) --- */}
                 {/* Fixed Background: Changed bg-white to bg-transparent */}
