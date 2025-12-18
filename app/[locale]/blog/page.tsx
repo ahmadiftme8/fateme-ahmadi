@@ -1,6 +1,6 @@
 // import { getTranslations } from "next-intl/server";
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+export async function generateMetadata() {
     // const { locale } = await params;
     // const t = await getTranslations({ locale, namespace: "blog" });
 

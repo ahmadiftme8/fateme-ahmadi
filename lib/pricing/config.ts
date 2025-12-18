@@ -81,18 +81,11 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
         fixedPrice: PRICING_RATES.featureCosts.web.gsap
       },
       {
-        id: 'website_ecom', // Added this based on Feature Costs "E-com" though not explicitly in "Structure description" list but implies it might be there. 
-                            // Wait, "Structure" says "Radio (CMS), Toggle (Animation)". E-com is in "Feature Costs". 
-                            // I will add E-com as a checkbox or toggle if it fits, or maybe it's part of CMS radio?
-                            // Let's stick to the explicit "Structure" list for now: "Radio (CMS), Toggle (Animation)".
-                            // Actually, "E-com ($1200)" is listed in Module 1. 
-                            // I'll add it as an optional toggle or part of a "Type" question if needed.
-                            // To be safe and strictly follow "Structure: Website: Range, Radio, Toggle", I will omit E-com from the visible Questions unless implied.
-                            // Re-reading: "Web: Headless CMS ($600), E-com ($1200), GSAP Animation ($800)."
-                            // Maybe CMS Radio has: None, Headless, E-com?
-        // Let's put E-com in the CMS radio options.
+        id: 'website_ecom',
+        label: 'E-commerce Functionality',
+        type: 'toggle',
         calcType: 'fixed_add',
-             // See options above
+        fixedPrice: PRICING_RATES.featureCosts.web.ecom
       }
     ]
   },
