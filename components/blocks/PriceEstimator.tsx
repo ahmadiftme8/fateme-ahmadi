@@ -40,6 +40,7 @@ const UiUxIcon = ({ className }: { className?: string }) => (
 import { PROJECT_CONFIGS, GLOBAL_CONFIG } from '@/lib/pricing/config';
 import { calculateEstimate } from '@/lib/pricing/engine';
 import { ProjectTypeId, PricingQuestion, PricingQuestionOption, UserAnswers } from '@/lib/pricing/types';
+import InvoicePDF, { InvoiceItem } from './InvoicePDF';
 
 // MAP ICONS TO IDs
 const ICONS: Record<ProjectTypeId, React.ReactNode> = {
@@ -263,6 +264,10 @@ export default function PriceEstimator() {
     // Global inputs
     const [budgetIndex, setBudgetIndex] = useState<number>(0);
     const [description, setDescription] = useState("");
+    
+    // Invoice overlay state
+    const [showInvoice, setShowInvoice] = useState(false);
+    const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
 
 
     // Effect: Auto-select first option on Desktop
@@ -286,6 +291,92 @@ export default function PriceEstimator() {
     // Helpers for display in sidebar
     const basePrice = currentProject?.basePrice || 0;
     const extraCost = Math.max(0, totalPrice - basePrice); // Simple diff for display
+
+    // --- Invoice Generation ---
+    const generateInvoiceItems = (): InvoiceItem[] => {
+        if (!currentProject) return [];
+        
+        const items: InvoiceItem[] = [];
+        
+        // 1. Base Price
+        items.push({
+            label: `${currentProject.title} - Base Fee`,
+            price: currentProject.basePrice
+        });
+
+        // 2. Loop through project-specific questions
+        for (const question of currentProject.questions) {
+            const answer = answers[question.id];
+            if (answer === undefined || answer === null) continue;
+
+            // Handle different question types
+            if (question.type === 'range' || question.type === 'slider') {
+                // Linear calc - pages/screens
+                if (question.calcType === 'linear' && question.unitPrice && typeof answer === 'number') {
+                    const count = answer;
+                    const cost = count * question.unitPrice;
+                    if (cost > 0) {
+                        items.push({
+                            label: `${question.label}: ${count} x $${question.unitPrice}`,
+                            price: cost
+                        });
+                    }
+                }
+            } else if (question.type === 'radio') {
+                // Radio selection
+                const selectedOption = question.options?.find(opt => opt.value === answer);
+                if (selectedOption) {
+                    // For multiplier type (e.g., responsive)
+                    if (question.calcType === 'multiplier' && selectedOption.multiplier && selectedOption.multiplier !== 1) {
+                        items.push({
+                            label: `${question.label}: ${selectedOption.label} (${selectedOption.multiplier}x)`,
+                            price: 0 // Multiplier is applied to total, shown separately
+                        });
+                    }
+                    // For fixed_add type
+                    if (question.calcType === 'fixed_add' && selectedOption.cost && selectedOption.cost > 0) {
+                        items.push({
+                            label: `${question.label}: ${selectedOption.label}`,
+                            price: selectedOption.cost
+                        });
+                    }
+                }
+            } else if (question.type === 'toggle') {
+                // Toggle (boolean)
+                if (answer === true && question.fixedPrice) {
+                    items.push({
+                        label: question.label,
+                        price: question.fixedPrice
+                    });
+                }
+            } else if (question.type === 'checkbox') {
+                // Multiple checkboxes selected
+                const selectedValues = (answer as string[]) || [];
+                for (const val of selectedValues) {
+                    const opt = question.options?.find(o => o.value === val);
+                    if (opt && opt.cost && opt.cost > 0) {
+                        items.push({
+                            label: opt.label,
+                            price: opt.cost
+                        });
+                    }
+                }
+            }
+        }
+
+        // 3. Check global questions (Urgency)
+        for (const gq of GLOBAL_CONFIG.questions) {
+            const gAnswer = answers[gq.id];
+            if (gq.calcType === 'multiplier' && gAnswer === true && gq.multiplierValue) {
+                items.push({
+                    label: `Urgency Fee (${gq.multiplierValue}x multiplier)`,
+                    price: 0 // Cost is embedded in total
+                });
+            }
+        }
+
+        return items;
+    };
 
     // --- Handlers ---
     const handleNext = () => {
@@ -560,8 +651,19 @@ export default function PriceEstimator() {
                                     <p className="text-gray-500 mb-6">Review your sidebar details.</p>
                                     <div className="w-full max-w-xs flex flex-col gap-3">
                                         
-                                        <button className="w-full py-3 border-2 border-[#1F67F1] text-[#1F67F1] rounded-[46px] font-bold hover:bg-[#1F67F1]/5 transition-all text-sm">
-                                            Download Proforma Invoice
+                                        <button 
+                                            onClick={() => setIsGeneratingPdf(true)}
+                                            disabled={isGeneratingPdf}
+                                            className="w-full py-3 border-2 border-[#1F67F1] text-[#1F67F1] rounded-[46px] font-bold hover:bg-[#1F67F1]/5 transition-all text-sm disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2"
+                                        >
+                                            {isGeneratingPdf ? (
+                                                <>
+                                                    <span className="animate-spin rounded-full h-4 w-4 border-b-2 border-[#1F67F1]"></span>
+                                                    Generating PDF...
+                                                </>
+                                            ) : (
+                                                "Download Invoice"
+                                            )}
                                         </button>
 
                                         <a href="#book" className="w-full py-3 bg-[#1F67F1] text-white rounded-[46px] font-bold shadow-md hover:shadow-lg transition-all">
@@ -664,8 +766,12 @@ export default function PriceEstimator() {
                         )}
                     </div>
 
-                     <button className="w-full py-2 mt-auto bg-[#1F67F1] text-white rounded-full text-sm font-bold opacity-80 hover:opacity-100">
-                        Download Quote
+                     <button 
+                        onClick={() => setIsGeneratingPdf(true)}
+                        disabled={isGeneratingPdf}
+                        className="w-full py-2 mt-auto bg-[#1F67F1] text-white rounded-full text-sm font-bold opacity-80 hover:opacity-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                     >
+                        {isGeneratingPdf ? "Generating..." : "Download Quote"}
                     </button>
                 </div>
 
@@ -741,6 +847,21 @@ export default function PriceEstimator() {
                     </motion.div>
                 )}
             </AnimatePresence>
+
+            {/* Invoice Overlay */}
+            {/* Invoice Generation (Hidden/Auto) or Overlay */}
+            {(showInvoice || isGeneratingPdf) && currentProject && (
+                <InvoicePDF 
+                    projectType={currentProject.title}
+                    items={generateInvoiceItems()}
+                    totalEstimate={totalPrice}
+                    onClose={() => {
+                        setShowInvoice(false);
+                        setIsGeneratingPdf(false);
+                    }}
+                    autoDownload={isGeneratingPdf}
+                />
+            )}
 
         </section>
     );
