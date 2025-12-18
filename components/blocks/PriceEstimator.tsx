@@ -12,37 +12,28 @@ const GraphicIcon = ({ className }: { className?: string }) => (
 );
 
 const WebDevIcon = ({ className }: { className?: string }) => (
-    <svg width="40" height="40" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
-      <path d="M10.1702 57.445C14.259 57.7775 20.749 58.125 30.0002 58.125C39.2515 58.125 45.7415 57.7775 49.8302 57.445C53.9402 57.1113 57.1115 53.94 57.4452 49.83C57.7777 45.7412 58.1252 39.2513 58.1252 30C58.1252 25.3625 58.0377 21.42 57.909 18.125H2.09149C1.94234 22.0816 1.87024 26.0406 1.87524 30C1.87524 39.2513 2.22274 45.7412 2.55524 49.83C2.88899 53.94 6.06024 57.1113 10.1702 57.445Z" fill="currentColor"/>
-      <path fillRule="evenodd" clipRule="evenodd" d="M2.26855 14.375C2.36022 12.7642 2.45564 11.3625 2.5548 10.17C2.88855 6.06 6.0598 2.88875 10.1698 2.555C14.2586 2.2225 20.7486 1.875 29.9998 1.875C39.2511 1.875 45.7411 2.2225 49.8298 2.555C53.9398 2.88875 57.1111 6.06 57.4448 10.17C57.5431 11.3617 57.6386 12.7633 57.7311 14.375H2.26855ZM9.3748 8.75C9.3748 8.25272 9.57235 7.7758 9.92398 7.42417C10.2756 7.07254 10.7525 6.875 11.2498 6.875H13.7498C14.2471 6.875 14.724 7.07254 15.0756 7.42417C15.4273 7.7758 15.6248 8.25272 15.6248 8.75C15.6248 9.24728 15.4273 9.72419 15.0756 10.0758C14.724 10.4275 14.2471 10.625 13.7498 10.625H11.2498C10.7525 10.625 10.2756 10.4275 9.92398 10.0758C9.57235 9.72419 9.3748 9.24728 9.3748 8.75ZM21.2498 6.875C20.7525 6.875 20.2756 7.07254 19.924 7.42417C19.5723 7.7758 19.3748 8.25272 19.3748 8.75C19.3748 9.24728 19.5723 9.72419 19.924 10.0758C20.2756 10.4275 20.7525 10.625 21.2498 10.625H23.7498C24.2471 10.625 24.724 10.4275 25.0756 10.0758C25.4273 9.72419 25.6248 9.24728 25.6248 8.75C25.6248 8.25272 25.4273 7.7758 25.0756 7.42417C24.724 7.07254 24.2471 6.875 23.7498 6.875H21.2498Z" fill="currentColor"/>
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+        <path fillRule="evenodd" clipRule="evenodd" d="M6.25449 21.6667C6.28783 27.1542 6.47783 31.0267 6.65366 33.4842C6.74533 34.7692 7.67533 35.7142 8.90366 35.8251C9.83033 35.9084 10.962 35.9917 12.312 36.0634C13.5117 34.7744 14.7344 33.507 15.9795 32.2617C19.0712 29.1584 21.1253 27.3001 22.4253 26.2067C24.0195 24.8651 26.267 24.6101 28.0945 25.8759C29.332 26.7326 31.1112 28.1376 33.5278 30.4259C33.6362 28.1617 33.7245 25.2609 33.7462 21.6667H6.25449ZM8.60533 39.1451C10.0453 39.2724 11.4878 39.3683 12.932 39.4326C14.8903 39.5226 17.2378 39.5842 20.0003 39.5842C25.222 39.5842 28.9587 39.3659 31.3962 39.1467C34.0295 38.9092 36.0703 36.9951 36.5703 34.4826L36.5795 34.4317C36.6239 34.199 36.6548 33.9623 36.672 33.7217C36.872 30.9384 37.0845 26.4517 37.0845 20.0001C37.0845 13.5484 36.8712 9.06175 36.672 6.27675C36.467 3.40925 34.2995 1.11591 31.3953 0.854248C28.9587 0.635081 25.222 0.416748 20.0003 0.416748C14.7787 0.416748 11.0428 0.635081 8.60533 0.854248C5.70199 1.11675 3.53366 3.40925 3.32866 6.27675C3.12949 9.06175 2.91699 13.5476 2.91699 20.0001C2.91699 26.4526 3.12949 30.9384 3.32866 33.7226C3.53366 36.5909 5.70199 38.8842 8.60533 39.1451ZM9.40782 14.7059C9.40782 14.2639 9.58342 13.84 9.89598 13.5274C10.2085 13.2148 10.6325 13.0392 11.0745 13.0392H28.9262C29.3682 13.0392 29.7921 13.2148 30.1047 13.5274C30.4172 13.84 30.5928 14.2639 30.5928 14.7059C30.5928 15.1479 30.4172 15.5719 30.1047 15.8844C29.7921 16.197 29.3682 16.3726 28.9262 16.3726H11.0745C10.6325 16.3726 10.2085 16.197 9.89598 15.8844C9.58342 15.5719 9.40782 15.1479 9.40782 14.7059ZM11.0745 6.52508C10.6325 6.52508 10.2085 6.70068 9.89598 7.01324C9.58342 7.3258 9.40782 7.74972 9.40782 8.19175C9.40782 8.63378 9.58342 9.0577 9.89598 9.37026C10.2085 9.68282 10.6325 9.85841 11.0745 9.85841H20.812C21.254 9.85841 21.6779 9.68282 21.9905 9.37026C22.3031 9.0577 22.4787 8.63378 22.4787 8.19175C22.4787 7.74972 22.3031 7.3258 21.9905 7.01324C21.6779 6.70068 21.254 6.52508 20.812 6.52508H11.0745ZM9.43033 27.3292C9.42967 26.8996 9.51364 26.474 9.67745 26.0769C9.84126 25.6797 10.0817 25.3186 10.385 25.0144C10.6884 24.7101 11.0487 24.4686 11.4454 24.3035C11.842 24.1385 12.2674 24.0532 12.697 24.0526C14.5053 24.0526 15.9653 25.5226 15.9653 27.3292C15.9653 29.1359 14.5053 30.6059 12.6978 30.6059C10.8903 30.6059 9.43033 29.1359 9.43033 27.3292Z" fill="currentColor"/>
+    </svg>
+);
+
+const WebAppIcon = ({ className }: { className?: string }) => (
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+        <path d="M6.78016 38.2966C9.50599 38.5183 13.8327 38.7499 20.0002 38.7499C26.1677 38.7499 30.4943 38.5183 33.2202 38.2966C35.9602 38.0741 38.0743 35.9599 38.2968 33.2199C38.5185 30.4941 38.7502 26.1674 38.7502 19.9999C38.7502 16.9083 38.6918 14.2799 38.606 12.0833H1.39433C1.29489 14.721 1.24683 17.3603 1.25016 19.9999C1.25016 26.1674 1.48183 30.4941 1.7035 33.2199C1.926 35.9599 4.04016 38.0741 6.78016 38.2966Z" fill="currentColor"/>
+        <path fillRule="evenodd" clipRule="evenodd" d="M1.5127 9.58333C1.57381 8.50944 1.63742 7.575 1.70353 6.78C1.92603 4.04 4.04019 1.92583 6.78019 1.70333C9.50603 1.48167 13.8327 1.25 20.0002 1.25C26.1677 1.25 30.4944 1.48167 33.2202 1.70333C35.9602 1.92583 38.0744 4.04 38.2969 6.78C38.3624 7.57444 38.426 8.50889 38.4877 9.58333H1.5127ZM6.2502 5.83333C6.2502 5.50181 6.38189 5.18387 6.61631 4.94945C6.85073 4.71503 7.16867 4.58333 7.5002 4.58333H9.16686C9.49838 4.58333 9.81633 4.71503 10.0507 4.94945C10.2852 5.18387 10.4169 5.50181 10.4169 5.83333C10.4169 6.16485 10.2852 6.4828 10.0507 6.71722C9.81633 6.95164 9.49838 7.08333 9.16686 7.08333H7.5002C7.16867 7.08333 6.85073 6.95164 6.61631 6.71722C6.38189 6.4828 6.2502 6.16485 6.2502 5.83333ZM14.1669 4.58333C13.8353 4.58333 13.5174 4.71503 13.283 4.94945C13.0486 5.18387 12.9169 5.50181 12.9169 5.83333C12.9169 6.16485 13.0486 6.4828 13.283 6.71722C13.5174 6.95164 13.8353 7.08333 14.1669 7.08333H15.8335C16.165 7.08333 16.483 6.95164 16.7174 6.71722C16.9518 6.4828 17.0835 6.16485 17.0835 5.83333C17.0835 5.50181 16.9518 5.18387 16.7174 4.94945C16.483 4.71503 16.165 4.58333 15.8335 4.58333H14.1669Z" fill="currentColor"/>
     </svg>
 );
 
 const UiUxIcon = ({ className }: { className?: string }) => (
-    <svg width="40" height="40" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
-      <g clipPath="url(#clip0_885_1156)">
-        <path d="M11.25 51.25H25C25.4973 51.25 25.9742 51.0525 26.3258 50.7008C26.6775 50.3492 26.875 49.8723 26.875 49.375C26.875 48.8777 26.6775 48.4008 26.3258 48.0492C25.9742 47.6975 25.4973 47.5 25 47.5H11.25C10.7527 47.5 10.2758 47.6975 9.92417 48.0492C9.57254 48.4008 9.375 48.8777 9.375 49.375C9.375 49.8723 9.57254 50.3492 9.92417 50.7008C10.2758 51.0525 10.7527 51.25 11.25 51.25ZM25 55H11.25C10.7527 55 10.2758 55.1975 9.92417 55.5492C9.57254 55.9008 9.375 56.3777 9.375 56.875C9.375 57.3723 9.57254 57.8492 9.92417 58.2008C10.2758 58.5525 10.7527 58.75 11.25 58.75H25C25.4973 58.75 25.9742 58.5525 26.3258 58.2008C26.6775 57.8492 26.875 57.3723 26.875 56.875C26.875 56.3777 26.6775 55.9008 26.3258 55.5492C25.9742 55.1975 25.4973 55 25 55ZM35 48.125H47.5C47.5 48.125 50 48.125 50 50.625V55.625C50 55.625 50 58.125 47.5 58.125H35C35 58.125 32.5 58.125 32.5 55.625V50.625C32.5 50.625 32.5 48.125 35 48.125Z" fill="currentColor"/>
-        <path d="M26.25 5C26.913 5 27.5489 5.26339 28.0178 5.73223C28.4866 6.20107 28.75 6.83696 28.75 7.5C28.75 8.16304 28.4866 8.79893 28.0178 9.26777C27.5489 9.73661 26.913 10 26.25 10C25.587 10 24.9511 9.73661 24.4822 9.26777C24.0134 8.79893 23.75 8.16304 23.75 7.5C23.75 6.83696 24.0134 6.20107 24.4822 5.73223C24.9511 5.26339 25.587 5 26.25 5ZM17.5 5C18.163 5 18.7989 5.26339 19.2678 5.73223C19.7366 6.20107 20 6.83696 20 7.5C20 8.16304 19.7366 8.79893 19.2678 9.26777C18.7989 9.73661 18.163 10 17.5 10C16.837 10 16.2011 9.73661 15.7322 9.26777C15.2634 8.79893 15 8.16304 15 7.5C15 6.83696 15.2634 6.20107 15.7322 5.73223C16.2011 5.26339 16.837 5 17.5 5ZM8.75 5C9.41304 5 10.0489 5.26339 10.5178 5.73223C10.9866 6.20107 11.25 6.83696 11.25 7.5C11.25 8.16304 10.9866 8.79893 10.5178 9.26777C10.0489 9.73661 9.41304 10 8.75 10C8.08696 10 7.45107 9.73661 6.98223 9.26777C6.51339 8.79893 6.25 8.16304 6.25 7.5C6.25 6.83696 6.51339 6.20107 6.98223 5.73223C7.45107 5.26339 8.08696 5 8.75 5ZM60 56.05V8.75C60 6.76088 59.2098 4.85322 57.8033 3.4467C56.3968 2.04018 54.4891 1.25 52.5 1.25H7.5C5.51088 1.25 3.60322 2.04018 2.1967 3.4467C0.790176 4.85322 0 6.76088 0 8.75L0 56.05C0 56.713 0.263392 57.3489 0.732233 57.8178C1.20107 58.2866 1.83696 58.55 2.5 58.55C3.16304 58.55 3.79893 58.2866 4.26777 57.8178C4.73661 57.3489 5 56.713 5 56.05V14.375C5 14.2092 5.06585 14.0503 5.18306 13.9331C5.30027 13.8158 5.45924 13.75 5.625 13.75H54.375C54.5408 13.75 54.6997 13.8158 54.8169 13.9331C54.9342 14.0503 55 14.2092 55 14.375V56.05C55 56.713 55.2634 57.3489 55.7322 57.8178C56.2011 58.2866 56.837 58.55 57.5 58.55C58.163 58.55 58.7989 58.2866 59.2678 57.8178C59.7366 57.3489 60 56.713 60 56.05Z" fill="currentColor"/>
-        <path d="M10 19.275V40.525H50V19.275H10ZM18.125 29.8C17.6305 29.8 17.1472 29.6534 16.7361 29.3787C16.325 29.104 16.0045 28.7135 15.8153 28.2567C15.6261 27.7999 15.5766 27.2973 15.673 26.8123C15.7695 26.3273 16.0076 25.8819 16.3572 25.5323C16.7069 25.1826 17.1523 24.9445 17.6373 24.8481C18.1222 24.7516 18.6249 24.8011 19.0817 24.9903C19.5385 25.1795 19.929 25.5 20.2037 25.9111C20.4784 26.3222 20.625 26.8056 20.625 27.3C20.625 27.9631 20.3616 28.599 19.8928 29.0678C19.4239 29.5366 18.788 29.8 18.125 29.8ZM24.2 36.05L34.775 26.625C35.2373 26.1963 35.8445 25.9581 36.475 25.9581C37.1055 25.9581 37.7127 26.1963 38.175 26.625L47.5 36.05H24.2Z" fill="currentColor"/>
-      </g>
-      <defs>
-        <clipPath id="clip0_885_1156">
-          <rect width="60" height="60" fill="white" />
-        </clipPath>
-      </defs>
-    </svg>
-);
-
-const VideoIcon = ({ className }: { className?: string }) => (
-    <svg width="40" height="40" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
-      <g clipPath="url(#clip0_885_1160)">
-        <path d="M15.0038 0H45.0037V7.48875H52.5037V0C54.4922 0.000994237 56.3989 0.791609 57.8046 2.19802C59.2103 3.60444 60 5.51153 60 7.5V52.5C60 54.4885 59.2103 56.3956 57.8046 57.802C56.3989 59.2084 54.4922 59.999 52.5037 60V52.4887H45.0037V60H15.0038V52.4887H7.50375V60C5.51463 60 3.60322 59.2098 2.1967 57.8033C0.790176 56.3968 0 54.4891 0 52.5V7.5C0 5.51088 0.790176 3.60322 2.1967 2.1967C3.60322 0.790176 5.51088 0 7.5 0L7.50375 7.48875H15.0038V0ZM22.5 41.25L39.375 30L22.5 18.75V41.25ZM52.5037 44.9887V33.7387H45.0037V44.9887H52.5037ZM52.5037 26.2387V14.9888H45.0037V26.2387H52.5037ZM15.0038 44.9887V33.7387H7.50375V44.9887H15.0038ZM15.0038 26.2387V14.9888H7.50375V26.2387H15.0038Z" fill="currentColor"/>
-      </g>
-      <defs>
-        <clipPath id="clip0_885_1160">
-          <rect width="60" height="60" fill="white" />
-        </clipPath>
-      </defs>
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+        <g clipPath="url(#clip0_1217_211)">
+            <path d="M25.2845 4.64332L35.3816 14.7425C35.9732 15.334 36.3783 16.0861 36.5466 16.9056C36.7149 17.7251 36.6391 18.576 36.3284 19.3528L31.2735 31.9912C30.9899 32.6987 30.5223 33.3175 29.9191 33.7835C29.316 34.2495 28.5992 34.5458 27.843 34.6416L16.9872 35.9988C16.7079 36.0316 16.4158 36.0715 16.1109 36.1185L15.1619 36.2724L14.666 36.3622L13.1207 36.6614L12.0627 36.8858L10.4703 37.2449L8.42909 37.7322L5.11186 38.5786L3.73111 38.9505C3.38266 39.0464 3.01573 39.0532 2.66397 38.9703C2.31221 38.8875 1.98688 38.7177 1.71779 38.4765C1.4487 38.2352 1.24448 37.9303 1.12384 37.5897C1.0032 37.249 0.97001 36.8836 1.02731 36.5267L1.09998 36.2147L1.73051 33.8379L2.29478 31.5979L2.78211 29.5567L3.13905 27.9644L3.36348 26.9042L3.66485 25.361L3.83584 24.3842L3.97263 23.4694L5.38331 12.184C5.47932 11.4276 5.77589 10.7107 6.24229 10.1075C6.70868 9.50428 7.32792 9.0368 8.03581 8.75351L20.6742 3.69859C21.451 3.38795 22.3019 3.31209 23.1214 3.4804C23.9409 3.64871 24.693 4.05166 25.2845 4.64332ZM17.3548 16.6234C16.8148 17.1637 16.4295 17.8389 16.2389 18.5787C16.0483 19.3184 16.0595 20.0958 16.2712 20.8298C16.1154 20.921 15.9717 21.0316 15.8437 21.1589L7.17017 29.8324C7.11333 29.8901 7.07404 29.9628 7.05689 30.0419L6.86666 30.8648L6.4862 32.4529L6.30239 33.2031C6.28357 33.2752 6.28395 33.3511 6.30349 33.423C6.32302 33.495 6.36104 33.5605 6.41376 33.6133C6.46647 33.666 6.53206 33.704 6.60401 33.7235C6.67596 33.7431 6.75177 33.7434 6.82391 33.7246L8.35642 33.3506L9.98725 32.9701C10.0659 32.952 10.1377 32.912 10.1946 32.8547L18.8681 24.1812C18.9953 24.0538 19.1059 23.9109 19.1973 23.7558C19.9215 23.9641 20.6879 23.9771 21.4189 23.7937C22.1498 23.6102 22.8192 23.2369 23.3593 22.7113C23.8995 22.1858 24.2911 21.5269 24.4945 20.8013C24.6979 20.0757 24.7058 19.3092 24.5176 18.5795C24.3293 17.8498 23.9515 17.1828 23.4224 16.6462C22.8933 16.1096 22.2318 15.7224 21.5048 15.5238C20.7779 15.3252 20.0114 15.3223 19.2829 15.5154C18.5545 15.7085 17.8901 16.0908 17.357 16.6234H17.3548ZM27.3108 0.627163C27.6786 0.258839 28.1681 0.037373 28.6875 0.00431724C29.207 -0.0287385 29.7207 0.128888 30.1321 0.447622L30.3331 0.627163L39.402 9.69397C39.7894 10.0777 40.0155 10.595 40.034 11.14C40.0525 11.685 39.862 12.2164 39.5015 12.6256C39.141 13.0347 38.6377 13.2906 38.0947 13.3408C37.5517 13.391 37.0101 13.2318 36.5807 12.8958L36.3776 12.7162L27.3108 3.64943C26.9101 3.24861 26.685 2.70506 26.685 2.1383C26.685 1.57154 26.9101 1.02798 27.3108 0.627163Z" fill="currentColor"/>
+        </g>
+        <defs>
+            <clipPath id="clip0_1217_211">
+                <rect width="40" height="40" fill="white"/>
+            </clipPath>
+        </defs>
     </svg>
 );
 
@@ -75,7 +66,7 @@ const PROJECT_TYPES: ProjectTypeData[] = [
         title: 'Brand Identity',
         basePrice: 1500,
         description: 'Logo, colors & typography',
-        icon: <GraphicIcon className="text-[#1F67F1]" />, 
+        icon: <GraphicIcon />, 
         specificQuestion: {
             label: "How many logo concepts?",
             type: 'radio',
@@ -91,7 +82,7 @@ const PROJECT_TYPES: ProjectTypeData[] = [
         title: 'Website',
         basePrice: 2500,
         description: 'Marketing & landing pages',
-        icon: <WebDevIcon className="text-[#1F67F1]" />,
+        icon: <WebDevIcon />,
         specificQuestion: {
             label: "Estimated number of pages?",
             type: 'slider', // Numeric range
@@ -107,7 +98,7 @@ const PROJECT_TYPES: ProjectTypeData[] = [
         title: 'Web App / SaaS',
         basePrice: 5000,
         description: 'Functional dashboards & tools',
-        icon: <VideoIcon className="text-[#1F67F1]" />,
+        icon: <WebAppIcon />,
         specificQuestion: {
             label: "Complexity Level",
             type: 'radio', // Single Choice Toggle
@@ -123,7 +114,7 @@ const PROJECT_TYPES: ProjectTypeData[] = [
         title: 'UI/UX Design',
         basePrice: 1200,
         description: 'Design prototypes (Figma)',
-        icon: <UiUxIcon className="text-[#1F67F1]" />,
+        icon: <UiUxIcon />,
         specificQuestion: {
             label: "Number of Main Screens",
             type: 'slider',
@@ -170,6 +161,7 @@ const SmoothSlider = ({ value, options, onChange, formatLabel }: { value: number
         }
     }, [value, options.length, progress]);
 
+    // Core Logic: Calculate progress from clientX
     const updateProgress = (clientX: number) => {
         if (!trackRef.current) return;
         const rect = trackRef.current.getBoundingClientRect();
@@ -180,45 +172,84 @@ const SmoothSlider = ({ value, options, onChange, formatLabel }: { value: number
         return clamped;
     };
 
-    const handlePointerDown = (e: React.PointerEvent) => {
-        isDragging.current = true;
-        // Prevent text selection
-        e.preventDefault();
-        
-        // Immediate update
-        updateProgress(e.clientX);
-        
-        // Capture pointer
-        e.currentTarget.setPointerCapture(e.pointerId);
-    };
-
-    const handlePointerMove = (e: React.PointerEvent) => {
-        if (!isDragging.current) return;
-        updateProgress(e.clientX);
-    };
-
-    const handlePointerUp = (e: React.PointerEvent) => {
-        if (!isDragging.current) return;
-        isDragging.current = false;
-        
-        const finalProgress = updateProgress(e.clientX); // Ensure validation
-        if (typeof finalProgress !== 'number') return;
-
-        // Snap to nearest step
+    const snapToNearest = () => {
+        const currentProgress = progress.get();
         const stepSize = 1 / (options.length - 1);
-        const closestIndex = Math.round(finalProgress / stepSize);
+        const closestIndex = Math.round(currentProgress / stepSize);
         const clampedIndex = Math.max(0, Math.min(options.length - 1, closestIndex));
         
-        // Animate visual snap
+        // Visual Snap
         const snapTarget = clampedIndex * stepSize;
         animate(progress, snapTarget, { type: "spring", stiffness: 400, damping: 25 });
         
-        // Notify parent
+        // Notify Parent
         if (clampedIndex !== value) {
             onChange(clampedIndex);
         }
+        return clampedIndex;
+    };
+
+    // --- NATIVE TOUCH HANDLERS (iOS Fix) ---
+    // We attach these manually to use { passive: false } which is required to prevent scrolling while dragging
+    useEffect(() => {
+        const track = trackRef.current;
+        if (!track) return;
+
+        const handleTouchMove = (e: TouchEvent) => {
+            if (!isDragging.current) return;
+            // CRITICAL: Prevent scrolling on iOS
+            if (e.cancelable) e.preventDefault(); 
+            updateProgress(e.touches[0].clientX);
+        };
+
+        const handleTouchEnd = () => {
+            isDragging.current = false;
+            snapToNearest();
+            window.removeEventListener('touchmove', handleTouchMove);
+            window.removeEventListener('touchend', handleTouchEnd);
+        };
+
+        const handleTouchStart = (e: TouchEvent) => {
+            // CRITICAL: Prevent scrolling start
+            if (e.cancelable) e.preventDefault();
+            isDragging.current = true;
+            updateProgress(e.touches[0].clientX);
+            
+            // Attach move/end to window to handle drag out
+            window.addEventListener('touchmove', handleTouchMove, { passive: false });
+            window.addEventListener('touchend', handleTouchEnd);
+        };
+
+        track.addEventListener('touchstart', handleTouchStart, { passive: false });
+
+        return () => {
+            track.removeEventListener('touchstart', handleTouchStart);
+            window.removeEventListener('touchmove', handleTouchMove);
+            window.removeEventListener('touchend', handleTouchEnd);
+        };
+    }, [options.length, value, onChange]); // Dependencies for snap logic if needed, strictly we use Refs for most
+
+    // --- MOUSE HANDLERS (Desktop) ---
+    // Standard React events work fine for mouse
+    const handleMouseDown = (e: React.MouseEvent) => {
+        isDragging.current = true;
+        updateProgress(e.clientX);
         
-        e.currentTarget.releasePointerCapture(e.pointerId);
+        const handleMouseMove = (e: MouseEvent) => {
+            if (!isDragging.current) return;
+            e.preventDefault();
+            updateProgress(e.clientX);
+        };
+
+        const handleMouseUp = () => {
+            isDragging.current = false;
+            snapToNearest();
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('mouseup', handleMouseUp);
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mouseup', handleMouseUp);
     };
 
     return (
@@ -226,10 +257,8 @@ const SmoothSlider = ({ value, options, onChange, formatLabel }: { value: number
             <div 
                 className="relative w-full h-[12px] bg-[#1F67F1]/10 rounded-full flex items-center cursor-pointer" 
                 ref={trackRef}
-                onPointerDown={handlePointerDown}
-                onPointerMove={handlePointerMove}
-                onPointerUp={handlePointerUp}
-                onPointerLeave={handlePointerUp} // Safety release
+                onMouseDown={handleMouseDown} // Only Mouse, Touch handled by effect
+                style={{ touchAction: 'none' }} // Double enforcement
             >
                 {/* Track Fill */}
                 <motion.div 
@@ -534,22 +563,27 @@ export default function PriceEstimator() {
 
                     {/* DESKTOP NAVIGATION BAR (Inside Left Box, Bottom Right) */}
                     {/* Fixed Overflow: Moved from absolute to relative flex placement */}
-                    <div className="hidden lg:flex items-center gap-[23px] self-end mt-4 w-full justify-between">
-                         {/* Back Button Placeholder (for spacing/alignment logic if needed, or active back button) */}
-                         <div className="w-[45px]">
+                    <div className="hidden lg:flex items-center gap-[23px] self-end mt-4 w-full justify-end">
+                        
+                        {/* Dynamic Container: Single row, gap handles spacing */}
+                         <div className={`flex items-center gap-[23px] w-full ${step > 0 ? 'justify-between' : 'justify-end'}`}>
+                            
+                            {/* Back Button - Only shows if step > 0 */}
                             {step > 0 && (
                                 <button 
                                      onClick={handleBack}
-                                     className="w-[45px] h-[45px] border-2 border-[#1F67F1] rounded-full flex items-center justify-center text-[#1F67F1] hover:bg-[#1F67F1]/5 transition-colors"
+                                     className="w-[45px] h-[45px] border-2 border-[#1F67F1] rounded-full flex items-center justify-center text-[#1F67F1] hover:bg-[#1F67F1]/5 transition-colors cursor-pointer flex-shrink-0"
                                 >
                                     <ChevronLeft size={24} />
                                 </button>
                             )}
-                         </div>
 
-                         <div className="flex items-center gap-[23px]">
-                            {/* Progress Bar Container */}
-                            <div className="w-[339px] h-[15px] bg-[#1F67F1]/22 rounded-[26px] overflow-hidden relative">
+                            {/* Progress Bar Container - Flex grow to fill space */}
+                            {/* Logic: If no back button, it still needs to be bounded or defined. User said "Full width" initially? 
+                                Actually "Initial State... progress bar should be full-width". 
+                                Let's make it flex-1 so it takes all space between (or start) and continue button. 
+                            */}
+                            <div className="h-[15px] bg-[#1F67F1]/22 rounded-[26px] overflow-hidden relative flex-1 max-w-[339px] lg:max-w-none">
                                 <motion.div 
                                     className="h-full bg-[#1F67F1] rounded-[26px]"
                                     initial={{ width: "25%" }}
@@ -565,7 +599,7 @@ export default function PriceEstimator() {
                                     w-[155px] h-[45px] rounded-[46px] 
                                     flex items-center justify-center gap-2
                                     text-white font-[600] text-[18px]
-                                    transition-all
+                                    transition-all cursor-pointer flex-shrink-0
                                     ${(step === 3 || (!selectedType && step === 0)) ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#1F67F1] hover:opacity-90 shadow-sm'}
                                 `}
                             >
