@@ -49,7 +49,7 @@ const InvoicePDF: React.FC<InvoicePDFProps> = ({
             backgroundColor: '#ffffff'
         });
 
-        const imgData = canvas.toDataURL('image/png');
+        const imgData = canvas.toDataURL('image/jpeg', 0.75);
         const pdf = new jsPDF({
             orientation: 'portrait',
             unit: 'mm',
@@ -59,7 +59,7 @@ const InvoicePDF: React.FC<InvoicePDFProps> = ({
         const imgWidth = 210; // A4 width mm
         const imgHeight = (canvas.height * imgWidth) / canvas.width;
         
-        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+        pdf.addImage(imgData, 'JPEG', 0, 0, imgWidth, imgHeight, undefined, 'FAST');
         pdf.save(`FatemeAhmadi_Estimate_${estimateId}.pdf`);
 
         // If auto-downloading, close after save
@@ -185,7 +185,7 @@ const InvoicePDF: React.FC<InvoicePDFProps> = ({
           {/* Items */}
           <div className="flex flex-col gap-2">
             {items.map((item, index) => (
-              <div key={index} className="flex justify-between items-center py-4 px-4 bg-white rounded-lg border border-dashed border-[#D9D9D9] hover:border-[#1F67F1] transition-colors break-inside-avoid">
+              <div key={index} className="flex justify-between items-center text-sm py-1 px-4 pt-0 mt-0 bg-white rounded-lg border border-dashed border-[#D9D9D9] hover:border-[#1F67F1] transition-colors break-inside-avoid">
                 <div className="flex-[3] font-medium text-[#252525]">{item.label}</div>
                 <div className="flex-1 text-right font-bold text-[#1F67F1]">
                   ${Number(item.price).toLocaleString()}
@@ -218,9 +218,7 @@ const InvoicePDF: React.FC<InvoicePDFProps> = ({
                 <div>
                    <h4 className="font-bold text-[#1F67F1] text-sm uppercase mb-1">Please Note</h4>
                    <p className="text-sm text-[#252525] leading-relaxed font-medium">
-                      This document is a preliminary estimate based on your initial inputs. 
-                      It is <strong>not a final contract or invoice</strong>. Final pricing may vary subject to detailed 
-                      scope definition, revisions, and specific technical requirements discussed during our consultation.
+                      This is a non-binding preliminary estimate; final pricing is subject to confirmed scope and technical requirements.
                   </p>
                 </div>
              </div>

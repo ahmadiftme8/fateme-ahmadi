@@ -86,13 +86,14 @@ const SmoothSlider = ({
     step?: number 
 }) => {
     const isRange = min !== undefined && max !== undefined;
-    const range = isRange ? (max! - min!) : (options ? options.length - 1 : 1);
+    const range = isRange ? (max! - min!) : (options?.length ? options.length - 1 : 1);
     
     // Helper to get normalized progress (0-1)
     // Wrapped in useCallback to use in dependency array
     const getProgress = (val: number) => {
         if (isRange) return (val - min!) / range;
-        return val / (options!.length - 1);
+        if (!options || options.length <= 1) return 0;
+        return val / (options.length - 1);
     };
 
     // Helper to get value from progress (0-1)
@@ -102,7 +103,8 @@ const SmoothSlider = ({
             if (step) return Math.round(raw / step) * step;
             return Math.round(raw);
         }
-        return Math.round(prog * (options!.length - 1));
+        if (!options || options.length <= 1) return 0;
+        return Math.round(prog * (options.length - 1));
     };
 
     const trackRef = useRef<HTMLDivElement>(null);
