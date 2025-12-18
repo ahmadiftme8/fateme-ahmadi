@@ -4,6 +4,7 @@ import FeaturedProjects from "@/components/blocks/FeaturedProjects";
 import Services from "@/components/blocks/Services";
 import TrustedBy from "@/components/blocks/TrustedBy";
 import FAQ from "@/components/blocks/FAQ";
+import PriceEstimator from "@/components/blocks/PriceEstimator";
 import { getTranslations } from "next-intl/server";
 
 type PageParams = {
@@ -41,6 +42,7 @@ export default async function HomePage() {
       <FeaturedProjects projects={projects} />
       <TrustedBy />
       <FAQ />
+      <PriceEstimator />
     </>
   );
 }
