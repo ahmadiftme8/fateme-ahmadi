@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useMotionValue, useTransform, animate } from 'framer-motion';
-import { ChevronRight, ChevronLeft, CheckCircle2, RefreshCw } from 'lucide-react';
+import { ChevronRight, ChevronLeft, CheckCircle2, RefreshCw, ChevronUp, ChevronDown } from 'lucide-react';
 
 // --- ICONS FROM FEATURED PROJECTS ---
 const GraphicIcon = ({ className }: { className?: string }) => (
@@ -37,136 +37,92 @@ const UiUxIcon = ({ className }: { className?: string }) => (
     </svg>
 );
 
-// TYPES
-type ProjectType = 'brand' | 'website' | 'webapp' | 'uiux';
+import { PROJECT_CONFIGS, GLOBAL_CONFIG } from '@/lib/pricing/config';
+import { calculateEstimate } from '@/lib/pricing/engine';
+import { ProjectTypeId, PricingQuestion, PricingQuestionOption, UserAnswers } from '@/lib/pricing/types';
 
-interface EstimatorOption {
-    label: string;
-    value: string | number;
-    cost?: number;
-    meta?: string;
-}
+// MAP ICONS TO IDs
+const ICONS: Record<ProjectTypeId, React.ReactNode> = {
+    brand: <GraphicIcon />,
+    website: <WebDevIcon />,
+    webapp: <WebAppIcon />,
+    uiux: <UiUxIcon />,
+};
 
-interface ProjectTypeData {
-    id: ProjectType;
-    title: string;
-    basePrice: number;
-    description: string;
-    icon: React.ReactNode;
-    specificQuestion: {
-        label: string;
-        type: 'slider' | 'radio' | 'grid';
-        options: EstimatorOption[];
-    };
-}
+// PREPARE DISPLAY DATA (Merging Config with Icons)
+const PROJECT_DISPLAY_DATA = PROJECT_CONFIGS.map(config => ({
+    ...config,
+    icon: ICONS[config.id]
+}));
 
-const PROJECT_TYPES: ProjectTypeData[] = [
-    {
-        id: 'brand',
-        title: 'Brand Identity',
-        basePrice: 1500,
-        description: 'Logo, colors & typography',
-        icon: <GraphicIcon />, 
-        specificQuestion: {
-            label: "How many logo concepts?",
-            type: 'radio',
-            options: [
-                { label: "1 Concept", value: 1, cost: 0 },
-                { label: "2 Concepts", value: 2, cost: 500 },
-                { label: "3+ Concepts", value: 3, cost: 1000 },
-            ]
-        }
-    },
-    {
-        id: 'website',
-        title: 'Website',
-        basePrice: 2500,
-        description: 'Marketing & landing pages',
-        icon: <WebDevIcon />,
-        specificQuestion: {
-            label: "Estimated number of pages?",
-            type: 'slider', // Numeric range
-            options: [
-                { label: "1-3", value: 0, cost: 0, meta: "Small" },
-                { label: "4-7", value: 50, cost: 800, meta: "Medium" },
-                { label: "8+", value: 100, cost: 1500, meta: "Large" },
-            ]
-        }
-    },
-    {
-        id: 'webapp',
-        title: 'Web App / SaaS',
-        basePrice: 5000,
-        description: 'Functional dashboards & tools',
-        icon: <WebAppIcon />,
-        specificQuestion: {
-            label: "Complexity Level",
-            type: 'radio', // Single Choice Toggle
-            options: [
-                { label: "MVP", value: 1, cost: 0, meta: "1-2 Features" },
-                { label: "Standard", value: 2, cost: 3000, meta: "3-5 Features" },
-                { label: "Enterprise", value: 3, cost: 8000, meta: "Complex" },
-            ]
-        }
-    },
-    {
-        id: 'uiux',
-        title: 'UI/UX Design',
-        basePrice: 1200,
-        description: 'Design prototypes (Figma)',
-        icon: <UiUxIcon />,
-        specificQuestion: {
-            label: "Number of Main Screens",
-            type: 'slider',
-            options: [
-                { label: "1-5", value: 0, cost: 0 },
-                { label: "6-15", value: 50, cost: 1000 },
-                { label: "16+", value: 100, cost: 2500 },
-            ]
-        }
-    }
-];
 
-const BUDGET_OPTIONS: EstimatorOption[] = [
+const BUDGET_OPTIONS = [ // Keep as simple options, typing handled in usages
     { label: "$1k - $5k", value: "1-5k" },
     { label: "$5k - $10k", value: "5-10k" },
     { label: "$10k - $20k", value: "10-20k" },
     { label: "$20k+", value: "20k+" },
 ];
 
-const DEADLINE_OPTIONS: EstimatorOption[] = [
-    { label: "1-4 Weeks", value: "1-4w" },
-    { label: "1-2 Months", value: "1-2m" },
-    { label: "2-4 Months", value: "2-4m" },
-    { label: "4+ Months", value: "4m+" },
-];
+// DEADLINE_OPTIONS removed as it's replaced by Global Config Urgency
+
 
 // ... imports ...
 // (imports are already present in file, we just replace the component)
 
-const SmoothSlider = ({ value, options, onChange, formatLabel }: { value: number, options: EstimatorOption[], onChange: (idx: number) => void, formatLabel?: (opt: EstimatorOption) => string }) => {
+const SmoothSlider = ({ 
+    value, 
+    options, 
+    onChange, 
+    min, 
+    max, 
+    step 
+}: { 
+    value: number, 
+    options?: { label: string; value?: any }[], 
+    onChange: (val: number) => void, 
+    min?: number, 
+    max?: number, 
+    step?: number 
+}) => {
+    const isRange = min !== undefined && max !== undefined;
+    const range = isRange ? (max! - min!) : (options ? options.length - 1 : 1);
+    
+    // Helper to get normalized progress (0-1)
+    // Wrapped in useCallback to use in dependency array
+    const getProgress = (val: number) => {
+        if (isRange) return (val - min!) / range;
+        return val / (options!.length - 1);
+    };
+
+    // Helper to get value from progress (0-1)
+    const getValue = (prog: number) => {
+        if (isRange) {
+            const raw = min! + (prog * range);
+            if (step) return Math.round(raw / step) * step;
+            return Math.round(raw);
+        }
+        return Math.round(prog * (options!.length - 1));
+    };
+
     const trackRef = useRef<HTMLDivElement>(null);
-    const progress = useMotionValue(0); // 0 to 1
+    const progress = useMotionValue(getProgress(value)); 
     const width = useTransform(progress, p => `${p * 100}%`);
     const left = useTransform(progress, p => `${p * 100}%`);
     
-    // Internal state to track dragging vs snapping
     const isDragging = useRef(false);
 
-    // Sync internal MotionValue with external prop (when not dragging)
+    // Sync external value changes
     useEffect(() => {
         if (!isDragging.current) {
-            const targetProgress = value / (options.length - 1);
-            animate(progress, targetProgress, { type: "spring", stiffness: 300, damping: 30 });
+            animate(progress, getProgress(value), { type: "spring", stiffness: 300, damping: 30 });
         }
-    }, [value, options.length, progress]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [value, min, max, options?.length, progress]); 
 
-    // Core Logic: Calculate progress from clientX
     const updateProgress = (clientX: number) => {
         if (!trackRef.current) return;
         const rect = trackRef.current.getBoundingClientRect();
         const newProgress = (clientX - rect.left) / rect.width;
-        // Clamp 0 to 1
         const clamped = Math.max(0, Math.min(1, newProgress));
         progress.set(clamped);
         return clamped;
@@ -174,30 +130,25 @@ const SmoothSlider = ({ value, options, onChange, formatLabel }: { value: number
 
     const snapToNearest = () => {
         const currentProgress = progress.get();
-        const stepSize = 1 / (options.length - 1);
-        const closestIndex = Math.round(currentProgress / stepSize);
-        const clampedIndex = Math.max(0, Math.min(options.length - 1, closestIndex));
+        const newVal = getValue(currentProgress);
+        const snappedProgress = getProgress(newVal);
+        const clampedProgress = Math.max(0, Math.min(1, snappedProgress));
         
-        // Visual Snap
-        const snapTarget = clampedIndex * stepSize;
-        animate(progress, snapTarget, { type: "spring", stiffness: 400, damping: 25 });
+        animate(progress, clampedProgress, { type: "spring", stiffness: 400, damping: 25 });
         
-        // Notify Parent
-        if (clampedIndex !== value) {
-            onChange(clampedIndex);
+        if (newVal !== value) {
+            onChange(newVal);
         }
-        return clampedIndex;
+        return newVal;
     };
 
-    // --- NATIVE TOUCH HANDLERS (iOS Fix) ---
-    // We attach these manually to use { passive: false } which is required to prevent scrolling while dragging
+    // Touch Handling
     useEffect(() => {
         const track = trackRef.current;
         if (!track) return;
 
         const handleTouchMove = (e: TouchEvent) => {
             if (!isDragging.current) return;
-            // CRITICAL: Prevent scrolling on iOS
             if (e.cancelable) e.preventDefault(); 
             updateProgress(e.touches[0].clientX);
         };
@@ -210,12 +161,10 @@ const SmoothSlider = ({ value, options, onChange, formatLabel }: { value: number
         };
 
         const handleTouchStart = (e: TouchEvent) => {
-            // CRITICAL: Prevent scrolling start
             if (e.cancelable) e.preventDefault();
             isDragging.current = true;
             updateProgress(e.touches[0].clientX);
             
-            // Attach move/end to window to handle drag out
             window.addEventListener('touchmove', handleTouchMove, { passive: false });
             window.addEventListener('touchend', handleTouchEnd);
         };
@@ -227,10 +176,10 @@ const SmoothSlider = ({ value, options, onChange, formatLabel }: { value: number
             window.removeEventListener('touchmove', handleTouchMove);
             window.removeEventListener('touchend', handleTouchEnd);
         };
-    }, [options.length, value, onChange]); // Dependencies for snap logic if needed, strictly we use Refs for most
+       // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [min, max, options?.length, value, onChange]);
 
-    // --- MOUSE HANDLERS (Desktop) ---
-    // Standard React events work fine for mouse
+    // Mouse Handling
     const handleMouseDown = (e: React.MouseEvent) => {
         isDragging.current = true;
         updateProgress(e.clientX);
@@ -257,19 +206,17 @@ const SmoothSlider = ({ value, options, onChange, formatLabel }: { value: number
             <div 
                 className="relative w-full h-[12px] bg-[#1F67F1]/10 rounded-full flex items-center cursor-pointer" 
                 ref={trackRef}
-                onMouseDown={handleMouseDown} // Only Mouse, Touch handled by effect
-                style={{ touchAction: 'none' }} // Double enforcement
+                onMouseDown={handleMouseDown}
+                style={{ touchAction: 'none' }}
             >
-                {/* Track Fill */}
                 <motion.div 
                     className="absolute top-0 left-0 h-full bg-[#1F67F1] rounded-full pointer-events-none"
                     style={{ width }}
                 />
 
-                {/* Knob */}
                 <motion.div
                     className="absolute top-1/2 w-6 h-6 z-20"
-                    style={{ left, y: "-50%", x: "-50%" }} // Center on position
+                    style={{ left, y: "-50%", x: "-50%" }}
                     whileHover={{ scale: 1.2 }}
                     initial={false}
                 >
@@ -277,26 +224,25 @@ const SmoothSlider = ({ value, options, onChange, formatLabel }: { value: number
                      
                      {/* Tooltip */}
                      <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-[#1F67F1] text-white text-xs py-1 px-2 rounded-[8px] whitespace-nowrap font-bold shadow-sm pointer-events-none">
-                        {formatLabel ? formatLabel(options[value]) : options[value].label}
+                        {options ? (options[value]?.label || value) : value}
                      </div>
                 </motion.div>
 
-                {/* Steps / Ticks */}
-                {options.map((opt, idx) => (
+                {/* Steps / Ticks - Only show if options are present */}
+                {options && options.map((opt, idx) => (
                     <div
                         key={idx}
                         className="absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-transparent z-0 pointer-events-none"
                         style={{ left: `${(idx / (options.length - 1)) * 100}%`, transform: 'translate(-50%, -50%)' }}
                     >
-                         {/* Dot for unselected steps */}
                          {idx !== value && <div className="w-1.5 h-1.5 bg-[#1F67F1]/30 rounded-full mx-auto" />}
                     </div>
                 ))}
             </div>
              {/* Bottom Labels */}
              <div className="flex justify-between w-full mt-4 text-xs font-semibold text-gray-400 select-none">
-                <span>{options[0].label}</span>
-                <span>{options[options.length-1].label}</span>
+                <span>{options ? options[0].label : min}</span>
+                <span>{options ? options[options.length-1].label : max}</span>
             </div>
         </div>
     );
@@ -306,35 +252,44 @@ const SmoothSlider = ({ value, options, onChange, formatLabel }: { value: number
 export default function PriceEstimator() {
     // STATE
     const [step, setStep] = useState(0);
-    // Initial state null for mobile-first "no selection"
-    const [selectedType, setSelectedType] = useState<ProjectType | null>(null);
-    const [specificOptionIndex, setSpecificOptionIndex] = useState<number>(0); 
+    const [selectedType, setSelectedType] = useState<ProjectTypeId | null>(null);
     
-    // Sliders for global inputs
+    // New: Centralized answers state
+    const [answers, setAnswers] = useState<UserAnswers>({});
+
+    // Mobile Bar State
+    const [isMobileCollapsed, setIsMobileCollapsed] = useState(false);
+
+    // Global inputs
     const [budgetIndex, setBudgetIndex] = useState<number>(0);
-    const [deadlineIndex, setDeadlineIndex] = useState<number>(1);
-    
-    // Description text
     const [description, setDescription] = useState("");
 
-    // Effect: Auto-select first option ONLY on Desktop on mount
+
+    // Effect: Auto-select first option on Desktop
     useEffect(() => {
         if (window.innerWidth >= 1024) {
-            setSelectedType(PROJECT_TYPES[0].id);
+            setSelectedType(PROJECT_DISPLAY_DATA[0].id);
         }
     }, []);
 
+    // Reset mobile bar collapse when changing steps
+    useEffect(() => {
+        setIsMobileCollapsed(false);
+    }, [step]);
+
     // --- Price Calculation ---
-    const currentProject = PROJECT_TYPES.find(p => p.id === selectedType);
-    const basePrice = currentProject?.basePrice || 0;
+    const currentProject = PROJECT_DISPLAY_DATA.find(p => p.id === selectedType);
     
-    // Logic for specific option cost
-    const extraCost = currentProject?.specificQuestion.options[specificOptionIndex]?.cost || 0;
-    const totalPrice = basePrice + extraCost;
+    // Calculate live price using the engine
+    const totalPrice = selectedType ? calculateEstimate(selectedType, answers) : 0;
+    
+    // Helpers for display in sidebar
+    const basePrice = currentProject?.basePrice || 0;
+    const extraCost = Math.max(0, totalPrice - basePrice); // Simple diff for display
 
     // --- Handlers ---
     const handleNext = () => {
-        if (step === 0 && !selectedType) return; // Prevent next if nothing selected
+        if (step === 0 && !selectedType) return;
         if (step < 3) setStep(prev => prev + 1);
     };
 
@@ -342,55 +297,123 @@ export default function PriceEstimator() {
         if (step > 0) setStep(prev => prev - 1);
     };
 
-    const handleTypeSelect = (id: ProjectType) => {
+    const handleTypeSelect = (id: ProjectTypeId) => {
         setSelectedType(id);
-        setSpecificOptionIndex(0); // Reset specific option on type change
+        setAnswers({}); // Reset answers on type change
+    };
+
+    const handleAnswerChange = (questionId: string, val: string | number | boolean | string[]) => {
+        setAnswers(prev => ({
+            ...prev,
+            [questionId]: val
+        }));
     };
 
     // --- Rich Input Components ---
+    const renderQuestion = (q: PricingQuestion) => {
+        const val = answers[q.id];
 
-    const renderRichInput = () => {
-        if (!currentProject) return null;
-        const { type, options } = currentProject.specificQuestion;
+        if (q.type === 'slider' || q.type === 'range') {
+             // Handle Slider
+             // If range, we rely on min/max. If generic slider (mapped options), we use options.
+             // Our config uses 'range' with min/max or 'options'.
+             const currentValue = (typeof val === 'number') ? val : (q.min ?? 0); 
+             
+             return (
+                 <div key={q.id} className="w-full mb-4">
+                     <label className="block text-[#1F67F1] font-bold mb-2">{q.label}</label>
+                     <SmoothSlider 
+                         value={currentValue} 
+                         min={q.min} max={q.max} step={q.step}
+                         options={q.options}
+                         onChange={(v) => handleAnswerChange(q.id, v)} 
+                     />
+                 </div>
+             );
+        }
 
-        if (type === 'slider') {
+        if (q.type === 'radio') {
             return (
-                <div className="w-full">
-                   <SmoothSlider 
-                        value={specificOptionIndex} 
-                        options={options} 
-                        onChange={setSpecificOptionIndex} 
-                   />
+                <div key={q.id} className="w-full mb-4">
+                    <label className="block text-[#1F67F1] font-bold mb-2">{q.label}</label>
+                    <div className="flex flex-col gap-2 w-full max-w-md">
+                        {q.options?.map((opt: PricingQuestionOption, idx: number) => (
+                            <button
+                                key={idx}
+                                onClick={() => handleAnswerChange(q.id, opt.value)}
+                                className={`
+                                    w-full p-4 rounded-[20px] border-2 text-left transition-all flex justify-between items-center
+                                    ${val === opt.value 
+                                        ? 'border-[#1F67F1] bg-[#1F67F1]/5' 
+                                        : 'border-[#1F67F1]/30 bg-transparent hover:border-[#1F67F1]'
+                                    }
+                                `}
+                            >
+                                <span className={`font-bold text-lg ${val === opt.value ? 'text-[#1F67F1]' : 'text-gray-600'}`}>{opt.label}</span>
+                                {opt.cost !== undefined && opt.cost > 0 && (
+                                    <span className="text-sm text-[#1F67F1] font-semibold">
+                                        +${opt.cost}
+                                    </span>
+                                )}
+                            </button>
+                        ))}
+                    </div>
                 </div>
             );
         }
 
-        if (type === 'radio') {
+        if (q.type === 'toggle') {
+            const isChecked = val === true;
             return (
-                <div className="flex flex-col gap-3 w-full max-w-md">
-                    {options.map((opt, idx) => (
-                        <button
-                            key={idx}
-                            onClick={() => setSpecificOptionIndex(idx)}
-                            className={`
-                                w-full p-4 rounded-[20px] border-2 text-left transition-all flex justify-between items-center
-                                ${specificOptionIndex === idx 
-                                    ? 'border-[#1F67F1] bg-[#1F67F1]/5' 
-                                    : 'border-[#1F67F1]/30 bg-transparent hover:border-[#1F67F1]'
-                                }
-                            `}
-                        >
-                            <span className={`font-bold text-lg ${specificOptionIndex === idx ? 'text-[#1F67F1]' : 'text-gray-600'}`}>{opt.label}</span>
-                            <span className="text-sm text-[#1F67F1] font-semibold">
-                                {opt.cost === 0 ? 'Included' : `+$${opt.cost}`}
-                            </span>
-                        </button>
-                    ))}
+                <div key={q.id} className="w-full mb-4 flex items-center justify-between p-3 rounded-[20px] border-2 border-[#1F67F1]/10">
+                     <span className="font-bold text-[#1F67F1] text-lg">{q.label}</span>
+                     <button 
+                        onClick={() => handleAnswerChange(q.id, !isChecked)}
+                        className={`w-[50px] h-[30px] rounded-full p-1 transition-colors ${isChecked ? 'bg-[#1F67F1]' : 'bg-gray-300'}`}
+                     >
+                        <div className={`w-[22px] h-[22px] bg-white rounded-full shadow-md transition-transform ${isChecked ? 'translate-x-[20px]' : 'translate-x-[0px]'}`} />
+                     </button>
                 </div>
             );
         }
 
-        return null; // Grid not implemented as not assigned to current types
+        if (q.type === 'checkbox') {
+             const selectedValues = (val as string[]) || []; // Improved cast
+             return (
+                <div key={q.id} className="w-full mb-4">
+                    <label className="block text-[#1F67F1] font-bold mb-2">{q.label}</label>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        {q.options?.map((opt: PricingQuestionOption) => {
+                            const isSelected = selectedValues.includes(opt.value as string);
+                            return (
+                                <button
+                                    key={String(opt.value)}
+                                    onClick={() => {
+                                        const valToToggle = opt.value as string;
+                                        const newSet = isSelected 
+                                            ? selectedValues.filter(v => v !== valToToggle)
+                                            : [...selectedValues, valToToggle];
+                                        handleAnswerChange(q.id, newSet);
+                                    }}
+                                    className={`
+                                        p-3 rounded-[15px] border-2 text-left transition-all flex justify-between items-center
+                                        ${isSelected 
+                                            ? 'border-[#1F67F1] bg-[#1F67F1]/5' 
+                                            : 'border-[#1F67F1]/30 bg-transparent hover:border-[#1F67F1]'
+                                        }
+                                    `}
+                                >
+                                    <span className={`font-semibold ${isSelected ? 'text-[#1F67F1]' : 'text-gray-600'}`}>{opt.label}</span>
+                                    {opt.cost !== undefined && opt.cost > 0 && <span className="text-xs text-[#1F67F1]">+${opt.cost}</span>}
+                                </button>
+                            );
+                        })}
+                    </div>
+                </div>
+             );
+        }
+
+        return null; 
     };
 
 
@@ -445,7 +468,7 @@ export default function PriceEstimator() {
                                     exit={{ opacity: 0 }}
                                     className="grid grid-cols-2 gap-[15px] lg:flex lg:flex-nowrap lg:gap-[14px] lg:justify-between w-full pb-2 lg:pb-0"
                                 >
-                                    {PROJECT_TYPES.map((type) => {
+                                    {PROJECT_DISPLAY_DATA.map((type) => {
                                         const isActive = selectedType === type.id;
                                         return (
                                             <div 
@@ -483,11 +506,8 @@ export default function PriceEstimator() {
                                     exit={{ opacity: 0, x: -20 }}
                                     className="w-full h-full flex flex-col items-center justify-center lg:items-start"
                                 >
-                                    <h3 className="text-xl lg:text-2xl font-bold text-[#1F67F1] mb-8 w-full text-center lg:text-left">
-                                        {currentProject.specificQuestion.label}
-                                    </h3>
-                                    <div className="w-full flex justify-center lg:justify-start">
-                                        {renderRichInput()}
+                                    <div className="w-full flex flex-col justify-start">
+                                        {currentProject.questions.map(q => renderQuestion(q))}
                                     </div>
                                 </motion.div>
                             )}
@@ -511,12 +531,9 @@ export default function PriceEstimator() {
                                             />
                                         </div>
                                         <div className="flex flex-col gap-2">
-                                            <label className="font-semibold text-[#1F67F1]">Deadline</label>
-                                            <SmoothSlider 
-                                                value={deadlineIndex}
-                                                options={DEADLINE_OPTIONS}
-                                                onChange={setDeadlineIndex}
-                                            />
+                                            <label className="font-semibold text-[#1F67F1]">Urgency</label>
+                                            {/* Mapping Urgency Toggle from Global Config */}
+                                            {GLOBAL_CONFIG.questions.map(q => renderQuestion(q))}
                                         </div>
                                     </div>
                                     <div className="flex flex-col gap-2 w-full mt-4">
@@ -661,13 +678,33 @@ export default function PriceEstimator() {
                 {step >= 0 && selectedType && (
                     <motion.div 
                         initial={{ y: "100%" }}
-                        animate={{ y: 0 }}
+                        animate={{ y: isMobileCollapsed ? "100%" : 0 }}
                         exit={{ y: "100%" }}
                         transition={{ type: "spring", stiffness: 300, damping: 30 }}
                         className="lg:hidden fixed bottom-0 left-0 w-full bg-[#DDDDDD] shadow-[0px_-3px_13.2px_rgba(0,0,0,0.09)] z-50 flex flex-col"
                     >
+                        {/* Toggle Handle (Only Step 3) */}
+                        {step === 3 && (
+                            <button 
+                                onClick={() => setIsMobileCollapsed(!isMobileCollapsed)}
+                                className="
+                                    absolute -top-[36px] left-[20px]
+                                    h-[36px] px-4
+                                    bg-[#DDDDDD] 
+                                    rounded-t-[12px]
+                                    shadow-[0px_-4px_6px_rgba(0,0,0,0.05)]
+                                    flex items-center justify-center
+                                    text-[#1F67F1]
+                                    z-0
+                                    pb-1
+                                "
+                            >
+                                {isMobileCollapsed ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
+                            </button>
+                        )}
+
                         {/* Progress Bar (Top Stripe) */}
-                        <div className="w-full h-[6px] bg-[#1F67F1]/20">
+                        <div className="w-full h-[6px] bg-[#1F67F1]/20 relative z-10">
                             <motion.div 
                                 className="h-full bg-[#1F67F1]"
                                 initial={{ width: "25%" }}
@@ -676,7 +713,7 @@ export default function PriceEstimator() {
                         </div>
                         
                         {/* Content */}
-                        <div className="w-full h-[85px] px-[20px] flex items-center justify-center">
+                        <div className="w-full h-[85px] px-[20px] flex items-center justify-center relative z-10 bg-[#DDDDDD]">
                             <div className="w-full max-w-[400px] flex justify-between items-center">
                                 <div className="flex flex-col">
                                     <span className="text-[#1F67F1] font-[600] text-[14px]">Live Estimate</span>
