@@ -49,6 +49,13 @@ const VideoIcon = ({ className }: { className?: string }) => (
 // TYPES
 type ProjectType = 'brand' | 'website' | 'webapp' | 'uiux';
 
+interface EstimatorOption {
+    label: string;
+    value: string | number;
+    cost?: number;
+    meta?: string;
+}
+
 interface ProjectTypeData {
     id: ProjectType;
     title: string;
@@ -58,7 +65,7 @@ interface ProjectTypeData {
     specificQuestion: {
         label: string;
         type: 'slider' | 'radio' | 'grid';
-        options: { label: string; value: any; cost: number; meta?: string }[];
+        options: EstimatorOption[];
     };
 }
 
@@ -129,14 +136,14 @@ const PROJECT_TYPES: ProjectTypeData[] = [
     }
 ];
 
-const BUDGET_OPTIONS = [
+const BUDGET_OPTIONS: EstimatorOption[] = [
     { label: "$1k - $5k", value: "1-5k" },
     { label: "$5k - $10k", value: "5-10k" },
     { label: "$10k - $20k", value: "10-20k" },
     { label: "$20k+", value: "20k+" },
 ];
 
-const DEADLINE_OPTIONS = [
+const DEADLINE_OPTIONS: EstimatorOption[] = [
     { label: "1-4 Weeks", value: "1-4w" },
     { label: "1-2 Months", value: "1-2m" },
     { label: "2-4 Months", value: "2-4m" },
@@ -146,7 +153,7 @@ const DEADLINE_OPTIONS = [
 // ... imports ...
 // (imports are already present in file, we just replace the component)
 
-const SmoothSlider = ({ value, options, onChange, formatLabel }: { value: number, options: any[], onChange: (idx: number) => void, formatLabel?: (opt: any) => string }) => {
+const SmoothSlider = ({ value, options, onChange, formatLabel }: { value: number, options: EstimatorOption[], onChange: (idx: number) => void, formatLabel?: (opt: EstimatorOption) => string }) => {
     const trackRef = useRef<HTMLDivElement>(null);
     const progress = useMotionValue(0); // 0 to 1
     const width = useTransform(progress, p => `${p * 100}%`);
