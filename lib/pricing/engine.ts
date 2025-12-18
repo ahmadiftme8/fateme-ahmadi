@@ -14,7 +14,7 @@ export function calculateEstimate(projectTypeId: ProjectTypeId, answers: UserAns
   let multiplierTotal = 1;
 
   // Helper to process a single question
-  const processQuestion = (q: PricingQuestion, answerValue: any) => {
+  const processQuestion = (q: PricingQuestion, answerValue: string | number | boolean | string[] | undefined) => {
     if (answerValue === undefined || answerValue === null) return;
 
     switch (q.calcType) {
@@ -71,11 +71,9 @@ export function calculateEstimate(projectTypeId: ProjectTypeId, answers: UserAns
         } else if (q.type === 'radio') {
              const opt = q.options?.find(o => o.value === answerValue);
              // E.g. option has multiplier: 1.5
-             // If option has explicit multiplier property (we need to types for this)
-             // In config.ts, I put `multiplier` on the option for radio
-             if (opt && 'multiplier' in opt) {
-                 // @ts-ignore - we know it exists from config structure
-                 multiplierTotal *= (opt as any).multiplier;
+             // If option has explicit multiplier property
+             if (opt?.multiplier) {
+                 multiplierTotal *= opt.multiplier;
              }
         }
         break;

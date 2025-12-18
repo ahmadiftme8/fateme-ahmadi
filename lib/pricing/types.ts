@@ -47,6 +47,7 @@ export interface PricingQuestionOption {
   value: string | number | boolean;
   cost?: number; // Pre-calculated cost if needed, but preferred to be derived via logic
   meta?: string;
+  multiplier?: number;
 }
 
 export interface PricingQuestion {
@@ -76,4 +77,4 @@ export interface GlobalConfig {
     questions: PricingQuestion[];
 }
 
-export type UserAnswers = Record<string, any>;
+export type UserAnswers = Record<string, string | number | boolean | string[]>;

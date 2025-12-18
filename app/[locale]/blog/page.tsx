@@ -1,8 +1,8 @@
-import { getTranslations } from "next-intl/server";
+// import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
-    const { locale } = await params;
-    const t = await getTranslations({ locale, namespace: "blog" });
+    // const { locale } = await params;
+    // const t = await getTranslations({ locale, namespace: "blog" });
 
     return {
         title: "Blog - Fateme Ahmadi",

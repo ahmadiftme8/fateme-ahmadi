@@ -19,20 +19,20 @@ const NAV_ITEMS = [
 
 const DROPDOWN_ID = "header-mobile-menu";
 
-const getLocalizedPath = (pathname: string, locale: string) => {
-  const safe = pathname.startsWith("/") ? pathname : `/${pathname}`;
-  const supported = ["/en", "/fa"];
-  const matched = supported.find(
-    (prefix) => safe === prefix || safe.startsWith(`${prefix}/`),
-  );
-
-  if (!matched) {
-    return safe;
-  }
-
-  const remainder = safe.slice(matched.length);
-  return remainder ? `/${locale}${remainder}` : `/${locale}`;
-};
+// const getLocalizedPath = (pathname: string, locale: string) => {
+//   const safe = pathname.startsWith("/") ? pathname : `/${pathname}`;
+//   const supported = ["/en", "/fa"];
+//   const matched = supported.find(
+//     (prefix) => safe === prefix || safe.startsWith(`${prefix}/`),
+//   );
+//
+//   if (!matched) {
+//     return safe;
+//   }
+//
+//   const remainder = safe.slice(matched.length);
+//   return remainder ? `/${locale}${remainder}` : `/${locale}`;
+// };
 
 export function Header() {
   const locale = useLocale();
@@ -147,10 +147,10 @@ export function Header() {
     };
   });
 
-  const nextLocale = locale === "fa" ? "en" : "fa";
-  const localeHref = getLocalizedPath(pathname, nextLocale);
-  const localeTextClass = `${styles.localeText} ${nextLocale === "fa" ? "font-vazirmatn" : ""
-    }`;
+  // const nextLocale = locale === "fa" ? "en" : "fa";
+  // const localeHref = getLocalizedPath(pathname, nextLocale);
+  // const localeTextClass = `${styles.localeText} ${nextLocale === "fa" ? "font-vazirmatn" : ""
+  //   }`;
 
   useEffect(() => {
     setIsMenuOpen(false);

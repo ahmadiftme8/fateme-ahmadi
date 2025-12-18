@@ -78,7 +78,7 @@ const SmoothSlider = ({
     step 
 }: { 
     value: number, 
-    options?: { label: string; value?: any }[], 
+    options?: { label: string; value?: string | number | boolean }[], 
     onChange: (val: number) => void, 
     min?: number, 
     max?: number, 
