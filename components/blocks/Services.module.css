@@ -39,8 +39,12 @@
   border-radius: 171px;
 
  
-  overflow: visible;
-  min-height: clamp(6.2rem, 13vw, 10.5rem);
+  overflow: hidden;
+  container-type: inline-size;
+  /* aspect-ratio: 16/9; removed to hug content */
+  height: auto;
+  min-height: 230px;
+  width: 100%;
 }
 
 .serviceNumber {
@@ -86,7 +90,8 @@
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  font-size: clamp(1.25rem, 2.6vw, 1.55rem);
+  /* font-size: clamp(1.25rem, 2.6vw, 1.55rem); removed for fluid cqi */
+  font-size: clamp(0.75rem, 6cqi, 1.25rem);
   line-height: 1.1;
   color: var(--blue, #1f67f1);
 }
@@ -101,19 +106,23 @@
 
 .serviceList {
   margin: 0;
-  padding: 0 0 0 1rem;
+  padding: 0 0 0 0rem;
   list-style: disc;
   display: grid;
   
   font-family: "Inter", sans-serif;
   font-weight: 400;
-  font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+  /* font-size: clamp(0.95rem, 1.6vw, 1.05rem); removed for fluid cqi */
   line-height: 1.45;
   color: var(--blue, #1f67f1);
+  font-size: clamp(0.7rem, 4cqi, 1rem);
 }
 
 .serviceList li {
   position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .serviceCta {
@@ -207,6 +216,7 @@
     gap: clamp(0.8rem, 2.6vw, 1rem);
     width: 100%;
   }
+
 
   .serviceCard {
     display: flex;

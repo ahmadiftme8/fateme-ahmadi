@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 
 import styles from "./FeaturedProjects.module.css";
+console.log("FeaturedProjects component rendering"); // added for debugging
 import WheelCarousel from "./WheelCarousel";
 
 type Category = {
@@ -29,8 +30,8 @@ type Project = {
 };
 
 const categories: Category[] = [
-  { id: "graphic-design", label: "Graphic Design", shortLabel: "Graphic", Icon: GraphicDesignIcon },
   { id: "web-development", label: "Web Development", shortLabel: "Web", Icon: WebDevIcon },
+  { id: "graphic-design", label: "Graphic Design", shortLabel: "Graphic", Icon: GraphicDesignIcon },
   { id: "ui-ux-design", label: "UI/UX Design", shortLabel: "UI/UX", Icon: UiUxIcon },
   { id: "video-editing", label: "Video Editing", shortLabel: "Video", Icon: VideoEditingIcon },
 ];
@@ -47,7 +48,7 @@ const galleryItems: Project[] = [
 
 
 export default function FeaturedProjects({ projects = [] }: { projects?: Project[] }) {
-  const [activeCategory, setActiveCategory] = useState("graphic-design");
+  const [activeCategory, setActiveCategory] = useState("web-development");
 
 
   // Filter projects based on active category
@@ -66,7 +67,7 @@ export default function FeaturedProjects({ projects = [] }: { projects?: Project
 
       return cat.includes(activeId) || cat.includes(activeLabel) || cat === activeId || cat === activeLabel;
     })
-    : activeCategory === "graphic-design" ? galleryItems : []; // Keep fallback for now or remove if strictly dynamic
+    : activeCategory === "web-development" ? galleryItems : []; // Keep fallback for now or remove if strictly dynamic
 
   return (
     <section id="portfolio" className={styles.featuredProjects}>
@@ -187,7 +188,7 @@ function WebDevIcon({ className }: { className?: string }) {
   return (
     <svg width="60" height="60" viewBox="0 0 60 60" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" className={className}>
       <path
-        d="M10.1702 57.445C14.259 57.7775 20.749 58.125 30.0002 58.125C39.2515 58.125 45.7415 57.7775 49.8302 57.445C53.9402 57.1113 57.1115 53.94 57.4452 49.83C57.7777 45.7412 58.1252 39.2513 58.1252 30C58.1252 25.3625 58.0377 21.42 57.909 18.125H2.09149C1.94234 22.0816 1.87024 26.0406 1.87524 30C1.87524 39.2513 2.22274 45.7412 2.55524 49.83C2.88899 53.94 6.06024 57.1113 10.1702 57.445Z"
+        d="M10.1702 57.445C14.259 57.7775 20.749 58.125 30.0002 58.125C39.2515 58.125 45.7415 57.7775 49.8302 57.445C53.9402 57.1113 57.1115 53.94 57.4452 49.83C57.7777 45.7412 58.1252 39.2512 58.1252 30C58.1252 25.3625 58.0377 21.42 57.909 18.125H2.09149C1.94234 22.0816 1.87024 26.0406 1.87524 30C1.87524 39.2512 2.22274 45.7412 2.55524 49.83C2.88899 53.94 6.06024 57.1113 10.1702 57.445Z"
         fill="currentColor"
       />
       <path

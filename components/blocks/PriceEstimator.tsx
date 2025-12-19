@@ -668,7 +668,7 @@ export default function PriceEstimator() {
                                             )}
                                         </button>
 
-                                        <a href="#book" className="w-full py-3 bg-[#1F67F1] text-white rounded-[46px] font-bold shadow-md hover:shadow-lg transition-all">
+                                        <a href="https://calendar.app.google/rjUiNwzF5sr7WvCY7" className="w-full py-3 bg-[#1F67F1] !text-white rounded-[46px] font-bold shadow-md hover:shadow-lg transition-all flex items-center justify-center">
                                             Book a Free Call
                                         </a>
 
@@ -837,12 +837,21 @@ export default function PriceEstimator() {
                                             <ChevronLeft size={24} />
                                          </button>
                                     )}
-                                    <button 
-                                        onClick={handleNext} 
-                                        className="w-[120px] h-[45px] bg-[#1F67F1] rounded-[46px] text-white font-[600] text-[18px] flex items-center justify-center"
-                                    >
-                                        {step === 3 ? 'Book' : 'Continue'}
-                                    </button>
+                                    {step === 3 ? (
+                                        <a 
+                                            href="https://calendar.app.google/rjUiNwzF5sr7WvCY7"
+                                            className="w-[120px] h-[45px] bg-[#1F67F1] rounded-[46px] !text-white font-[600] text-[18px] flex items-center justify-center shadow-sm hover:opacity-90 transition-all"
+                                        >
+                                            Book
+                                        </a>
+                                    ) : (
+                                        <button 
+                                            onClick={handleNext} 
+                                            className="w-[120px] h-[45px] bg-[#1F67F1] rounded-[46px] text-white font-[600] text-[18px] flex items-center justify-center hover:opacity-90 shadow-sm transition-all"
+                                        >
+                                            Continue
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         </div>
