@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton+SC&display=swap');
 @import "tailwindcss";
 
 @font-face {
@@ -39,6 +40,11 @@
   --color-foreground: #121212;
   --color-primary: #1f67f1;
   --color-accent: #ea5039;
+
+  /* Color aliases for Services section */
+  --primary-blue: #1f67f1;
+  --accent-orange: #ea5b37;
+  --bg-gray: #e5e5e5;
 
   --font-big-shoulders-text: "Big Shoulders Text", sans-serif;
 

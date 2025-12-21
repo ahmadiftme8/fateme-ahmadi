@@ -42,23 +42,11 @@ export function HomeHero() {
   };
 
   const leftVariants = {
-    initial: isMobile
-      ? { y: 60, x: 0, opacity: 0 }
-      : { x: reduceMotion ? 0 : -100, y: 0, opacity: 0 },
+    initial: { y: 60, opacity: 0 },
     animate: {
       y: 0,
-      x: 0,
       opacity: 1,
-      transition: { duration: 0.8, ease: easeOutCurve },
-    },
-  };
-
-  const rightVariants = {
-    initial: { x: reduceMotion ? 0 : 100, opacity: 0 },
-    animate: {
-      x: 0,
-      opacity: 1,
-      transition: { duration: 0.8, ease: easeOutCurve },
+      transition: { duration: 0.8, ease: easeOutCurve, delay: 0.3 },
     },
   };
 
@@ -95,41 +83,25 @@ export function HomeHero() {
             style={{ filter: autoBlur, opacity }}
             className={styles.heroWrap}
           >
-            <motion.div
-              key={isMobile ? "mobile" : "desktop"}
-              variants={leftVariants}
-              initial="initial"
-              animate="animate"
-              className={styles.heroLeft}
+            {/* Profile Wrapper with Image and Badge */}
+            <motion.div 
+              variants={imageVariants} 
+              className={styles.profileWrapper}
             >
-              <span className={styles.heroName}>{t("name")}</span>
-              {isFa ? (
-                <span className={styles.heroRoleCombined}>
-                  {t("designerDeveloper")}
-                </span>
-              ) : (
-                <>
-                  <span className={styles.heroRoleDesigner}>{t("designer")}</span>
-                  <span className={styles.heroRolesMobile} aria-hidden="true">
-                    <span>{t("designer")}</span>
-                    <span className={styles.heroAmpersand}>&</span>
-                    <span>{t("developer")}</span>
-                  </span>
-                </>
-              )}
-            </motion.div>
-
-            <motion.div variants={imageVariants} className={styles.heroCard}>
               <div className={styles.heroImageFrame}>
-                <Image
-                  src="/fateme-pic.png"
-                  alt={t("imageAlt")}
-                  fill
-                  sizes="304px"
-                  priority
-                  className={styles.heroImage}
-                />
+                <div className={styles.heroCard}>
+                  <Image
+                    src="/fateme-pic.png"
+                    alt={t("imageAlt")}
+                    fill
+                    sizes="285px"
+                    priority
+                    className={styles.heroImage}
+                  />
+                </div>
               </div>
+              
+              {/* Badge with Animation */}
               <motion.div className={styles.badge} variants={badgeVariants} aria-hidden="true">
                 <span className={styles.badgeText}>Hi</span>
                 <div className={styles.badgeIcon}>
@@ -146,50 +118,47 @@ export function HomeHero() {
               </motion.div>
             </motion.div>
 
+            {/* Text Content */}
             <motion.div
-              variants={rightVariants}
-              className={styles.heroRight}
+              key={isMobile ? "mobile" : "desktop"}
+              variants={leftVariants}
+              initial="initial"
+              animate="animate"
+              className={styles.textContent}
             >
-              {!isFa && (
-                <span className={styles.heroRoleDeveloper}>
-                  {t("developer")}
-                </span>
-              )}
-              <div className={styles.heroDesc}>
-                <p>{t("descriptionPrimary")}</p>
-                <p>{t("descriptionSecondary")}</p>
-              </div>
+              <h1 className={styles.heroName}>{t("name")}</h1>
+              <p className={styles.heroRole}>
+                {isFa ? t("designerDeveloper") : `${t("designer")} & ${t("developer")}`}
+              </p>
             </motion.div>
           </motion.div>
-
-          <div className={styles.scrollIndicator} aria-hidden="true">
-            <div className={styles.scrollTrack}>
-              <div className={styles.scrollThumb} />
-            </div>
-            <span className={styles.scrollLabel}>SCROLL</span>
-          </div>
-
-
         </div>
 
         <div className={styles.postHero} id="about">
           <svg
             id="Layer_2"
+            width="46"
+            height="41"
+            viewBox="0 0 46 41"
+            fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 29.91 27.37"
             className={styles.quoteIcon}
           >
-            <g id="Layer_2-2" data-name="Layer 2">
+            <g clipPath="url(#clip0_1239_3287)">
               <path
-                fill="#ea5039"
-                d="m13.97,21.54c0,3.88-2.42,5.82-7.25,5.82-2.89,0-4.8-.76-5.72-2.28-.67-1.06-1.01-3.12-1.01-6.19,0-5.75.44-9.79,1.32-12.12C2.81,2.86,5.91.69,10.64.26v3.44c-2.79.28-4.66,1.61-5.61,3.97-.53,1.34-.87,3.78-1.01,7.3,6.63,0,9.95,2.19,9.95,6.56Zm15.93-.26c0,3.88-2.4,5.82-7.2,5.82-2.89,0-4.8-.76-5.72-2.28-.71-1.13-1.06-3.19-1.06-6.19,0-5.72.44-9.74,1.32-12.07,1.52-3.92,4.62-6.1,9.32-6.56v3.44c-2.72.32-4.57,1.68-5.56,4.08-.56,1.41-.92,3.81-1.06,7.2,6.63,0,9.95,2.19,9.95,6.56Z"
+                d="M0 41V24.2328C0 8.08161 6.29718 0 18.8793 0V7.47761C13.5237 7.47761 10.8581 11.1258 10.8581 18.4222V22.3483H18.8793V41H0ZM27.1329 41V24.2328C27.1329 8.08161 33.4179 0 46 0V7.47761C40.6443 7.47761 37.9787 11.1258 37.9787 18.4222V22.3483H46V41H27.1207H27.1329Z"
+                fill="#EA5B37"
               />
             </g>
+            <defs>
+              <clipPath id="clip0_1239_3287">
+                <rect width="46" height="41" fill="white" />
+              </clipPath>
+            </defs>
           </svg>
           <p className={styles.postHeroText}>{`I'm Fatemeh, a multidisciplinary designer and front-end developer
             creating impactful digital experiences, visuals, and products for
             brands and businesses for over 7 years.`}
-
           </p>
         </div>
       </section>

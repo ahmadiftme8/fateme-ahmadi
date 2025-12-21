@@ -1,335 +1,219 @@
+/* Section Container */
 .servicesSection {
-
-  padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 6vw, 2.5rem)
-    clamp(4rem, 10vw, 7rem);
-  padding-top: 0px;
-  padding-bottom: 0px;
-    margin-bottom: 50px;
-}
-
-@media (min-width: 900px) {
-  .servicesSection {
-    
-  }
-}
-
-.servicesContainer {
-  width: 100%;
-  max-width: 1320px;
-  margin: 0 auto;
-
-}
-
-.servicesGrid {
-  display: grid;
-  gap: clamp(1.25rem, 2.8vw, 2.2rem);
-}
-
-@media (min-width: 900px) {
-  .servicesGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-.serviceCard {
-  position: relative;
+  background-color: var(--color-background);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: clamp(0.9rem, 1.8vw, 1.5rem);
-  padding: clamp(1.2rem, 2.8vw, 1.9rem) clamp(1.6rem, 3.6vw, 2.6rem);
-  border: 2px solid var(--blue, #1f67f1);
-  border-radius: 171px;
-
- 
-  overflow: hidden;
-  container-type: inline-size;
-  /* aspect-ratio: 16/9; removed to hug content */
-  height: auto;
-  min-height: 230px;
-  width: 100%;
+  padding: 60px 20px;
+  gap: 50px;
+  font-family: "Inter", sans-serif;
 }
 
-.serviceNumber {
-  font-family: "Inter", sans-serif;
-  font-weight: 900;
-  font-size: 100px;
-  line-height: 1;
-  color: var(--blue, #1f67f1);
-  padding: 0 0.4rem 0 0;
-  min-width: clamp(3.2rem, 7.6vw, 4.8rem);
+/* Title Styling */
+.sectionTitle {
+  font-family: "Big Shoulders Text", cursive;
+  font-weight: 800;
+  font-size: 64px;
+  text-transform: uppercase;
+  color: var(--primary-blue, #1f67f1);
+  margin: 0;
   text-align: center;
 }
 
-.serviceDivider {
-  width: 3px;
-  height: 95%;
-  align-self: center;
-  background: rgba(31, 103, 241, 0.32);
-  margin: 0 clamp(0.6rem, 1.6vw, 0.9rem);
-}
-
-.serviceBody {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: clamp(0.4rem, 1.4vw, 0.85rem);
-  min-width: 0;
-  position: relative;
-  flex: 1 1 auto;
-}
-
-.serviceHeader {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  justify-content: flex-start;
-  gap: clamp(0.5rem, 1.6vw, 0.8rem);
-}
-
-.serviceName {
-  margin: 0;
-  font-family: "Inter", sans-serif;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  /* font-size: clamp(1.25rem, 2.6vw, 1.55rem); removed for fluid cqi */
-  font-size: clamp(0.75rem, 6cqi, 1.25rem);
-  line-height: 1.1;
-  color: var(--blue, #1f67f1);
-}
-
-.serviceArrow {
- width: 50px;
- height:50px;
-  background: center / contain no-repeat
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='49' height='49' viewBox='0 0 49 49'%3E%3Cpath fill='%23EA5039' d='M15.665 32.0303L13.9677 29.7137L27.8672 19.5302L16.8291 17.8271L17.2688 14.9772L33.1636 17.4297L30.7111 33.3245L27.8613 32.8848L29.5644 21.8468L15.665 32.0303Z'/%3E%3C/svg%3E");
-  margin-left: auto;
-}
-
-.serviceList {
-  margin: 0;
-  padding: 0 0 0 0rem;
-  list-style: disc;
+/* Grid Layout for Cards */
+.servicesGrid {
   display: grid;
-  
-  font-family: "Inter", sans-serif;
-  font-weight: 400;
-  /* font-size: clamp(0.95rem, 1.6vw, 1.05rem); removed for fluid cqi */
-  line-height: 1.45;
-  color: var(--blue, #1f67f1);
-  font-size: clamp(0.7rem, 4cqi, 1rem);
-}
-
-.serviceList li {
-  position: relative;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.serviceCta {
-  margin-top: 60px;
-   width: 250px;
-   height:60px;
-  background: var(--blue, #1f67f1);
-  color: #fff;
-  border: none;
-  border-radius: 999px;
-  
-  font-family: "Inter", sans-serif;
-  font-size: clamp(1rem, 2.4vw, 1.1rem);
-  font-weight: 800;
-
-  display: inline-flex;
-  align-items: center;
-  justify-self: center;
-
-
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
- 
-  justify-content: center;
-  align-self: center;
-}
-
-
-
-.serviceCta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 18px 36px rgba(31, 103, 241, 0.32);
-}
-
-.serviceCtaArrow {
-  position: relative;
-  width: 1.8rem;
-  height: 1.05rem;
-  display: inline-block;
-  font-size: 0;
-  margin-left: 0.35rem;
-  border: 2px solid #ea5039;
-  border-top: none;
-  border-left: none;
-  border-radius: 0 0 1rem 0.85rem;
-  transform: rotate(-18deg);
-  background: transparent;
-}
-
-.serviceCtaArrow::before {
-  content: none;
-}
-
-.serviceCtaArrow::after {
-  content: none;
-}
-
-.ctabtndiv{
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  max-width: 1400px;
   width: 100%;
-  justify-self: center;
-  justify-items: center;
-  align-self: center;
 }
 
-@media (max-width: 768px) {
-  .servicesSection {
-    padding: clamp(2.75rem, 7vw, 3.5rem) clamp(1.25rem, 6vw, 2rem)
-      clamp(3rem, 9vw, 4.25rem);
-    
-    
-  }
+/* Individual Card Styling */
+.serviceCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 2px solid var(--primary-blue, #1f67f1);
+  border-radius: 100px;
+  padding: 0px 40px;
+  background: transparent;
+  gap: 30px;
+  min-height: 160px;
+  max-width: 640px;
+  width: 100%;
+  overflow: hidden;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
 
-  .servicesContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    width: 100%;
-    max-width: 24rem;
-    margin: 0 auto;
-    gap: clamp(2rem, 6vw, 2.6rem);
-    padding-inline: 0.25rem;
-  }
+.serviceCard:hover {
+  background: rgba(31, 103, 241, 0.05);
+}
 
+/* Illustration Image */
+.cardImage {
+  flex-shrink: 0;
+  margin-left: -35px;
+  align-self: flex-end;
+  margin-bottom: -40px;
+}
+
+.cardImage img {
+  width: 200px;
+  height: 200px;
+  display: block;
+}
+
+/* Text Content Area */
+.cardText {
+  flex: 1;
+  color: var(--primary-blue, #1f67f1);
+  min-width: 0;
+}
+
+.cardText h3 {
+  font-weight: 800;
+  font-size: 26px;
+  text-transform: uppercase;
+  margin: 0 0 10px 0;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.cardText ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cardText li {
+  font-size: 14px;
+  line-height: 1.4;
+  position: relative;
+  padding-left: 15px;
+  white-space: nowrap;
+}
+
+/* Custom Bullet Points */
+.cardText li::before {
+  content: "•";
+  color: var(--primary-blue, #1f67f1);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+/* Arrow Icon Area */
+.cardArrow {
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.cardArrow img {
+  width: 50px;
+  height: 50px;
+  transition: transform 0.2s;
+}
+
+.serviceCard:hover .cardArrow img {
+  transform: translateX(5px);
+}
+
+/* Bottom Button Styling */
+.btnPrimary {
+  background-color: var(--primary-blue, #1f67f1);
+  color: #d9d9d9;
+  font-family: "Inter", sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  text-transform: uppercase;
+  padding: 15px 60px;
+  border: none;
+  border-radius: 80px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: background 0.3s, transform 0.2s ease;
+}
+
+.btnPrimary:hover {
+  background-color: #1550c4;
+  transform: translateY(-2px);
+}
+
+/* The Orange Dot inside button */
+.dot {
+  width: 20px;
+  height: 20px;
+  background-color: #ff6c47;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 1100px) {
   .servicesGrid {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(0.8rem, 2.6vw, 1rem);
-    width: 100%;
+    grid-template-columns: 1fr;
   }
-
 
   .serviceCard {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: clamp(0.65rem, 2.4vw, 0.9rem);
-    flex-wrap: nowrap;
-    height: 80px;
-    max-width: 100%;
-    width: 100%;
-    margin: 0 auto;
-    background: transparent;
-    border-radius: 999px;
-    border-width: 1px;
-    padding: clamp(0.95rem, 3.4vw, 1.25rem) clamp(1.2rem, 4vw, 1.6rem);
-    min-height: auto;
-    box-shadow: none;
-    position: relative;
+    border-radius: 40px;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .servicesSection {
+    padding: 40px 20px;
+    gap: 40px;
   }
 
-  .serviceNumber {
-    font-family: "Inter", sans-serif;
-    font-weight: 900;
-    font-size: clamp(2.05rem, 6.5vw, 2.5rem);
-    padding: 0;
-    line-height: 1;
-    min-width: clamp(2.6rem, 7vw, 3.4rem);
-    letter-spacing: 0.01em;
+  .sectionTitle {
+    font-size: 42px;
   }
 
-  .serviceBody {
-   margin-right: 0;
-   padding-right: 0;
-   gap: 0;
-    
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    flex: 1 1 auto;
-    min-width: 0;
+  .serviceCard {
+    flex-direction: column;
+    text-align: center;
+    border-radius: 20px;
+    padding: 25px;
+    gap: 15px;
   }
 
-  .serviceArrow {
-    position: static;
-    transform: none;
-    width: 30px;
-    justify-self: right;
-    background: center / contain no-repeat
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='49' height='49' viewBox='0 0 49 49'%3E%3Cpath fill='%23EA5039' d='M15.665 32.0303L13.9677 29.7137L27.8672 19.5302L16.8291 17.8271L17.2688 14.9772L33.1636 17.4297L30.7111 33.3245L27.8613 32.8848L29.5644 21.8468L15.665 32.0303Z'/%3E%3C/svg%3E");
-    margin-left: auto;
-    font-size: 0;
-    align-self: right;
+  .cardImage img {
+    width: 140px;
   }
 
-  .serviceName {
-    font-family: "Inter", sans-serif;
-    font-weight: 880;
+  .cardText h3 {
+    font-size: 22px;
+  }
+
+  .cardText li {
+    font-size: 14px;
+  }
+
+  .cardText ul {
     text-align: left;
-    align-items: left;
-    
-    font-size: clamp(1rem, 3.2vw, 1.25rem);
-
-    margin: 0;
-    white-space: nowrap;
+    display: inline-block;
   }
 
-  .serviceCard:nth-child(2) {
-    gap: clamp(0.55rem, 2vw, 0.75rem);
+  .cardArrow {
+    margin-top: 10px;
   }
 
-  .serviceCard:nth-child(2) .serviceName {
-    font-size: clamp(0.94rem, 2.8vw, 1.12rem);
-    line-height: clamp(1.1rem, 3vw, 1.35rem);
-    letter-spacing: -0.005em;
+  .cardArrow img {
+    width: 40px;
+    height: 40px;
   }
 
-  .serviceList {
-    display: none;
+  .btnPrimary {
+    font-size: 20px;
+    padding: 12px 40px;
   }
 
-  .serviceCta {
-    min-width: min(80%, 18rem);
-    max-width: 22rem;
-    padding: clamp(0.7rem, 2.6vw, 0.95rem) clamp(1.6rem, 6vw, 2.5rem);
-    min-height: clamp(2.6rem, 7.4vw, 3.1rem);
-    justify-content: center;
-    font-family: "Inter", sans-serif;
-    font-weight: 800;
-    font-size: clamp(0.9rem, 2.8vw, 1.05rem);
-    letter-spacing: 0.04em;
-    margin-top: clamp(0rem, 5vw, 0rem);
-  
-    position: relative;
-  }
-
-  .serviceCtaArrow {
-    position: absolute;
-    right: -2.2rem;
-    bottom: -0.35rem;
-    width: 1.8rem;
-    height: 1.05rem;
-    border: 2px solid #ea5039;
-    border-top: none;
-    border-left: none;
-    border-radius: 0 0 1rem 0.85rem;
-    transform: rotate(-18deg);
-    background: transparent;
-  }
-
-  .serviceCtaArrow::before,
-  .serviceCtaArrow::after {
-    content: none;
+  .dot {
+    width: 16px;
+    height: 16px;
   }
 }

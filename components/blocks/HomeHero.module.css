@@ -1,7 +1,9 @@
 .hero {
-  /* Mobile Base */
-  margin-top: 48px;
-  margin-bottom: 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   color: var(--blue, #1f67f1);
 }
 
@@ -10,513 +12,118 @@
   margin: 0 auto;
   padding: 0 24px;
   width: 100%;
-}
-
-.postHero {
-  /* Mobile Base */
-  margin-top: 60px;
-  padding: 0 24px;
-  text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-self: center;
   align-items: center;
+  justify-content: center;
+  flex: 1;
 }
 
-.quoteIcon {
-  width: 40px;
-  height: auto;
-  margin-bottom: 10px;
-}
-
-.postHeroText {
-  margin: 0;
-  color: #505050;
-  font-family: var(--font-poppins);
-  font-style: normal;
-  font-weight: 300;
-  font-size: 16px;
-  /* Mobile Size */
-  max-width: 600px;
-  text-align: center;
-}
-
-/* --- Hero Layout (Mobile Base) --- */
+/* --- Hero Layout --- */
 .heroWrap {
-  display: grid;
-  align-items: center;
-  position: relative;
-
-  /* Mobile: Single Column */
-  grid-template-columns: 1fr;
-  text-align: center;
-  row-gap: 28px;
-  gap: 28px;
-}
-
-.heroLeft {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* Mobile: Center alignment, Order 2 (below image) */
   align-items: center;
-  text-align: center;
-  order: 2;
+  gap: 30px;
+  width: 100%;
 }
 
-.heroRight {
-  display: none;
-  /* Hidden on mobile < 980 base */
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 12px;
-  order: 3;
-  text-align: start;
-}
-
-/* --- Hero Card (Mobile Base) --- */
-.heroCard {
+/* --- Profile Wrapper & Image Frame --- */
+.profileWrapper {
   position: relative;
-  width: 80%;
-  aspect-ratio: 304 / 456;
-  overflow: visible;
-  margin: 0 auto;
-  order: 1;
-  /* Top on mobile */
-
-  /* Mobile Dimensions */
-  max-width: 182px;
-  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .heroImageFrame {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #B7B6B6;
+  border-radius: 151px;
+  padding: 18px;
+  background: transparent;
   position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
+  width: fit-content;
+}
+
+.heroCard {
+  width: 285px;
+  height: 437px;
+  border-radius: 132px;
   overflow: hidden;
+  position: relative;
 }
 
 .heroImage {
   object-fit: cover;
 }
 
-/* Corner Shape Support */
-@supports (corner-shape: squircle) {
-  .heroCard {
-    corner-shape: squircle;
-  }
-}
-
-@supports (-webkit-corner-shape: squircle) {
-  .heroCard {
-    -webkit-corner-shape: squircle;
-  }
-}
-
-/* --- User Name & Roles (Mobile Base) --- */
-.heroName {
-  font-family: var(--font-big-shoulders), "Big Shoulders", sans-serif;
-  font-weight: 900;
-  text-transform: uppercase;
-  color: var(--blue, #1f67f1);
-
-  /* Mobile Size & Positioning */
-  position: unset;
-  font-size: 46px;
-  padding: 0;
-  margin: 0;
-  line-height: 1.2;
-}
-
-.heroRoleDesigner,
-.heroRoleDeveloper {
-  /* Hidden on mobile, replaced by combined/mobile roles */
-  display: none;
-  font-family: var(--font-big-shoulders), "Big Shoulders", sans-serif;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-size: 100px;
-  line-height: 1;
-  margin-top: 4px;
-}
-
-.heroRoleDeveloper {
-  letter-spacing: -0.02em;
-  margin: -6px 0 0;
-}
-
-.heroRolesMobile {
-  display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+/* --- Text Content --- */
+.textContent {
   text-align: center;
-  gap: 6px;
-
-  font-family: var(--font-big-shoulders), "Big Shoulders", sans-serif;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: #1f67f1;
-
-  /* Mobile Size */
-  font-size: 24px;
-  letter-spacing: -0.11px;
-  line-height: 0.8;
-  margin: 0;
-  padding: 0;
-}
-
-.heroRolesMobile span {
-  display: inline-flex;
-  align-items: center;
-}
-
-.heroRoleCombined {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-family: var(--font-big-shoulders), "Big Shoulders", sans-serif;
-  font-weight: 900;
-  line-height: 1;
-
-  /* Mobile Size */
-  font-size: 22px;
-  margin-top: 0px;
-  margin-bottom: 12px;
-}
-
-.heroAmpersand {
-  font-size: 50px;
-  /* Mobile */
-  color: #1f67f1;
-}
-
-.heroDesc {
-  /* Mobile: Hidden */
-  display: none;
-  max-width: 460px;
-  font-family: var(--font-big-shoulders), "Big Shoulders", sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  text-align: right;
-  position: absolute;
-  bottom: 75px;
-  flex-direction: column;
-  align-self: end;
-}
-
-.heroDesc p {
-  margin: 0;
-}
-
-.heroDesc p+p {
-  margin-top: 0px;
-  text-align: right;
-}
-
-/* --- Scroll Indicator (Mobile Visible) --- */
-.scrollIndicator {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  margin: 12px 0 0;
-  margin-top: 50px;
+  gap: 0px;
 }
 
-.scrollTrack {
-  position: relative;
-  width: 3px;
-  height: 54px;
-  background: #C8C7C7;
-  overflow: hidden;
-  border-radius: 999px;
-}
-
-.scrollThumb {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 20px;
-  background: #1F67F1;
-  border-radius: 999px;
-  animation: scrollLoop 2s ease-in-out infinite alternate;
-}
-
-@keyframes scrollLoop {
-  0% {
-    transform: translateY(0);
-  }
-
-  100% {
-    transform: translateY(34px);
-  }
-}
-
-.scrollLabel {
-  font-family: var(--font-poppins), "Poppins", sans-serif;
-  font-size: 11px;
-  letter-spacing: 0.32em;
+.heroName {
+  font-family: 'Big Shoulders Text', var(--font-big-shoulders), sans-serif;
+  font-weight: 900;
+  font-size: 76px;
+  line-height: 1.1;
   text-transform: uppercase;
-  color: #4a4a4a;
+  color: #1F67F1;
+  margin: 0;
+  letter-spacing: 0.03em;
+  height: 74px;
 }
 
-
-
-
-/* ========================================= */
-/* --- EXTRA SMALL MOBILE (< 375px) --- */
-/* ========================================= */
-@media (max-width: 375px) {
-  .heroCard {
-    max-width: 140px;
-    border-radius: 32px;
-  }
-
-  .heroName {
-    font-size: 32px;
-    margin-bottom: -8px;
-  }
-
-  .heroRoleCombined {
-    font-size: 20px;
-    margin-top: -10px;
-  }
-
-  .heroAmpersand {
-    font-size: 40px;
-  }
-
-  .heroRolesMobile {
-    font-size: 18px;
-  }
+.heroRole {
+  font-family: 'Anton SC', sans-serif;
+  font-weight: 400;
+  font-size: 38px;
+  text-transform: uppercase;
+  color: #1F67F1;
+  margin: 0;
 }
 
-
-/* ========================================= */
-/* --- TABLET BREAKPOINT (min-width: 641px) --- */
-/* ========================================= */
-@media (min-width: 641px) {
-  .hero {
-    margin-top: min(12vh, 120px);
-    margin-bottom: min(8vh, 80px);
-  }
-
-  .postHero {
-    margin-top: 70px;
-  }
-
-  .postHeroText {
-    font-size: 18px;
-  }
-
-  .heroWrap {
-    row-gap: 32px;
-    gap: 32px;
-  }
-
-  .heroCard {
-    max-width: 264px;
-    border-radius: 65px;
-  }
-
-  .heroName {
-    font-size: 60px;
-    /* Larger tablet name */
-  }
-
-  .heroRolesMobile {
-    font-size: 28px;
-    letter-spacing: 0.06em;
-    gap: 8px;
-  }
-
-  .heroRoleCombined {
-    font-size: 110px;
-    /* Restore desktop-like size for combined if used here? Or keep tablet scale. Assuming tablet uses mobile simplified view but larger. */
-    margin-top: 12px;
-  }
-
-  .heroAmpersand {
-    font-size: 32px;
-  }
-
-  .scrollIndicator {
-    gap: 16px;
-  }
-
-
-
-  .scrollLabel {
-    font-size: 12px;
-    letter-spacing: 0.4em;
-  }
-
-
-}
-
-
-/* ========================================= */
-/* --- DESKTOP BREAKPOINT (min-width: 981px) --- */
-/* ========================================= */
-@media (min-width: 981px) {
-
-  /* Layout Changes */
-  .heroWrap {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 304px) minmax(0, 1fr);
-    gap: clamp(16px, 2.5vw, 24px);
-    text-align: left;
-    row-gap: 0;
-  }
-
-  .heroLeft {
-    align-items: flex-start;
-    text-align: start;
-    order: unset;
-    /* Restore order */
-  }
-
-  .heroRight {
-    display: flex;
-    /* Visible */
-    order: unset;
-  }
-
-  .heroCard {
-    order: unset;
-    margin: 0 auto;
-    max-width: 304px;
-  }
-
-  /* Text Styles Restoration */
-  .heroName {
-    font-size: 32px;
-    /* Desktop label size */
-    position: absolute;
-    bottom: 240px;
-    margin: -6px 0 0;
-  }
-
-  .heroRoleDesigner,
-  .heroRoleDeveloper {
-    display: block;
-    /* Visible */
-  }
-
-  .heroRolesMobile {
-    display: none;
-  }
-
-  .heroRoleCombined {
-    display: none;
-  }
-
-  /* Hide combined role if separated on desktop? Original CSS only showed combined on mobile/tablet contexts implicitly via hiding others. The original code had .heroRoleCombined visible always but other roles mobile hidden < 640. Wait. Line 102 .heroRoleCombined just styles it. But Line 257 hides Designer/Developer < 640. So > 640 they are visible. 
-     On Desktop, we want Designer and Developer separate? 
-     Original: Designer/Developer has font-size 100px. 
-     Mobile Combined has 110px.
-     
-     Actually, looking at original code:
-     .heroRoleDesigner (Desktop)
-     .heroRolesMobile (Mobile < 640)
-     
-     Wait, .heroRoleCombined is used inside .heroRolesMobile? NO.
-     Original HTML structure likely has multiple blocks.
-     If desktop, we show .heroRoleDesigner and .heroRoleDeveloper.
-     If mobile, we show .heroRolesMobile (which contains combined or spans).
-  */
-
-  .heroDesc {
-    display: flex;
-    /* Visible */
-  }
-
-  .scrollIndicator {
-    display: none;
-  }
-}
-
-/* RTL Support */
-:global(html[dir="rtl"]) .heroWrap {
-  direction: rtl;
-}
-
-:global(html[dir="rtl"]) .heroLeft,
-:global(html[dir="rtl"]) .heroRight {
-  align-items: flex-end;
-  text-align: end;
-}
-
-:global(html[lang="fa"]) .heroRoleDesigner,
-:global(html[lang="fa"]) .heroRoleDeveloper,
-:global(html[lang="fa"]) .heroRolesMobile,
-:global(html[lang="fa"]) .scrollLabel,
-:global(html[lang="fa"]) .heroRoleCombined {
-  letter-spacing: normal;
-}
-
-:global(html[lang="fa"]) .heroName,
-:global(html[lang="fa"]) .heroRoleDesigner,
-:global(html[lang="fa"]) .heroRoleDeveloper,
-:global(html[lang="fa"]) .heroRolesMobile,
-:global(html[lang="fa"]) .heroDesc,
-:global(html[lang="fa"]) .postHeroText,
-:global(html[lang="fa"]) .heroRoleCombined {
-  font-family: "Vazirmatn", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  text-transform: none;
-}
-
-:global(html[lang="fa"]) .heroLeft {
-  align-items: center;
-  text-align: center;
-}
-
-:global(html[lang="fa"]) .heroDesc {
-  line-height: 1.7;
-  text-align: center;
-}
-
-/* Dark Mode */
-@media (prefers-color-scheme: dark) {
-  /* .heroCard {} */
-}
-
-/* --- Profile Badge --- */
+/* --- The "HI" Red Badge --- */
 .badge {
   position: absolute;
-  left: -32px;
-  bottom: 30px;
-  width: 65px;
-  height: 65px;
+  width: 98px;
+  height: 98px;
   background-color: #EA5039;
   border-radius: 50%;
-  overflow: hidden;
-  z-index: 10;
   display: flex;
   justify-content: center;
   align-items: center;
+  bottom: 35px;
+  left: -15px;
+  z-index: 10;
+  overflow: hidden;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .badgeText {
   position: absolute;
-  color: #fff;
+  color: #F6F6F6;
   font-family: var(--font-poppins), sans-serif;
-  font-weight: 600;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 30px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   transform: translateY(0);
   animation: textSlide 5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
 }
 
 .badgeIcon {
   position: absolute;
-  width: 38px;
-  height: 38px;
+  width: 48px;
+  height: 48px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -527,13 +134,13 @@
 .badgeIcon svg {
   width: 100%;
   height: 100%;
-  fill: #fff;
+  fill: #F6F6F6;
   transform-origin: bottom center;
   animation: handWave 5s ease-in-out infinite;
 }
 
+/* --- Animations --- */
 @keyframes textSlide {
-
   0%,
   15% {
     transform: translateY(0);
@@ -554,7 +161,6 @@
 }
 
 @keyframes iconSlide {
-
   0%,
   20% {
     transform: translateY(160%);
@@ -572,7 +178,6 @@
 }
 
 @keyframes handWave {
-
   0%,
   35% {
     transform: rotate(0deg);
@@ -598,4 +203,91 @@
   100% {
     transform: rotate(0deg);
   }
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  .heroCard {
+    width: 100%;
+    max-width: 230px;
+    height: auto;
+    aspect-ratio: 285 / 437;
+  }
+
+  .heroImageFrame {
+    border-radius: 110px;
+    padding: 13px;
+  }
+
+  .heroName {
+    font-size: 46px;
+  }
+
+  .heroRole {
+    font-size: 24px;
+  }
+
+  .badge {
+    width: 70px;
+    height: 70px;
+    left: 0;
+    bottom: 25px;
+  }
+
+  .badgeText {
+    font-size: 20px;
+  }
+
+  .badgeIcon {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* --- Post Hero Section --- */
+.postHero {
+  margin-top: 80px;
+  padding: 0 24px 60px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+}
+
+.quoteIcon {
+  width: 40px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.postHeroText {
+  margin: 0;
+  color: #505050;
+  font-family: var(--font-poppins);
+  font-style: normal;
+  font-weight: 300;
+  font-size: 16px;
+  max-width: 600px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .postHeroText {
+    font-size: 18px;
+  }
+}
+
+/* --- Persian/RTL Support --- */
+:global(html[lang="fa"]) .heroName,
+:global(html[lang="fa"]) .heroRole {
+  font-family: "Vazirmatn", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+:global(html[lang="fa"]) .postHeroText {
+  font-family: "Vazirmatn", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.8;
 }

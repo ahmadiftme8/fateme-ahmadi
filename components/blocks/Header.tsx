@@ -286,10 +286,8 @@ export function Header() {
   const barVariants = {
     default: {
       borderRadius: 36,
-      maxWidth: 360,
       marginTop: 16,
       marginBottom: 16,
-      width: "100%",
       borderBottomWidth: 1,
       borderTopWidth: 1,
       borderLeftWidth: 1,
@@ -310,6 +308,7 @@ export function Header() {
       <motion.div
         className={`${styles.bar} ${isMenuOpen ? styles.barOpen : ""}`}
         variants={barVariants}
+        animate={isMobileViewport ? "default" : false}
       >
         <div className={styles.avatar}>
           <Image

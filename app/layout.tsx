@@ -20,7 +20,6 @@ const bigShouldersDisplay = Big_Shoulders({
   weight: ["700", "800", "900"],
   variable: "--font-big-shoulders",
   display: "swap",
-  adjustFontFallback: false,
 });
 
 const fallbackLocale = nextIntlConfig.defaultLocale as AppLocale;
