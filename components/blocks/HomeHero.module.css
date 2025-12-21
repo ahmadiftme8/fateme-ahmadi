@@ -1,16 +1,19 @@
+/* Mobile-first: Base styles for mobile devices */
 .hero {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  min-height: 100svh; /* Use small viewport height for better mobile support */
   color: var(--blue, #1f67f1);
+  padding-top: 0px;
 }
 
 .container {
   max-width: 1180px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -22,10 +25,10 @@
 /* --- Hero Layout --- */
 .heroWrap {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Vertical stacking on all screen sizes */
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 24px; /* Smaller gap on mobile */
   width: 100%;
 }
 
@@ -35,6 +38,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: fit-content; /* Wrap the content */
 }
 
 .heroImageFrame {
@@ -42,70 +46,76 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 3px solid #B7B6B6;
-  border-radius: 151px;
-  padding: 18px;
+  border: 2px solid #B7B6B6; /* Thinner border on mobile */
+  border-radius: 110px;
+  padding: 12px;
   background: transparent;
   position: relative;
-  width: fit-content;
+  width: fit-content; /* Wrap the image content */
+
 }
 
 .heroCard {
-  width: 285px;
-  height: 437px;
-  border-radius: 132px;
+  width: 230px; /* Fixed width on mobile */
+  height: auto;
+  aspect-ratio: 285 / 437; /* Maintain proper aspect ratio */
+  border-radius: 100px;
   overflow: hidden;
   position: relative;
 }
 
 .heroImage {
   object-fit: cover;
+  object-position: center;
 }
 
 /* --- Text Content --- */
 .textContent {
-  text-align: center;
+  text-align: center; /* Centered on all screen sizes */
   display: flex;
   flex-direction: column;
   gap: 0px;
+  width: 100%;
+  padding: 0 8px;
 }
 
 .heroName {
   font-family: 'Big Shoulders Text', var(--font-big-shoulders), sans-serif;
   font-weight: 900;
-  font-size: 76px;
+  font-size: clamp(40px, 12vw, 76px); /* Fluid typography */
   line-height: 1.1;
   text-transform: uppercase;
   color: #1F67F1;
   margin: 0;
   letter-spacing: 0.03em;
-  height: 74px;
+  height: auto; /* Remove fixed height for better mobile rendering */
 }
 
 .heroRole {
   font-family: 'Anton SC', sans-serif;
   font-weight: 400;
-  font-size: 38px;
+  font-size: clamp(20px, 6vw, 38px); /* Fluid typography */
   text-transform: uppercase;
   color: #1F67F1;
   margin: 0;
+  line-height: 1.2;
 }
 
 /* --- The "HI" Red Badge --- */
 .badge {
   position: absolute;
-  width: 98px;
-  height: 98px;
+  width: 70px; /* Smaller on mobile */
+  height: 70px;
   background-color: #EA5039;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  bottom: 35px;
-  left: -15px;
+  bottom: 15px;
+  left: -10px;
   z-index: 10;
   overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .badgeText {
@@ -113,7 +123,7 @@
   color: #F6F6F6;
   font-family: var(--font-poppins), sans-serif;
   font-weight: 500;
-  font-size: 30px;
+  font-size: 20px; /* Smaller on mobile */
   letter-spacing: 0.05em;
   text-transform: uppercase;
   transform: translateY(0);
@@ -122,8 +132,8 @@
 
 .badgeIcon {
   position: absolute;
-  width: 48px;
-  height: 48px;
+  width: 32px; /* Smaller on mobile */
+  height: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -205,61 +215,96 @@
   }
 }
 
-/* --- Mobile Responsiveness --- */
-@media (max-width: 768px) {
-  .heroCard {
-    width: 100%;
-    max-width: 230px;
-    height: auto;
-    aspect-ratio: 285 / 437;
+/* --- Tablet Responsiveness (min-width: 768px) --- */
+@media (min-width: 768px) {
+  .container {
+    padding: 0 24px; /* Add padding back for larger screens */
+  }
+
+  .heroWrap {
+    gap: 30px; /* Larger gap on tablets and up */
   }
 
   .heroImageFrame {
-    border-radius: 110px;
-    padding: 13px;
+    border: 3px solid #B7B6B6; /* Thicker border */
+    border-radius: 130px;
+    padding: 15px;
   }
 
-  .heroName {
-    font-size: 46px;
+  .heroCard {
+    width: 285px; /* Fixed width on tablet */
+    border-radius: 115px;
   }
 
-  .heroRole {
-    font-size: 24px;
+  .textContent {
+    padding: 0; /* Remove padding on larger screens */
   }
 
   .badge {
-    width: 70px;
-    height: 70px;
-    left: 0;
-    bottom: 25px;
+    width: 85px;
+    height: 85px;
+    bottom: 30px;
+    left: -10px;
   }
 
   .badgeText {
-    font-size: 20px;
+    font-size: 26px;
   }
 
   .badgeIcon {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* --- Desktop Responsiveness (min-width: 981px) --- */
+@media (min-width: 981px) {
+  .heroImageFrame {
+    border-radius: 151px;
+    padding: 18px;
+  }
+
+  .heroCard {
+    width: 285px; /* Fixed width on desktop */
+    border-radius: 132px;
+  }
+
+  .badge {
+    width: 98px;
+    height: 98px;
+    bottom: 35px;
+    left: -15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .badgeText {
+    font-size: 30px;
+  }
+
+  .badgeIcon {
+    width: 48px;
+    height: 48px;
   }
 }
 
 /* --- Post Hero Section --- */
 .postHero {
-  margin-top: 80px;
-  padding: 0 24px 60px;
+  margin-top: 40px; /* Smaller margin on mobile */
+  padding: 0 0 40px; /* Remove horizontal padding */
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-self: center;
   align-items: center;
+  width: 100%;
 }
 
 .quoteIcon {
-  width: 40px;
+  width: 32px; /* Smaller on mobile */
   height: auto;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  flex-shrink: 0;
 }
 
 .postHeroText {
@@ -268,16 +313,47 @@
   font-family: var(--font-poppins);
   font-style: normal;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 14px; /* Smaller on mobile */
+  line-height: 1.6;
   max-width: 600px;
   text-align: center;
 }
 
+/* Tablet and up */
 @media (min-width: 768px) {
+  .postHero {
+    margin-top: 60px;
+    padding: 0 24px 50px; /* Add horizontal padding back */
+  }
+
+  .quoteIcon {
+    width: 36px;
+  }
+
   .postHeroText {
-    font-size: 18px;
+    font-size: 16px;
+    line-height: 1.7;
   }
 }
+
+/* Desktop postHero adjustments */
+@media (min-width: 981px) {
+  .postHero {
+    margin-top: 80px;
+    padding: 0 24px 60px;
+  }
+
+  .quoteIcon {
+    width: 40px;
+    margin-bottom: 10px;
+  }
+
+  .postHeroText {
+    font-size: 18px;
+    line-height: 1.8;
+  }
+}
+
 
 /* --- Persian/RTL Support --- */
 :global(html[lang="fa"]) .heroName,
@@ -290,4 +366,44 @@
 :global(html[lang="fa"]) .postHeroText {
   font-family: "Vazirmatn", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   line-height: 1.8;
+}
+
+/* --- Extra Small Mobile Devices (max-width: 360px) --- */
+@media (max-width: 360px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .profileWrapper {
+    max-width: 240px;
+  }
+
+  .heroImageFrame {
+    border-width: 1.5px;
+    padding: 10px;
+  }
+
+  .heroCard {
+    max-width: 200px;
+  }
+
+  .badge {
+    width: 60px;
+    height: 60px;
+    bottom: 15px;
+    left: -3px;
+  }
+
+  .badgeText {
+    font-size: 16px;
+  }
+
+  .badgeIcon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .postHeroText {
+    font-size: 13px;
+  }
 }
