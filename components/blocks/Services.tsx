@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./Services.module.css";
 
 type Service = {
@@ -5,6 +7,7 @@ type Service = {
   title: string;
   items: string[];
   image: string;
+  categoryId: string;
 };
 
 const services: Service[] = [
@@ -18,6 +21,7 @@ const services: Service[] = [
       "Custom illustrations and icons",
     ],
     image: "/images/vectors/graphic-designer.svg",
+    categoryId: "graphic-design",
   },
   {
     id: 2,
@@ -29,6 +33,7 @@ const services: Service[] = [
       " maintenance & performance tuning",
     ],
     image: "/images/vectors/web-development.svg",
+    categoryId: "web-development",
   },
   {
     id: 3,
@@ -40,6 +45,7 @@ const services: Service[] = [
       "Design systems and style guides",
     ],
     image: "/images/vectors/uiux-designer.svg",
+    categoryId: "ui-ux-design",
   },
   {
     id: 4,
@@ -51,10 +57,25 @@ const services: Service[] = [
       "Audio mixing and sound enhancement",
     ],
     image: "/images/vectors/video-editor.svg",
+    categoryId: "video-editing",
   },
 ];
 
 export default function Services() {
+  const handleServiceClick = (categoryId: string) => {
+    const portfolioSection = document.getElementById("portfolio");
+    if (portfolioSection) {
+      // Update URL hash without triggering a page jump
+      window.history.pushState(null, "", `#portfolio-${categoryId}`);
+      
+      // Smooth scroll to portfolio section
+      portfolioSection.scrollIntoView({ behavior: "smooth" });
+      
+      // Dispatch custom event for FeaturedProjects to listen to
+      window.dispatchEvent(new CustomEvent("changeFeaturedCategory", { detail: categoryId }));
+    }
+  };
+
   return (
     <section className={styles.servicesSection}>
       <h2 className={styles.sectionTitle}>My Services</h2>
@@ -87,14 +108,18 @@ export default function Services() {
                 </ul>
               </div>
 
-              <div className={styles.cardArrow}>
+              <button 
+                className={styles.cardArrow}
+                onClick={() => handleServiceClick(service.categoryId)}
+                aria-label={`View ${service.title} projects`}
+              >
                 <img
                   src="/images/vectors/card-arrow.svg"
-                  alt="Arrow icon"
+                  alt=""
                   width={50}
                   height={50}
                 />
-              </div>
+              </button>
             </div>
           );
         })}

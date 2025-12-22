@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 import styles from "./FeaturedProjects.module.css";
@@ -50,6 +50,30 @@ const galleryItems: Project[] = [
 export default function FeaturedProjects({ projects = [] }: { projects?: Project[] }) {
   const [activeCategory, setActiveCategory] = useState("web-development");
 
+  // Check URL hash on mount and set initial category
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash.startsWith("#portfolio-")) {
+      const categoryFromHash = hash.replace("#portfolio-", "");
+      const validCategory = categories.find(cat => cat.id === categoryFromHash);
+      if (validCategory) {
+        setActiveCategory(categoryFromHash);
+      }
+    }
+  }, []);
+
+  // Listen for category change events from Services component
+  useEffect(() => {
+    const handleCategoryChange = (event: CustomEvent<string>) => {
+      setActiveCategory(event.detail);
+    };
+
+    window.addEventListener("changeFeaturedCategory", handleCategoryChange as EventListener);
+    
+    return () => {
+      window.removeEventListener("changeFeaturedCategory", handleCategoryChange as EventListener);
+    };
+  }, []);
 
   // Filter projects based on active category
   // Using 'category_main' column from Sheet matching our category IDs or Labels
