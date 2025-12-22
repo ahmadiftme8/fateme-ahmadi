@@ -94,7 +94,7 @@ export function HomeHero() {
                     src="/fateme-pic.png"
                     alt={t("imageAlt")}
                     fill
-                    sizes="285px"
+                    sizes="205px"
                     priority
                     className={styles.heroImage}
                   />

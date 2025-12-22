@@ -25,8 +25,8 @@ const services: Service[] = [
     items: [
       "Custom responsive website building",
       "Front-end development and animations",
-      "CMS integration and e-commerce setup",
-      "Site maintenance and performance tuning",
+      "CMS integration and e-commerce",
+      " maintenance & performance tuning",
     ],
     image: "/images/vectors/web-development.svg",
   },
