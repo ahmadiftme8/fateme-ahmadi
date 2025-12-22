@@ -47,21 +47,24 @@
   justify-content: center;
   align-items: center;
   border: none;
-  border-radius: 24px;
+  border-radius: 50px;
   padding: 11px;
   background: transparent;
   position: relative;
   width: 100%;
-
+  /* iOS-style squircle effect */
+  clip-path: inset(0 round 50px);
 }
 
 .heroCard {
   width: 166px; /* Fixed width on mobile - 10% smaller */
   height: auto;
   aspect-ratio: 285 / 437; /* Maintain proper aspect ratio */
-  border-radius: 20px;
+  border-radius: 50px;
   overflow: hidden;
   position: relative;
+  /* iOS-style squircle effect */
+  clip-path: inset(0 round 50px);
 }
 
 .heroImage {
@@ -227,13 +230,15 @@
 
   .heroImageFrame {
     border: none;
-    border-radius: 28px;
+    border-radius: 50px;
     padding: 14px;
+    clip-path: inset(0 round 50px);
   }
 
   .heroCard {
     width: 205px; /* Fixed width on tablet - 10% smaller */
-    border-radius: 24px;
+    border-radius: 50px;
+    clip-path: inset(0 round 50px);
   }
 
   .textContent {
@@ -260,13 +265,15 @@
 /* --- Desktop Responsiveness (min-width: 981px) --- */
 @media (min-width: 981px) {
   .heroImageFrame {
-    border-radius: 32px;
+    border-radius: 50px;
     padding: 16px;
+    clip-path: inset(0 round 50px);
   }
 
   .heroCard {
     width: 205px; /* Fixed width on desktop - 10% smaller */
-    border-radius: 28px;
+    border-radius: 50px;
+    clip-path: inset(0 round 50px);
   }
 
   .badge {
@@ -316,6 +323,7 @@
   font-size: 14px; /* Smaller on mobile */
   line-height: 1.6;
   max-width: 600px;
+  width: 80%; /* 90% width on mobile */
   text-align: center;
 }
 
@@ -333,6 +341,7 @@
   .postHeroText {
     font-size: 16px;
     line-height: 1.7;
+    width: auto; /* Reset width on tablet and up */
   }
 }
 
@@ -351,6 +360,7 @@
   .postHeroText {
     font-size: 18px;
     line-height: 1.8;
+    width: auto; /* Reset width on desktop */
   }
 }
 
@@ -380,11 +390,15 @@
 
   .heroImageFrame {
     border-width: 1.5px;
+    border-radius: 50px;
     padding: 10px;
+    clip-path: inset(0 round 50px);
   }
 
   .heroCard {
     max-width: 144px; /* 10% smaller */
+    border-radius: 50px;
+    clip-path: inset(0 round 50px);
   }
 
   .badge {
