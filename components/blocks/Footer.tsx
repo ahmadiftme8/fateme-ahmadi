@@ -29,7 +29,6 @@ export function Footer() {
       <nav className={styles.footerNav}>
         <a href="https://calendar.app.google/rjUiNwzF5sr7WvCY7" className={styles.pillBtn} target="_blank" rel="noopener noreferrer">Book a free call ☕</a>
         <a href="#portfolio" className={styles.pillBtn}>{t("myPortfolio")}</a>
-        <a href="mailto:devftme@gmail.com" className={styles.pillBtn}>{t("collaborate")}</a>
         <a href="#about" className={styles.pillBtn}>{t("aboutMe")}</a>
       </nav>
 
