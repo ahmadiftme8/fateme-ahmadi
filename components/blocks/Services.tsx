@@ -76,6 +76,13 @@ export default function Services() {
     }
   };
 
+  const handleGetStartedClick = () => {
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section className={styles.servicesSection}>
       <h2 className={styles.sectionTitle}>My Services</h2>
@@ -125,7 +132,7 @@ export default function Services() {
         })}
       </div>
 
-      <button className={styles.btnPrimary}>
+      <button className={styles.btnPrimary} onClick={handleGetStartedClick}>
         <span className={styles.dot} aria-hidden="true"></span>
         Get Started
       </button>

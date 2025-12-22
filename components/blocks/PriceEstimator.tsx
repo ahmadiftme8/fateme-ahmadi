@@ -511,7 +511,7 @@ export default function PriceEstimator() {
 
 
     return (
-        <section className="flex flex-col items-center w-full max-w-[1128px] mx-auto py-[40px] lg:py-[60px] font-['Inter']">
+        <section id="contact" className="flex flex-col items-center w-full max-w-[1128px] mx-auto py-[40px] lg:py-[60px] font-['Inter']">
             
             {/* Header */}
             <div className="w-full flex-col lg:items-start items-center text-center lg:text-left mb-[30px] lg:mb-[42px] px-[20px]">
