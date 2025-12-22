@@ -60,36 +60,44 @@ export default function Services() {
       <h2 className={styles.sectionTitle}>My Services</h2>
 
       <div className={styles.servicesGrid}>
-        {services.map((service) => (
-          <div key={service.id} className={styles.serviceCard}>
-            <div className={styles.cardImage}>
-              <img
-                src={service.image}
-                alt={`${service.title} illustration`}
-                width={180}
-                height={180}
-              />
-            </div>
+        {services.map((service, index) => {
+          // Determine if image should be on right (for 2nd and 4th cards - indices 1 and 3) - MOBILE ONLY
+          const imageOnRight = index % 2 === 1;
+          
+          return (
+            <div 
+              key={service.id} 
+              className={`${styles.serviceCard} ${imageOnRight ? styles.imageRight : ''}`}
+            >
+              <div className={styles.cardImage}>
+                <img
+                  src={service.image}
+                  alt={`${service.title} illustration`}
+                  width={180}
+                  height={180}
+                />
+              </div>
 
-            <div className={styles.cardText}>
-              <h3>{service.title}</h3>
-              <ul>
-                {service.items.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
+              <div className={styles.cardText}>
+                <h3>{service.title}</h3>
+                <ul>
+                  {service.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
 
-            <div className={styles.cardArrow}>
-              <img
-                src="/images/vectors/card-arrow.svg"
-                alt="Arrow icon"
-                width={50}
-                height={50}
-              />
+              <div className={styles.cardArrow}>
+                <img
+                  src="/images/vectors/card-arrow.svg"
+                  alt="Arrow icon"
+                  width={50}
+                  height={50}
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <button className={styles.btnPrimary}>

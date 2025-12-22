@@ -163,7 +163,8 @@
   }
 }
 
-@media (max-width: 600px) {
+/* Big Mobile (326px - 400px) */
+@media (max-width: 600px) and (min-width: 376px) {
   .servicesSection {
     padding: 40px 20px;
     gap: 40px;
@@ -173,38 +174,104 @@
     font-size: 42px;
   }
 
-  .serviceCard {
+  .servicesGrid {
+    display: flex;
     flex-direction: column;
-    text-align: center;
-    border-radius: 20px;
-    padding: 25px;
-    gap: 15px;
+    align-items: center;
+    gap: 22px;
+    width: 326px;
+    margin: 0 auto;
+  }
+
+  .serviceCard {
+    width: 326px;
+    height: 93px;
+    padding: 32px 0;
+    border: 1px solid var(--primary-blue, #1f67f1);
+    border-radius: 23px;
+    background: transparent;
+    gap: 0;
+    min-height: unset;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Hide arrow on mobile */
+  .cardArrow {
+    display: none;
+  }
+
+  .cardImage {
+    width: 119px;
+    height: 121px;
+    position: relative;
+    flex: none;
+    margin: 0;
+    align-self: center;
   }
 
   .cardImage img {
-    width: 140px;
+    position: absolute;
+    width: 110.95px;
+    height: 121px;
+    left: 8.05px;
+    top: 10px;
+  }
+
+  .cardText {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0 12px;
   }
 
   .cardText h3 {
-    font-size: 22px;
-  }
-
-  .cardText li {
-    font-size: 14px;
+    width: 146px;
+    font-size: 15px;
+    line-height: 18px;
+    margin: 0;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+    text-indent: 12px;
   }
 
   .cardText ul {
-    text-align: left;
-    display: inline-block;
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
-  .cardArrow {
-    margin-top: 10px;
+  .cardText li {
+    font-size: 9px;
+    line-height: 11px;
+    white-space: normal;
+    padding-left: 12px;
   }
 
-  .cardArrow img {
-    width: 40px;
-    height: 40px;
+  .cardText li::before {
+    left: 0;
+    font-size: 9px;
+  }
+
+  /* Zig-zag layout: Image on LEFT for 1st and 3rd cards (default) */
+  .serviceCard .cardImage {
+    order: 0;
+  }
+
+  .serviceCard .cardText {
+    order: 1;
+  }
+
+  /* Zig-zag layout: Image on RIGHT for 2nd and 4th cards */
+  .serviceCard.imageRight .cardImage {
+    order: 1;
+  }
+
+  .serviceCard.imageRight .cardText {
+    order: 0;
   }
 
   .btnPrimary {
@@ -215,5 +282,127 @@
   .dot {
     width: 16px;
     height: 16px;
+  }
+}
+
+/* Small Mobile (284px - 375px) */
+@media (max-width: 375px) {
+  .servicesSection {
+    padding: 40px 20px;
+    gap: 40px;
+  }
+
+  .sectionTitle {
+    font-size: 42px;
+  }
+
+  .servicesGrid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    width: 284px;
+    margin: 0 auto;
+  }
+
+  .serviceCard {
+    width: 284px;
+    height: 81px;
+    padding: 32px 0;
+    border: 1px solid var(--primary-blue, #1f67f1);
+    border-radius: 23px;
+    background: transparent;
+    gap: 0;
+    min-height: unset;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Hide arrow on mobile */
+  .cardArrow {
+    display: none;
+  }
+
+  .cardImage {
+    width: 95px;
+    height: 97px;
+    position: relative;
+    flex: none;
+    margin: 0;
+    align-self: center;
+  }
+
+  .cardImage img {
+    position: absolute;
+    width: 88.57px;
+    height: 97px;
+    left: 6.43px;
+    top: 10px;
+  }
+
+  .cardText {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0 10px;
+  }
+
+  .cardText h3 {
+    width: 137px;
+    font-size: 14px;
+    line-height: 17px;
+    margin: 0;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+    text-indent: 12px;
+  }
+
+  .cardText ul {
+    width: 160px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .cardText li {
+    font-size: 8px;
+    line-height: 10px;
+    white-space: normal;
+    padding-left: 10px;
+  }
+
+  .cardText li::before {
+    left: 0;
+    font-size: 8px;
+  }
+
+  /* Zig-zag layout: Image on LEFT for 1st and 3rd cards (default) */
+  .serviceCard .cardImage {
+    order: 0;
+  }
+
+  .serviceCard .cardText {
+    order: 1;
+  }
+
+  /* Zig-zag layout: Image on RIGHT for 2nd and 4th cards */
+  .serviceCard.imageRight .cardImage {
+    order: 1;
+  }
+
+  .serviceCard.imageRight .cardText {
+    order: 0;
+  }
+
+  .btnPrimary {
+    font-size: 18px;
+    padding: 10px 35px;
+  }
+
+  .dot {
+    width: 14px;
+    height: 14px;
   }
 }
