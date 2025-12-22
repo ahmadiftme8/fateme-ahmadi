@@ -1,0 +1,159 @@
+/* --- Animated Dotted Background --- */
+.dottedBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: calc(75vh + var(--header-offset, 0px));
+  margin-top: calc(-1 * var(--header-offset, 0px));
+  pointer-events: none;
+  z-index: 0;
+  
+  /* Single dotted pattern layer - bigger dots */
+  background-image: radial-gradient(circle, #ffffff 1.5px, transparent 1.5px);
+  background-size: 18px 18px;
+  background-position: 0 0;
+  
+  /* Mobile gradient mask - fade from top to center */
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.35) 30%,
+    rgba(0, 0, 0, 0.15) 60%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.35) 30%,
+    rgba(0, 0, 0, 0.15) 60%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  
+  /* Add animations for liquid silver effect */
+  animation: liquidSilverShimmer 8s ease-in-out infinite, shimmerFlow 12s linear infinite;
+}
+
+/* Liquid silver shimmer - using opacity and filter for color-shift effect */
+@keyframes liquidSilverShimmer {
+  0%, 100% {
+    opacity: 1;
+    filter: brightness(1) contrast(1);
+  }
+  25% {
+    opacity: 0.88;
+    filter: brightness(0.92) contrast(1.08);
+  }
+  50% {
+    opacity: 0.95;
+    filter: brightness(1.15) contrast(0.95);
+  }
+  75% {
+    opacity: 0.92;
+    filter: brightness(0.98) contrast(1.02);
+  }
+}
+
+/* Shimmer flow animation - creates subtle flowing effect */
+@keyframes shimmerFlow {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 18px 18px;
+  }
+}
+
+/* --- Tablet Responsiveness (min-width: 768px) --- */
+@media (min-width: 768px) {
+  .dottedBackground {
+    height: calc(80vh + var(--header-offset, 0px));
+    background-image: radial-gradient(circle, #ffffff 1.8px, transparent 1.8px);
+    background-size: 20px 20px;
+    
+    /* Slightly stronger on tablet */
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.4) 35%,
+      rgba(0, 0, 0, 0.2) 65%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    mask-image: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.4) 35%,
+      rgba(0, 0, 0, 0.2) 65%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+
+  @keyframes shimmerFlow {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 20px 20px;
+    }
+  }
+}
+
+/* --- Desktop Responsiveness (min-width: 981px) --- */
+@media (min-width: 981px) {
+  .dottedBackground {
+    height: calc(85vh + var(--header-offset, 0px));
+    background-image: radial-gradient(circle, #ffffff 2px, transparent 2px);
+    background-size: 24px 24px;
+    
+    /* Desktop semi-circle mask with heavily blurred edges */
+    -webkit-mask-image: radial-gradient(
+      ellipse 100% 100% at 50% 0%,
+      rgba(0, 0, 0, 0.65) 0%,
+      rgba(0, 0, 0, 0.5) 25%,
+      rgba(0, 0, 0, 0.3) 50%,
+      rgba(0, 0, 0, 0.15) 70%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    mask-image: radial-gradient(
+      ellipse 100% 100% at 50% 0%,
+      rgba(0, 0, 0, 0.65) 0%,
+      rgba(0, 0, 0, 0.5) 25%,
+      rgba(0, 0, 0, 0.3) 50%,
+      rgba(0, 0, 0, 0.15) 70%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    
+    /* Enhanced blur filter for smoother fade */
+    animation: liquidSilverShimmerDesktop 8s ease-in-out infinite, shimmerFlowDesktop 12s linear infinite;
+  }
+
+  /* Desktop-specific animation with blur filter */
+  @keyframes liquidSilverShimmerDesktop {
+    0%, 100% {
+      opacity: 1;
+      filter: brightness(1) contrast(1) blur(0.3px);
+    }
+    25% {
+      opacity: 0.88;
+      filter: brightness(0.92) contrast(1.08) blur(0.3px);
+    }
+    50% {
+      opacity: 0.95;
+      filter: brightness(1.15) contrast(0.95) blur(0.3px);
+    }
+    75% {
+      opacity: 0.92;
+      filter: brightness(0.98) contrast(1.02) blur(0.3px);
+    }
+  }
+
+  @keyframes shimmerFlowDesktop {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 24px 24px;
+    }
+  }
+}

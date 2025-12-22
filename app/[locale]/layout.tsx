@@ -6,6 +6,7 @@ import { Footer } from "@/components/blocks/Footer";
 import { Header } from "@/components/blocks/Header";
 import { LocaleAttributesUpdater } from "@/components/utility/LocaleAttributesUpdater";
 import { ScrollProvider } from "@/components/utility/ScrollContext";
+import { AnimatedDottedBackground } from "@/components/utility/AnimatedDottedBackground";
 import { getDirection } from "@/lib/i18n";
 import nextIntlConfig, { AppLocale, locales } from "@/next-intl.config";
 
@@ -42,10 +43,11 @@ export default async function LocaleLayout({
       <ScrollProvider>
         <LocaleAttributesUpdater />
         <div
-          className="flex min-h-dvh flex-col"
+          className="flex min-h-dvh flex-col relative"
           data-locale={locale}
           data-dir={dir}
         >
+          <AnimatedDottedBackground />
           <Header />
           <main className="flex-1 pb-20">
             {children}
