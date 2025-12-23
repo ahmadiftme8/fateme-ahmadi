@@ -52,7 +52,17 @@ export default function AboutHero() {
       <div className={styles.mainContainer}>
         {/* Header Pill */}
         <div className={`${styles.pillBox} ${styles.headerPill}`}>
-          <h2 className={styles.headline}>{t("intro.title")}</h2>
+          <h2 className={styles.headline}>
+            {t("intro.title")
+              .split(". ")
+              .filter((phrase) => phrase.trim())
+              .map((phrase, index, array) => (
+                <span key={index}>
+                  {phrase.replace(/\.$/, "")}
+                  {index < array.length - 1 && <br />}
+                </span>
+              ))}
+          </h2>
           <p className={styles.subhead}>{t("intro.subtitle")}</p>
         </div>
 
@@ -139,10 +149,12 @@ export default function AboutHero() {
 
         {/* CTA Pill */}
         <div className={`${styles.pillBox} ${styles.ctaPill}`}>
-          <p className={styles.ctaText}>{t("cta.text")}</p>
+          <p className={styles.ctaText}>
+            I am currently <strong className={styles.ctaHighlight}>open to collaborating</strong> with teams who value this multidisciplinary mindset.
+          </p>
           <div className={styles.ctaArrow}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M5 12h14M12 5l7 7-7 7" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M5 12h14M12 5l7 7-7 7" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
         </div>
