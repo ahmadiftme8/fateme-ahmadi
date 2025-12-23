@@ -335,48 +335,96 @@
 }
 
 @media (max-width: 900px) {
+  .mainContainer {
+    padding: 60px 24px;
+    gap: 50px;
+  }
+  
   .contentRow,
   .contentRow.reverse {
     flex-direction: column;
     text-align: center;
-    gap: 40px;
+    gap: 35px;
   }
 
   .imageStack {
-    height: 350px;
+    height: auto;
+    min-height: 320px;
     width: 100%;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .imageStack img {
+    width: 160px;
+    height: 230px;
+    position: absolute;
+  }
+  
+  .imgBack {
+    transform: rotate(-7deg) translateX(-18px);
+    left: calc(50% - 90px);
+  }
+  
+  .imgFront {
+    transform: rotate(10deg) translateX(18px);
+    left: calc(50% - 70px);
   }
   
   .pillBox {
-    padding: 30px 40px;
+    padding: 30px 24px;
+    text-align: center;
   }
   
   .headline {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
+    line-height: 1.3;
+    text-align: center;
   }
   
   .subhead {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+  
+  .textContent {
+    width: 100%;
+    text-align: center;
   }
   
   .textContent h3 {
-    font-size: 1.3rem;
+    font-size: 1.35rem;
+    margin-bottom: 15px;
+    text-align: center;
   }
   
   .textContent p {
     font-size: 1rem;
+    line-height: 1.6;
+    text-align: center;
   }
   
   .sectionTitle {
-    font-size: 2.5rem;
+    font-size: 2.25rem;
+    text-align: center;
   }
   
   .skillsList {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+  
+  .toolkitSection {
+    text-align: center;
   }
   
   .ctaText {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
 }
 
@@ -457,25 +505,132 @@
   }
   
   .mainContainer {
-    gap: 50px;
-    padding: 50px 15px;
+    gap: 40px;
+    padding: 40px 32px;
+    max-width: 100%;
+  }
+  
+  .pillBox {
+    padding: 25px 24px;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+  
+  .headline {
+    font-size: 1.75rem;
+    line-height: 1.3;
+    text-align: center;
+  }
+  
+  .subhead {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+  
+  .contentRow,
+  .contentRow.reverse {
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 100%;
+  }
+  
+  .textContent {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+  }
+  
+  .textContent h3 {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+    line-height: 1.4;
+    text-align: center;
+  }
+  
+  .textContent p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    text-align: center;
   }
   
   .imageStack {
-    height: 300px;
+    height: auto;
+    width: 100%;
+    min-height: 280px;
+    padding: 20px 0;
+    margin: 0 auto;
+    overflow: visible;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .imageStack img {
-    width: 180px;
-    height: 260px;
+    width: 140px;
+    height: 200px;
+    position: absolute;
+  }
+  
+  .imgBack {
+    transform: rotate(-7deg) translateX(-15px);
+    left: calc(50% - 80px);
+    z-index: 1;
+  }
+  
+  .imgFront {
+    transform: rotate(10deg) translateX(15px);
+    left: calc(50% - 60px);
+    z-index: 2;
+  }
+  
+  .toolkitSection {
+    width: 100%;
+    padding: 0;
+    text-align: center;
+  }
+  
+  .sectionTitle {
+    font-size: 2rem;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  
+  .skillsList {
+    font-size: 1rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+  
+  .ctaPill {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+    padding: 25px 20px;
+  }
+  
+  .ctaText {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .ctaArrow {
+    width: 50px;
+    height: 50px;
   }
 }
 
 @media (max-width: 480px) {
   .heroCard {
     border-radius: 0;
-    padding-top: 52%; /* Position content higher up */
+    padding-top: 40%; /* Position content higher up */
     justify-content: flex-start;
+    padding-left: 16px;
+    padding-right: 16px;
   }
   
   .heroContent {
@@ -501,34 +656,109 @@
     height: 12px;
   }
   
+  .mainContainer {
+    gap: 35px;
+    padding: 35px 28px;
+    max-width: 100%;
+  }
+  
   .pillBox {
-    padding: 25px 30px;
+    padding: 20px 20px;
+    margin: 0 auto;
+    max-width: 100%;
   }
   
   .headline {
-    font-size: 2rem;
-  }
-  
-  .subhead {
-    font-size: 1rem;
-  }
-  
-  .imageStack {
-    height: 280px;
-  }
-  
-  .imageStack img {
-    width: 160px;
-    height: 230px;
-  }
-  
-  .ctaPill {
-    flex-direction: column;
+    font-size: 1.5rem;
+    line-height: 1.3;
     text-align: center;
   }
   
+  .subhead {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+  
+  .contentRow,
+  .contentRow.reverse {
+    gap: 25px;
+    text-align: center;
+  }
+  
+  .textContent {
+    text-align: center;
+  }
+  
+  .textContent h3 {
+    font-size: 1.125rem;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .textContent p {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+  
+  .imageStack {
+    height: auto;
+    min-height: 240px;
+    padding: 15px 0;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .imageStack img {
+    width: 120px;
+    height: 170px;
+    position: absolute;
+  }
+  
+  .imgBack {
+    transform: rotate(-7deg) translateX(-12px);
+    left: calc(50% - 70px);
+    z-index: 1;
+  }
+  
+  .imgFront {
+    transform: rotate(10deg) translateX(12px);
+    left: calc(50% - 50px);
+    z-index: 2;
+  }
+  
+  .sectionTitle {
+    font-size: 1.75rem;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .skillsList {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+  
+  .toolkitSection {
+    text-align: center;
+  }
+  
+  .ctaPill {
+    padding: 20px 16px;
+    gap: 12px;
+  }
+  
+  .ctaText {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
   .ctaArrow {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
   }
 }
