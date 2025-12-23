@@ -51,10 +51,52 @@
     },
     "copyright": "All Rights Reserved for @Fateme"
   },
+  "about": {
+    "hero": {
+      "subtitle": "Who is",
+      "title": "FATEME?",
+      "cta": "LET'S FIND OUT"
+    },
+    "intro": {
+      "title": "SHE BUILDS. SHE DESIGNS. SHE CREATES.",
+      "subtitle": "Bridging The Gap Between Engineering Logic, Visual Aesthetics, And Motion."
+    },
+    "philosophy": {
+      "title": "In the tech world, people are often labeled as either 'thinkers' or 'artists.' I've never fit neatly into just one box.",
+      "description": "To me, Coding and Design are not separate disciplines—they are two sides of the same coin. A beautiful interface fails without robust architecture, and clean code is wasted on a poor user experience. I have dedicated my career to mastering both equally, ensuring that what sits under the hood is just as polished as the pixels on the screen."
+    },
+    "journey": {
+      "title": "It started six years ago with small content projects in my hometown.",
+      "description": "eventually leading to my first professional Corporate job at Saediniq. While my role there focused on Graphic Design, I quickly realized I thrived at the intersection of creativity and logic. I didn't just want to design the surface; I wanted to build the engine"
+    },
+    "current": {
+      "title": "Today, as a Freelance Full-Stack Developer, I refuse to separate Form from Function.",
+      "description": "I engineer scalable, high-performance code while simultaneously crafting intuitive designs, ensuring the underlying logic is just as elegant as the interface the user sees."
+    },
+    "toolkit": {
+      "title": "My Toolkit",
+      "skills": "Graphic Design • Full-Stack Development • UI/UX Design • Video Production"
+    },
+    "cta": {
+      "text": "I am currently open to collaborating with teams who value this multidisciplinary mindset."
+    },
+    "images": {
+      "workspace1": "Fateme working on design",
+      "workspace2": "Fateme at desk",
+      "journey1": "Early career projects",
+      "journey2": "Corporate experience",
+      "current1": "Current freelance work",
+      "current2": "Development workflow"
+    }
+  },
   "seo": {
     "home": {
       "title": "Fateme Ahmadi — Brand Identity & Web Design",
       "description": "I design elevated bilingual brand identities and fast, SEO-friendly websites built with Next.js."
+    },
+    "about": {
+      "title": "About Fateme Ahmadi — Designer & Developer",
+      "description": "Learn about Fateme Ahmadi, a full-stack developer and designer bridging the gap between code and creativity."
     }
   }
 }

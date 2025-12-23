@@ -1,0 +1,499 @@
+/* Colors from Figma */
+:root {
+  --c-white: #FFFFFF;
+  --c-blue-accent: #7FC1F4;
+  --c-blue-contact: #1F67F1;
+  --c-orange-dot: #EA5039;
+  --c-glass-bg: rgba(217, 217, 217, 0.26);
+  --c-glass-border: #E4E4E4;
+  
+  /* Content section colors */
+  --primary-blue: #1F67F1;
+  --primary-orange: #EA5B37;
+  --text-black: #000000;
+  --bg-gray: #E5E5E5;
+}
+
+.aboutSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--bg-gray);
+  padding: 0;
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+}
+
+/* --- Hero Card Container --- */
+.heroCard {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  
+  /* Background Image setup */
+  background: url('/images/hero/fatemeahmadi-desktop-hero.png') no-repeat center center/cover;
+  border-radius: 0;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 5%;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+/* --- Hero Content (Left Side) --- */
+.heroContent {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+  margin-top: 100px;
+}
+
+.titleGroup {
+  border-left: 8px solid var(--c-white);
+  padding-left: 31px;
+}
+
+.titleGroup h1 {
+  font-family: 'Big Shoulders Display', var(--font-big-shoulders-text), sans-serif;
+  font-weight: 900;
+  font-size: 4rem;
+  line-height: 1.2;
+  color: var(--c-white);
+  text-transform: capitalize;
+  margin: 0;
+}
+
+.titleGroup h1 span {
+  font-size: 5rem;
+  text-transform: uppercase;
+  display: block;
+}
+
+/* Let's Find Out Button */
+.btnPrimary {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 25px;
+  background: var(--c-white);
+  border-radius: 52px;
+  border: none;
+  cursor: pointer;
+  
+  font-family: 'Big Shoulders Display', var(--font-big-shoulders-text), sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: var(--c-blue-accent);
+  text-transform: uppercase;
+  transition: transform 0.2s ease;
+}
+
+.btnPrimary:hover {
+  transform: scale(1.05);
+}
+
+.iconArrow {
+  background: var(--c-blue-accent);
+  color: var(--c-white);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* --- Social Icons --- */
+.socialLinks {
+  position: absolute;
+  bottom: 60px;
+  right: 60px;
+  display: flex;
+  gap: 15px;
+  z-index: 10;
+}
+
+.socialLinks a {
+  width: 37px;
+  height: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-white);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.socialLinks a:hover {
+  opacity: 0.8;
+  transform: scale(1.1);
+}
+
+/* --- Main Content Container --- */
+.mainContainer {
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+  padding: 80px 20px;
+}
+
+/* --- Pill Boxes (Header & Footer) --- */
+.pillBox {
+  border: 1px solid var(--primary-blue);
+  border-radius: 100px;
+  text-align: center;
+  padding: 40px 60px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.headerPill {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.headline {
+  font-family: 'Anton', var(--font-big-shoulders-text), sans-serif;
+  color: var(--primary-blue);
+  font-size: 3rem;
+  text-transform: uppercase;
+  line-height: 1.1;
+  font-weight: 400;
+  margin: 0;
+}
+
+.subhead {
+  color: var(--primary-blue);
+  font-size: 1.25rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* --- Content Rows --- */
+.contentRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Modifier to flip order for the second section */
+.contentRow.reverse {
+  flex-direction: row-reverse;
+}
+
+.textContent {
+  flex: 1;
+  color: var(--text-black);
+}
+
+.textContent h3 {
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.textContent p {
+  font-weight: 400;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* --- The Tilted Image Stack --- */
+.imageStack {
+  flex: 1;
+  position: relative;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.imageStack img {
+  position: absolute;
+  width: 240px;
+  height: 340px;
+  object-fit: cover;
+  border-radius: 28px;
+  box-shadow: -6px 7px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+/* Bottom/Left Image */
+.imgBack {
+  transform: rotate(-7deg) translateX(-20px);
+  z-index: 1;
+}
+
+/* Top/Right Image */
+.imgFront {
+  transform: rotate(10deg) translateX(20px);
+  z-index: 2;
+}
+
+/* Hover effect */
+.imageStack:hover .imgBack {
+  transform: rotate(-12deg) translateX(-30px);
+}
+
+.imageStack:hover .imgFront {
+  transform: rotate(15deg) translateX(30px);
+}
+
+/* --- Toolkit Section --- */
+.toolkitSection {
+  text-align: center;
+  width: 100%;
+  max-width: 900px;
+}
+
+.sectionTitle {
+  font-family: 'Anton', var(--font-big-shoulders-text), sans-serif;
+  color: var(--primary-blue);
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+  font-weight: 400;
+}
+
+.skillsList {
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 0;
+  color: var(--text-black);
+}
+
+/* --- CTA Footer --- */
+.ctaPill {
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  gap: 20px;
+}
+
+.ctaText {
+  font-size: 1.5rem;
+  color: var(--primary-blue);
+  line-height: 1.4;
+  margin: 0;
+  flex: 1;
+}
+
+.ctaArrow {
+  background-color: var(--primary-orange);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.ctaArrow:hover {
+  transform: scale(1.1);
+}
+
+/* Mobile Responsive */
+@media (max-width: 1200px) {
+  .titleGroup h1 {
+    font-size: 3rem;
+  }
+  
+  .titleGroup h1 span {
+    font-size: 4rem;
+  }
+  
+  .mainContainer {
+    gap: 60px;
+    padding: 60px 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .contentRow,
+  .contentRow.reverse {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .imageStack {
+    height: 350px;
+    width: 100%;
+  }
+  
+  .pillBox {
+    padding: 30px 40px;
+  }
+  
+  .headline {
+    font-size: 2.5rem;
+  }
+  
+  .subhead {
+    font-size: 1.1rem;
+  }
+  
+  .textContent h3 {
+    font-size: 1.3rem;
+  }
+  
+  .textContent p {
+    font-size: 1rem;
+  }
+  
+  .sectionTitle {
+    font-size: 2.5rem;
+  }
+  
+  .skillsList {
+    font-size: 1.2rem;
+  }
+  
+  .ctaText {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroCard {
+    background: url('/images/hero/fatemeahmadi-mobile-hero.png') no-repeat center center/cover;
+    border-radius: 0;
+    height: 100vh;
+    min-height: 100vh;
+  }
+  
+  .heroContent {
+    margin-top: 120px;
+    padding: 0 20px;
+  }
+  
+  .titleGroup {
+    border-left: 5px solid var(--c-white);
+    padding-left: 20px;
+  }
+  
+  .titleGroup h1 {
+    font-size: 2.5rem;
+  }
+  
+  .titleGroup h1 span {
+    font-size: 3rem;
+  }
+  
+  .btnPrimary {
+    font-size: 1.5rem;
+    padding: 8px 20px;
+  }
+  
+  .iconArrow {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+  }
+  
+  .socialLinks {
+    bottom: 30px;
+    right: 30px;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .socialLinks a {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+  }
+  
+  .mainContainer {
+    gap: 50px;
+    padding: 50px 15px;
+  }
+  
+  .imageStack {
+    height: 300px;
+  }
+  
+  .imageStack img {
+    width: 180px;
+    height: 260px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroCard {
+    border-radius: 0;
+  }
+  
+  .heroContent {
+    margin-top: 150px;
+  }
+  
+  .titleGroup h1 {
+    font-size: 2rem;
+  }
+  
+  .titleGroup h1 span {
+    font-size: 2.5rem;
+  }
+  
+  .btnPrimary {
+    font-size: 1.2rem;
+  }
+  
+  .pillBox {
+    padding: 25px 30px;
+  }
+  
+  .headline {
+    font-size: 2rem;
+  }
+  
+  .subhead {
+    font-size: 1rem;
+  }
+  
+  .imageStack {
+    height: 280px;
+  }
+  
+  .imageStack img {
+    width: 160px;
+    height: 230px;
+  }
+  
+  .ctaPill {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .ctaArrow {
+    width: 50px;
+    height: 50px;
+  }
+}

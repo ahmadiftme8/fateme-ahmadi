@@ -1,6 +1,7 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import Link from "next/link";
 import {
   FaLinkedin,
   FaWhatsapp,
@@ -13,6 +14,7 @@ import styles from "./Footer.module.css";
 
 export function Footer() {
   const t = useTranslations("footer");
+  const locale = useLocale();
 
   return (
     <footer className={styles.footerSection} id="contact">
@@ -29,7 +31,7 @@ export function Footer() {
       <nav className={styles.footerNav}>
         <a href="https://calendar.app.google/rjUiNwzF5sr7WvCY7" className={styles.pillBtn} target="_blank" rel="noopener noreferrer">Book a free call ☕</a>
         <a href="#portfolio" className={styles.pillBtn}>{t("myPortfolio")}</a>
-        <a href="#about" className={styles.pillBtn}>{t("aboutMe")}</a>
+        <Link href={`/${locale}/about`} className={styles.pillBtn}>{t("aboutMe")}</Link>
       </nav>
 
       {/* Social Icons */}

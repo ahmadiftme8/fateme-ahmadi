@@ -12,7 +12,7 @@ import styles from "./Header.module.css";
 
 const NAV_ITEMS = [
   { key: "home", segment: "" },
-  { key: "about", segment: "#about" },
+  { key: "about", segment: "about" },
   { key: "portfolio", segment: "#portfolio" },
   { key: "blog", segment: "blog" },
 ] as const;
@@ -48,6 +48,9 @@ export function Header() {
   const previousBodyPaddingTopRef = useRef<string | null>(null);
 
   const [activeSection, setActiveSection] = useState<string>("");
+  
+  // Check if we're on the About page
+  const isAboutPage = pathname.includes('/about');
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -70,57 +73,10 @@ export function Header() {
     return () => observer.disconnect();
   }, []);
 
-  const computeNavOffset = useCallback(() => {
-    const navElement = navRef.current;
-
-    if (!navElement) {
-      return 0;
-    }
-
-    const rect = navElement.getBoundingClientRect();
-    return Math.max(0, rect.top + rect.height);
-  }, []);
-
-  const applyBodyOffset = useCallback(() => {
-    if (typeof document === "undefined") {
-      return;
-    }
-
-    // Prevent body padding update when sticky to avoid layout shifts (scroll jumping)
-
-
-    const offset = collapsedOffsetRef.current || computeNavOffset();
-
-    if (!offset) {
-      return;
-    }
-
-    const offsetValue = Math.round(offset);
-    document.body.style.paddingTop = `${offsetValue}px`;
-  }, [computeNavOffset]);
-
-  const updateCollapsedOffset = useCallback(() => {
-    if (isMenuOpenRef.current) {
-      return;
-    }
-
-    const offset = computeNavOffset();
-
-    if (!offset) {
-      return;
-    }
-
-    collapsedOffsetRef.current = Math.round(offset);
-  }, [computeNavOffset]);
-
+  // Removed body offset logic - navbar now floats over content
   const handleDropdownAnimationComplete = useCallback(() => {
-    if (isMenuOpenRef.current) {
-      return;
-    }
-
-    updateCollapsedOffset();
-    applyBodyOffset();
-  }, [applyBodyOffset, updateCollapsedOffset]);
+    // Dropdown animation complete handler
+  }, []);
 
   const navLinks = NAV_ITEMS.map(({ key, segment }) => {
     const href = segment ? `/${locale}/${segment}` : `/${locale}`;
@@ -133,8 +89,10 @@ export function Header() {
       isActive = activeSection === "home" || (pathname === `/${locale}` && !activeSection);
     } else if (key === "blog") {
       isActive = pathname.startsWith(`/${locale}/blog`);
+    } else if (key === "about") {
+      isActive = pathname.startsWith(`/${locale}/about`);
     } else {
-      // For anchor links (about, portfolio)
+      // For anchor links (portfolio)
       const targetId = segment.replace("#", "");
       isActive = activeSection === targetId;
     }
@@ -179,66 +137,9 @@ export function Header() {
 
   useEffect(() => {
     isMenuOpenRef.current = isMenuOpen;
+  }, [isMenuOpen]);
 
-    if (typeof window === "undefined") {
-      return;
-    }
-
-    const frame = requestAnimationFrame(() => {
-      applyBodyOffset();
-    });
-
-    return () => {
-      cancelAnimationFrame(frame);
-    };
-  }, [isMenuOpen, applyBodyOffset]);
-
-  useEffect(() => {
-    if (!hasMounted || typeof window === "undefined") {
-      return;
-    }
-
-    if (typeof document !== "undefined" && previousBodyPaddingTopRef.current === null) {
-      previousBodyPaddingTopRef.current = document.body.style.paddingTop;
-    }
-
-    let frame = 0;
-
-    const scheduleUpdate = () => {
-      if (frame) {
-        cancelAnimationFrame(frame);
-      }
-
-      frame = requestAnimationFrame(() => {
-        updateCollapsedOffset();
-        applyBodyOffset();
-      });
-    };
-
-    scheduleUpdate();
-
-    window.addEventListener("resize", scheduleUpdate);
-
-    return () => {
-      window.removeEventListener("resize", scheduleUpdate);
-
-      if (frame) {
-        cancelAnimationFrame(frame);
-      }
-
-      if (typeof document === "undefined") {
-        return;
-      }
-
-      const original = previousBodyPaddingTopRef.current;
-
-      if (original === null) {
-        document.body.style.removeProperty("padding-top");
-      } else {
-        document.body.style.paddingTop = original;
-      }
-    };
-  }, [hasMounted, applyBodyOffset, updateCollapsedOffset]);
+  // Removed body padding logic - navbar floats over content
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 720px)");
@@ -299,14 +200,14 @@ export function Header() {
   return (
     <motion.nav
       ref={navRef}
-      className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ""}`}
+      className={`${styles.nav} ${isMenuOpen ? styles.navOpen : ""} ${isAboutPage ? styles.navAboutVariant : ""}`}
       aria-label={tHeader("title")}
       initial={false}
       animate={isMobileViewport ? "default" : undefined}
       variants={navVariants}
     >
       <motion.div
-        className={`${styles.bar} ${isMenuOpen ? styles.barOpen : ""}`}
+        className={`${styles.bar} ${isMenuOpen ? styles.barOpen : ""} ${isAboutPage ? styles.barAboutVariant : ""}`}
         variants={barVariants}
         animate={isMobileViewport ? "default" : false}
       >

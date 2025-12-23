@@ -575,3 +575,72 @@
 :global(html[lang="fa"]) .contactLabelMobile {
   letter-spacing: normal;
 }
+
+/* --- About Page Variant (Glassmorphism) --- */
+.navAboutVariant {
+  /* Keep all positioning and spacing the same */
+}
+
+.barAboutVariant {
+  /* Glassmorphism styling */
+  background: rgba(217, 217, 217, 0.26) !important;
+  border: 1px solid #E4E4E4 !important;
+  backdrop-filter: blur(18.35px);
+  -webkit-backdrop-filter: blur(18.35px);
+}
+
+/* Avatar border on About page */
+.barAboutVariant .avatar img {
+  border-color: #8F8F8F;
+}
+
+/* Links color on About page */
+.barAboutVariant .link {
+  color: #FFFFFF !important;
+}
+
+.barAboutVariant .link:hover {
+  opacity: 0.8;
+}
+
+/* Contact button on About page */
+.barAboutVariant .contactBtn {
+  background: #FFFFFF !important;
+  color: #1F67F1 !important;
+}
+
+.barAboutVariant .contactBtn:hover {
+  background: #FFFFFF !important;
+  opacity: 0.95;
+}
+
+/* Active link indicator - orange dot */
+.barAboutVariant .linkActive::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 11px;
+  height: 11px;
+  background-color: #EA5039;
+  border-radius: 50%;
+}
+
+/* Menu button icon color on About page */
+.barAboutVariant .menuIcon {
+  color: #FFFFFF;
+}
+
+/* Mobile menu text color */
+.barAboutVariant .contactLabelMobile,
+.barAboutVariant .contactLabelDesktop {
+  color: #1F67F1;
+}
+
+/* Desktop-specific adjustments */
+@media (min-width: 1025px) {
+  .barAboutVariant {
+    max-width: 1013px;
+  }
+}
