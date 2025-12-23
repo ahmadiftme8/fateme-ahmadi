@@ -342,6 +342,10 @@
     margin-bottom: 10px;
     margin-top: -100px;
   }
+  
+  .headline span {
+    font-size: 40px;
+  }
 }
 
 /* Mobile Responsive */

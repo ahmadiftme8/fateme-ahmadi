@@ -54,11 +54,11 @@ export default function AboutHero() {
         <div className={`${styles.pillBox} ${styles.headerPill}`}>
           <h2 className={styles.headline}>
             {t("intro.title")
-              .split(". ")
+              .split("!")
               .filter((phrase) => phrase.trim())
               .map((phrase, index, array) => (
                 <span key={index}>
-                  {phrase.replace(/\.$/, "")}
+                  {phrase.replace(/\.$/, ".")}
                   {index < array.length - 1 && <br />}
                 </span>
               ))}
