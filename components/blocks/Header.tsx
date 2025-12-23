@@ -241,7 +241,7 @@ export function Header() {
               href={href}
               onClick={handleCloseMenu}
               className={`${styles.link} ${key === "home" ? styles.linkHome : ""
-                } ${isActive && key !== "home" ? styles.linkActive : ""}`}
+                } ${isActive ? styles.linkActive : ""}`}
             >
               {label}
             </Link>
@@ -286,7 +286,7 @@ export function Header() {
               href={href}
               onClick={handleCloseMenu}
               className={`${styles.link} ${key === "home" ? styles.linkHome : ""
-                } ${isActive && key !== "home" ? styles.linkActive : ""}`}
+                } ${isActive ? styles.linkActive : ""}`}
             >
               {label}
             </Link>

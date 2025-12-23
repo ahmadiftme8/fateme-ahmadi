@@ -2,15 +2,13 @@
 
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 import styles from "./HomeHero.module.css";
 
 export function HomeHero() {
   const t = useTranslations("hero");
   const locale = useLocale();
-  const reduceMotion = useReducedMotion();
   const isFa = locale === "fa";
   const [isMobile, setIsMobile] = useState(false);
 
@@ -26,68 +24,13 @@ export function HomeHero() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const easeOutCurve = [0.22, 1, 0.36, 1] as const;
-
-  const imageVariants = {
-    initial: { filter: "blur(15px)", opacity: 0 },
-    animate: {
-      filter: "blur(0px)",
-      opacity: 1,
-      transition: {
-        duration: 2,
-        ease: "easeOut" as const,
-        delay: 0.2,
-      },
-    },
-  };
-
-  const leftVariants = {
-    initial: { y: 60, opacity: 0 },
-    animate: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.8, ease: easeOutCurve, delay: 0.3 },
-    },
-  };
-
-  const badgeVariants = {
-    initial: { scale: 0, opacity: 0 },
-    animate: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        type: "spring" as const,
-        stiffness: 260,
-        damping: 20,
-        delay: 0.5,
-      },
-    },
-  };
-
-  const containerRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const autoBlur = useTransform(scrollYProgress, [0, 1], ["blur(0px)", "blur(10px)"]);
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.5]);
-
   return (
     <>
-      <section className={styles.hero} ref={containerRef} id="home">
+      <section className={styles.hero} id="home">
         <div className={styles.container}>
-          <motion.div
-            initial="initial"
-            animate="animate"
-            style={{ filter: autoBlur, opacity }}
-            className={styles.heroWrap}
-          >
+          <div className={styles.heroWrap}>
             {/* Profile Wrapper with Image and Badge */}
-            <motion.div 
-              variants={imageVariants} 
-              className={styles.profileWrapper}
-            >
+            <div className={styles.profileWrapper}>
               <div className={styles.heroImageFrame}>
                 <div className={styles.heroCard}>
                   <Image
@@ -102,7 +45,7 @@ export function HomeHero() {
               </div>
               
               {/* Badge with Animation */}
-              <motion.div className={styles.badge} variants={badgeVariants} aria-hidden="true">
+              <div className={styles.badge} aria-hidden="true">
                 <span className={styles.badgeText}>Hi</span>
                 <div className={styles.badgeIcon}>
                   <svg
@@ -115,23 +58,17 @@ export function HomeHero() {
                     />
                   </svg>
                 </div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
             {/* Text Content */}
-            <motion.div
-              key={isMobile ? "mobile" : "desktop"}
-              variants={leftVariants}
-              initial="initial"
-              animate="animate"
-              className={styles.textContent}
-            >
+            <div className={styles.textContent}>
               <h1 className={styles.heroName}>{t("name")}</h1>
               <p className={styles.heroRole}>
                 {isFa ? t("designerDeveloper") : `${t("designer")} & ${t("developer")}`}
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
 
         <div className={styles.postHero} id="about">

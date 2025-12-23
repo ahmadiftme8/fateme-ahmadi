@@ -171,16 +171,8 @@
 
 /* .linkHome::after removed to rely on .linkActive logic */
 
-.linkActive::after {
-  content: "";
-  position: absolute;
-  bottom: -12px;
-  left: 50%;
-  translate: -50% 0;
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background: #ea5039;
+.linkActive {
+  font-weight: bold;
 }
 
 .localeLink::after {
@@ -222,23 +214,7 @@
   gap: 12px;
 }
 
-.linksOpen .linkHome::before {
-  content: "";
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #ea5039;
-}
-
-/* Hide duplicate indicators in open menu */
-.linksOpen .linkHome::after {
-  display: none;
-}
-
-.linksOpen .linkActive::after {
-  display: none;
-}
+/* Active links use bold font weight instead of bullets */
 
 .linksOpen .localeLink {
   display: none;
@@ -643,17 +619,9 @@
   opacity: 0.95;
 }
 
-/* Active link indicator - orange dot */
-.barAboutVariant .linkActive::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 11px;
-  height: 11px;
-  background-color: #EA5039;
-  border-radius: 50%;
+/* Active links use bold font weight instead of bullets */
+.barAboutVariant .linkActive {
+  font-weight: bold;
 }
 
 /* Menu button icon color on About page */
