@@ -638,6 +638,18 @@
   color: #1F67F1;
 }
 
+/* Remove white background from contact button on mobile About page */
+@media (max-width: 720px) {
+  .barAboutVariant .contactBtn {
+    background: transparent !important;
+    color: var(--bg-gray) !important;
+  }
+  
+  .barAboutVariant .contactLabelMobile {
+    color: var(--c-white) !important;
+  }
+}
+
 /* Desktop-specific adjustments */
 @media (min-width: 1025px) {
   .barAboutVariant {

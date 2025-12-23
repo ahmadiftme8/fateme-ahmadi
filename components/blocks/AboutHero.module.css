@@ -386,35 +386,61 @@
     border-radius: 0;
     height: 100vh;
     min-height: 100vh;
+    /* Position content higher */
+    display: flex;
+    justify-content: flex-start; /* Start from top */
+    align-items: center;     /* Horizontal center */
+    padding: 0 20px;
+    padding-top: 25%;     /* Position content higher up */
   }
   
   .heroContent {
-    margin-top: 120px;
-    padding: 0 20px;
+    margin-top: 0;
+    padding: 0;
+    /* Center content */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+    width: 100%;
   }
   
   .titleGroup {
-    border-left: 5px solid var(--c-white);
-    padding-left: 20px;
+    /* Remove left border for mobile centered view */
+    border-left: none;
+    padding-left: 0;
   }
   
   .titleGroup h1 {
-    font-size: 2.5rem;
+    font-size: 1.75rem; /* ~28px - smaller for "Who Is" */
+    font-weight: 900;
+    line-height: 1.2;
+    text-align: center;
   }
   
   .titleGroup h1 span {
-    font-size: 3rem;
+    font-size: 3rem; /* ~48px - much larger for "FATEME?" */
+    display: block; /* Display on new line */
+    font-weight: 900;
   }
   
+  /* Small Pill Button */
   .btnPrimary {
-    font-size: 1.5rem;
-    padding: 8px 20px;
+    font-size: 0.9rem; /* ~14px */
+    font-weight: 700;
+    padding: 6px 16px;
+    border-radius: 100px;
+    gap: 8px;
+    text-transform: uppercase;
   }
   
   .iconArrow {
-    width: 30px;
-    height: 30px;
-    font-size: 1rem;
+    width: 14px;
+    height: 14px;
+    background: transparent;
+    color: var(--c-blue-accent);
+    font-size: 0.875rem;
   }
   
   .socialLinks {
@@ -448,22 +474,31 @@
 @media (max-width: 480px) {
   .heroCard {
     border-radius: 0;
+    padding-top: 52%; /* Position content higher up */
+    justify-content: flex-start;
   }
   
   .heroContent {
-    margin-top: 150px;
+    margin-top: 0;
+    gap: 15px;
   }
   
   .titleGroup h1 {
-    font-size: 2rem;
+    font-size: 1.5rem; /* Smaller for "Who Is" */
   }
   
   .titleGroup h1 span {
-    font-size: 2.5rem;
+    font-size: 2.5rem; /* Larger for "FATEME?" */
   }
   
   .btnPrimary {
-    font-size: 1.2rem;
+    font-size: 0.85rem;
+    padding: 6px 14px;
+  }
+  
+  .iconArrow {
+    width: 12px;
+    height: 12px;
   }
   
   .pillBox {
