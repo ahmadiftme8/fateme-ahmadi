@@ -75,14 +75,14 @@ export default function AboutHero() {
 
           <div className={styles.imageStack}>
             <Image
-              src="/images/about/ftmestory-01.png"
+              src="/images/about/ftmestory-01.webp"
               alt={t("images.workspace1")}
               width={240}
               height={340}
               className={styles.imgBack}
             />
             <Image
-              src="/images/about/ftmestory-02.png"
+              src="/images/about/ftmestory-02.webp"
               alt={t("images.workspace2")}
               width={240}
               height={340}
@@ -100,14 +100,14 @@ export default function AboutHero() {
 
           <div className={styles.imageStack}>
             <Image
-              src="/images/about/ftmestory-03.png"
+              src="/images/about/ftmestory-03.webp"
               alt={t("images.journey1")}
               width={240}
               height={340}
               className={styles.imgBack}
             />
             <Image
-              src="/images/about/ftmestory-04.png"
+              src="/images/about/ftmestory-04.webp"
               alt={t("images.journey2")}
               width={240}
               height={340}
@@ -125,14 +125,14 @@ export default function AboutHero() {
 
           <div className={styles.imageStack}>
             <Image
-              src="/images/about/ftmestory-05.png"
+              src="/images/about/ftmestory-05.webp"
               alt={t("images.current1")}
               width={240}
               height={340}
               className={styles.imgBack}
             />
             <Image
-              src="/images/about/ftmestory-06.png"
+              src="/images/about/ftmestory-06.webp"
               alt={t("images.current2")}
               width={240}
               height={340}
