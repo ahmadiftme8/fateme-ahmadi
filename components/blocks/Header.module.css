@@ -578,15 +578,44 @@
 
 /* --- About Page Variant (Glassmorphism) --- */
 .navAboutVariant {
-  /* Keep all positioning and spacing the same */
+  /* Ensure nav doesn't clip backdrop-filter effect */
+  overflow: visible !important;
 }
 
 .barAboutVariant {
-  /* Glassmorphism styling */
+  /* Glassmorphism styling - no framer-motion on About page, so backdrop-filter works! */
+  /* CRITICAL: overflow visible to allow backdrop-filter to work in desktop Chrome */
+  overflow: visible !important;
+  
+  /* Semi-transparent background for backdrop-filter to work */
   background: rgba(217, 217, 217, 0.26) !important;
   border: 1px solid #E4E4E4 !important;
-  backdrop-filter: blur(18.35px);
-  -webkit-backdrop-filter: blur(18.35px);
+  
+  /* Create stacking context */
+  position: relative;
+  
+  /* Apply backdrop-filter - works in all browsers now! */
+  
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
+}
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(15px)) {
+  .barAboutVariant {
+    background: rgba(217, 217, 217, 0.85) !important;
+  }
+}
+
+/* Ensure inner content maintains proper stacking */
+.barAboutVariant > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Handle overflow for mobile expanded state */
+.barAboutVariant.barOpen {
+  overflow: visible !important;
 }
 
 /* Avatar border on About page */

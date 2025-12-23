@@ -197,6 +197,10 @@ export function Header() {
     }
   };
 
+  // Use regular div for About page to allow backdrop-filter to work in Chrome
+  // motion.div transforms break backdrop-filter in Chrome desktop
+  const BarComponent = isAboutPage ? 'div' : motion.div;
+
   return (
     <motion.nav
       ref={navRef}
@@ -206,10 +210,12 @@ export function Header() {
       animate={isMobileViewport ? "default" : undefined}
       variants={navVariants}
     >
-      <motion.div
+      <BarComponent
         className={`${styles.bar} ${isMenuOpen ? styles.barOpen : ""} ${isAboutPage ? styles.barAboutVariant : ""}`}
-        variants={barVariants}
-        animate={isMobileViewport ? "default" : false}
+        {...(!isAboutPage && {
+          variants: barVariants,
+          animate: isMobileViewport ? "default" : false
+        })}
       >
         <div className={styles.avatar}>
           <Image
@@ -359,7 +365,7 @@ export function Header() {
             </span>
           </Link>
         </div>
-      </motion.div>
+      </BarComponent>
     </motion.nav>
   );
 }
