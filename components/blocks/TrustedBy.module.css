@@ -94,10 +94,6 @@
   vertical-align: middle;
 }
 
-/* Hover to pause animation */
-.logoRowWrapper:hover .logoRow {
-  animation-play-state: paused;
-}
 
 .desktopView {
   display: flex;
