@@ -34,7 +34,7 @@
   align-items: center;
   gap: 24px; /* Smaller gap on mobile */
   width: 100%;
-  animation: fadeIn 0.6s ease-out;
+  animation: fadeIn 0.5s ease-out;
 }
 
 /* --- Profile Wrapper & Image Frame --- */
@@ -44,7 +44,7 @@
   justify-content: center;
   align-items: center;
   width: fit-content; /* Wrap the content */
-  animation: fadeInImage 1.2s ease-out 0.2s both;
+  animation: fadeIn 0.5s ease-out both;
 }
 
 .heroImageFrame {
@@ -84,7 +84,7 @@
   gap: 0px;
   width: 100%;
   padding: 0 8px;
-  animation: fadeInUp 0.8s ease-out 0.3s both;
+  animation: fadeIn 0.5s ease-out 0.1s both;
 }
 
 .heroName {
@@ -124,7 +124,7 @@
   z-index: 10;
   overflow: hidden;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  animation: fadeInScale 0.6s ease-out 0.5s both;
+  animation: fadeIn 0.5s ease-out 0.2s both;
 }
 
 .badgeText {
@@ -158,46 +158,13 @@
   animation: handWave 5s ease-in-out infinite;
 }
 
-/* --- Fade-in Animations --- */
+/* Keyframes for simple fade-in */
 @keyframes fadeIn {
   from {
     opacity: 0;
   }
   to {
     opacity: 1;
-  }
-}
-
-@keyframes fadeInImage {
-  from {
-    opacity: 0;
-    filter: blur(15px);
-  }
-  to {
-    opacity: 1;
-    filter: blur(0px);
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(60px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
   }
 }
 
