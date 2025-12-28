@@ -110,6 +110,12 @@
   justify-content: center;
 }
 
+.iconArrow svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 /* --- Social Icons --- */
 .socialLinks {
   position: absolute;
@@ -325,6 +331,12 @@
   flex-shrink: 0;
   cursor: pointer;
   transition: transform 0.2s ease;
+}
+
+.ctaArrow svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .ctaArrow:hover {
