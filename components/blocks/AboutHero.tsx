@@ -22,9 +22,15 @@ export default function AboutHero() {
             </h1>
           </div>
 
-          <button className={styles.btnPrimary}>
+          <button className={styles.btnPrimary} onClick={() => {
+            document.getElementById('about-content')?.scrollIntoView({ behavior: 'smooth' });
+          }}>
             {t("hero.cta")}
-            <span className={styles.iconArrow}>→</span>
+            <span className={styles.iconArrow}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.74 49.74">
+                <path d="m24.87,0C11.16,0,0,11.16,0,24.87s11.16,24.87,24.87,24.87,24.87-11.16,24.87-24.87S38.59,0,24.87,0Zm17.32,27.19c-.69,0-2.31.27-5.3,2.11-2.4,1.47-4.58,3.43-6.48,5.82-2.55,3.19-2.58,4.34-2.58,4.35h-4.63c0-1.18.38-3.22,3.58-7.24,1.53-1.92,3.22-3.6,5.05-5.04H6.91v-4.63h24.91c-1.84-1.44-3.52-3.13-5.05-5.04-3.2-4.02-3.58-6.06-3.58-7.24h4.63s.03,1.17,2.57,4.35c1.91,2.39,4.08,4.35,6.49,5.82,3,1.84,4.61,2.11,5.3,2.11v4.63Z" fill="currentColor" strokeWidth="0"/>
+              </svg>
+            </span>
           </button>
         </div>
 
@@ -49,7 +55,7 @@ export default function AboutHero() {
       </div>
 
       {/* Main Content Container */}
-      <div className={styles.mainContainer}>
+      <div id="about-content" className={styles.mainContainer}>
         {/* Header Pill */}
         <div className={`${styles.pillBox} ${styles.headerPill}`}>
           <h2 className={styles.headline}>
@@ -148,16 +154,22 @@ export default function AboutHero() {
         </div>
 
         {/* CTA Pill */}
-        <div className={`${styles.pillBox} ${styles.ctaPill}`}>
+        <a 
+          href="https://calendar.app.google/rjUiNwzF5sr7WvCY7" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className={`${styles.pillBox} ${styles.ctaPill}`}
+          style={{ textDecoration: 'none', cursor: 'pointer' }}
+        >
           <p className={styles.ctaText}>
             I am currently <strong className={styles.ctaHighlight}>open to collaborating</strong> with teams who value this multidisciplinary mindset.
           </p>
           <div className={styles.ctaArrow}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M5 12h14M12 5l7 7-7 7" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.74 49.74">
+              <path d="m24.87,0C11.16,0,0,11.16,0,24.87s11.16,24.87,24.87,24.87,24.87-11.16,24.87-24.87S38.59,0,24.87,0Zm17.32,27.19c-.69,0-2.31.27-5.3,2.11-2.4,1.47-4.58,3.43-6.48,5.82-2.55,3.19-2.58,4.34-2.58,4.35h-4.63c0-1.18.38-3.22,3.58-7.24,1.53-1.92,3.22-3.6,5.05-5.04H6.91v-4.63h24.91c-1.84-1.44-3.52-3.13-5.05-5.04-3.2-4.02-3.58-6.06-3.58-7.24h4.63s.03,1.17,2.57,4.35c1.91,2.39,4.08,4.35,6.49,5.82,3,1.84,4.61,2.11,5.3,2.11v4.63Z" fill="#ea5b37" strokeWidth="0"/>
             </svg>
           </div>
-        </div>
+        </a>
       </div>
     </section>
   );
