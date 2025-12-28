@@ -48,14 +48,6 @@ export const metadata: Metadata = {
   },
   description:
     "Bilingual brand identity and web design studio crafting bold digital experiences for English and Persian audiences.",
-  icons: {
-    icon: [
-      { url: "/images/fav/icon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "any" },
-    ],
-    apple: "/images/fav/icon-touch.png",
-  },
-  manifest: "/images/fav/manifest.json",
 };
 
 export default async function RootLayout({
