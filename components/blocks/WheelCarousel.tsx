@@ -16,19 +16,32 @@ type Project = {
     excerpt?: string;
     description?: string;
     isDribbble?: boolean; // New flag for the CTA card
+    isUnderConstruction?: boolean; // Flag for under construction card
     [key: string]: unknown;
 };
 
 interface WheelCarouselProps {
     projects: Project[];
+    activeCategory?: string;
 }
 
 const CARD_WIDTH = 242;
 const GAP = 11; // Gap between cards
 
-export default function WheelCarousel({ projects }: WheelCarouselProps) {
-    // 1. Prepare Data: Add Dribbble Card
+export default function WheelCarousel({ projects, activeCategory }: WheelCarouselProps) {
+    // 1. Prepare Data: Add Dribbble or Under Construction Card
     const projectsWithCta = useMemo(() => {
+        const isUnderConstructionCategory = activeCategory === "ui-ux-design" || activeCategory === "video-editing";
+
+        if (isUnderConstructionCategory) {
+            const constructionCard: Project = {
+                id: "under-construction",
+                isUnderConstruction: true,
+                title: "Under Construction",
+            };
+            return [...projects, constructionCard];
+        }
+
         const dribbbleCard: Project = {
             id: "dribbble-cta",
             isDribbble: true,
@@ -37,7 +50,7 @@ export default function WheelCarousel({ projects }: WheelCarouselProps) {
             URL: "https://dribbble.com/ftm_psd"
         };
         return [...projects, dribbbleCard];
-    }, [projects]);
+    }, [projects, activeCategory]);
 
     const totalItems = projectsWithCta.length;
     const itemFullWidth = CARD_WIDTH + GAP;
@@ -442,6 +455,40 @@ export default function WheelCarousel({ projects }: WheelCarouselProps) {
 
 function WheelCard({ project, isActive, onClick }: { project: Project, isActive: boolean, onClick: () => void }) {
     // Styles preserved exactly
+
+    if (project.isUnderConstruction) {
+        return (
+            <motion.div
+                layout
+                onClick={onClick}
+                animate={{
+                    height: isActive ? 388 : 343,
+                    opacity: isActive ? 1 : 0.7,
+                    zIndex: isActive ? 10 : 1,
+                    scale: isActive ? 1 : 0.95,
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                className={`
+                    flex flex-col items-center justify-center p-[20px] bg-[#E3E3E3] rounded-[28px]
+                    w-[242px] shrink-0 cursor-pointer overflow-hidden
+                    ${isActive ? 'shadow-[-2px_3px_33.5px_rgba(0,0,0,0.15)]' : ''}
+                `}
+            >
+                <div className="flex flex-col items-center justify-center gap-4 text-center">
+                    <Image
+                        src="/images/gif/Under-Construction.gif"
+                        alt="Under Construction"
+                        width={150}
+                        height={150}
+                        className="object-contain"
+                    />
+                    <p className="font-poppins font-semibold text-[16px] text-[#1f67f1] mt-2">
+                        Under Construction
+                    </p>
+                </div>
+            </motion.div>
+        );
+    }
 
     if (project.isDribbble) {
         return (
