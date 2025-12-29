@@ -187,7 +187,7 @@ export default function FeaturedProjects({ projects = [] }: { projects?: Project
         </div>
 
         <div className="w-full">
-          <WheelCarousel projects={displayItems} />
+          <WheelCarousel key={activeCategory} projects={displayItems} />
         </div>
 
         {/* Bottom Sentinel to trigger sticky OFF */}
