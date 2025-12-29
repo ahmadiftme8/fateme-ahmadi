@@ -6,6 +6,7 @@ type Service = {
   id: number;
   title: string;
   items: string[];
+  description: string;
   image: string;
   categoryId: string;
 };
@@ -20,6 +21,7 @@ const services: Service[] = [
       "Infographics and data visualization",
       "Custom illustrations and icons",
     ],
+    description: "Logo and brand identity, social media and ad graphics, infographics, and custom illustrations/icons.",
     image: "/images/vectors/graphic-designer.svg",
     categoryId: "graphic-design",
   },
@@ -32,6 +34,7 @@ const services: Service[] = [
       "CMS integration and e-commerce",
       " maintenance & performance tuning",
     ],
+    description: "Responsive websites, front-end animations, CMS/e-commerce, performance maintenance.",
     image: "/images/vectors/web-development.svg",
     categoryId: "web-development",
   },
@@ -44,6 +47,7 @@ const services: Service[] = [
       "User journey mapping and flow charts",
       "Design systems and style guides",
     ],
+    description: "Web and mobile UI, wireframes and prototypes, user flows, design systems.",
     image: "/images/vectors/uiux-designer.svg",
     categoryId: "ui-ux-design",
   },
@@ -56,6 +60,7 @@ const services: Service[] = [
       "Color correction and visual effects",
       "Audio mixing and sound enhancement",
     ],
+    description: "Social and promo editing, motion graphics, color correction, visual effects, audio mixing.",
     image: "/images/vectors/video-editor.svg",
     categoryId: "video-editing",
   },
@@ -108,11 +113,12 @@ export default function Services() {
 
               <div className={styles.cardText}>
                 <h3>{service.title}</h3>
-                <ul>
+                <ul className={styles.itemsList}>
                   {service.items.map((item) => (
                     <li key={item}>{item}</li>
                   ))}
                 </ul>
+                <p className={styles.description}>{service.description}</p>
               </div>
 
               <button 
