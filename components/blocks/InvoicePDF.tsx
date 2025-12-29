@@ -140,7 +140,7 @@ const InvoicePDF: React.FC<InvoicePDFProps> = ({
         {/* Header */}
         <div className="flex justify-between items-end mb-16 relative z-10">
           <div>
-            <h1 className="text-4xl font-black text-[#1F67F1] tracking-tighter mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>
+            <h1 className="text-4xl font-black text-[#1F67F1] tracking-tighter mb-2" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
               Fateme Ahmadi<span className="text-[#EA5B37]">.</span>
             </h1>
             <p className="text-sm font-medium inline-block px-2 py-1 rounded-md" style={{ backgroundColor: '#f3f4f6', color: '#6b7280' }}>
@@ -225,11 +225,6 @@ const InvoicePDF: React.FC<InvoicePDFProps> = ({
           </div>
         </div>
       </div>
-      
-      {/* Print Styles Injection */}
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@800&family=Inter:wght@400;500;700;900&display=swap');
-      `}</style>
     </div>
   );
 };
