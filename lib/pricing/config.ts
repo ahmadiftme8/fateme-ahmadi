@@ -52,16 +52,6 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
         min: 1,
         max: 20,
         step: 1,
-        options: [
-             { label: "1-3", value: 3, meta: "Small" }, // Using max of range as value for estimation safety? Or user picks exact number?
-                                                        // UI has "1-3", "4-7", "8+". The prompt says "Range (Pages via 'linear')".
-                                                        // If it's a slider returning an integer, we use that integer.
-                                                        // Let's assume the UI slider provides a specific number or we map index to number.
-             // For now, let's Stick to the existing UI style which returns an index, but the engine expects a number for linear.
-             // We will handle the mapping in the UI component or here.
-             // Prompt says: "Range (Pages via 'linear')".
-             // Let's assume the input value is the number of pages.
-        ]
       },
       {
         id: 'website_cms',
@@ -103,6 +93,7 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
         unitPrice: PRICING_RATES.unitCosts.appScreen,
         min: 1,
         max: 50,
+        step: 1,
       },
       {
         id: 'webapp_features',
@@ -130,6 +121,9 @@ export const PROJECT_CONFIGS: ProjectConfig[] = [
         type: 'range',
         calcType: 'linear',
         unitPrice: PRICING_RATES.unitCosts.uiScreen,
+        min: 1,
+        max: 30,
+        step: 1,
       },
       {
         id: 'ui_responsive',
