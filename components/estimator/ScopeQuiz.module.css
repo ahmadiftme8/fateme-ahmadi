@@ -1,0 +1,563 @@
+/* ScopeQuiz Compact & Horizontal Redesign */
+
+.container {
+  width: 100%;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* ==================== Shared Card Base ==================== */
+.cardBase {
+  background: transparent;
+  border-radius: var(--radius-lg);
+  padding: 0;
+  box-shadow: none;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--color-primary);
+  width: 100%;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .cardBase {
+    height: 480px;
+    min-height: 480px;
+    max-height: 480px;
+  }
+}
+
+/* ==================== Grid Layout ==================== */
+.splitGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  flex: 1;
+}
+
+@media (min-width: 768px) {
+  .splitGrid {
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .leftCol {
+    width: 100%;
+  }
+
+  .rightCol {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+/* ==================== Progress / Counter ==================== */
+.stepCounter {
+  font-family: var(--font-anton);
+  font-size: 0.875rem;
+  color: var(--color-foreground);
+  opacity: 0.8;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.6rem;
+  background: var(--primary-light);
+  border-radius: var(--radius-sm);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* ==================== Intro State ==================== */
+.introCard {
+  composes: cardBase;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.introHero {
+  background: var(--color-primary);
+  padding: 1.75rem 2rem;
+  text-align: center;
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.introIconWrapper {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.heroIcon {
+  width: 30px;
+  height: 30px;
+  color: var(--white);
+  stroke-width: 1.5;
+}
+
+.introTitle {
+  font-family: var(--font-big-shoulders);
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-transform: uppercase;
+  color: var(--white);
+  margin: 0;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.introSubtitle {
+  font-family: var(--font-poppins);
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  line-height: 1.4;
+  max-width: 500px;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .introSubtitle {
+    white-space: normal;
+    max-width: 450px;
+  }
+}
+
+.introContent {
+  flex: 1;
+  padding: 1.5rem 2rem 2.5rem 2rem; /* Increased bottom padding to lift buttons */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  width: 100%;
+  overflow: hidden;
+}
+
+.benefitsList {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.benefitsList li {
+  font-family: var(--font-inter);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.checkmarkIcon {
+  color: var(--color-primary);
+  fill: var(--color-primary);
+  stroke: var(--white); /* White check on blue background */
+}
+
+.startButton {
+  background: var(--color-primary);
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+  padding: 1rem 2rem;
+  font-family: var(--font-poppins);
+  font-size: 1.25rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: auto;
+  min-width: 260px;
+  max-width: 90%;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .startButton {
+    font-size: 1.1rem;
+    padding: 0.8rem 1.5rem;
+    min-width: 220px;
+  }
+}
+
+.startButton:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+/* ==================== Quiz State ==================== */
+.quizCard {
+  composes: cardBase;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.stepContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto 0.25rem auto;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 0.5rem;
+}
+
+.headerTitleGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.headerIcon {
+  width: 24px;
+  height: 24px;
+  color: var(--white);
+  stroke-width: 2;
+  flex-shrink: 0;
+}
+
+.questionTitle {
+  font-family: var(--font-big-shoulders);
+  font-weight: 800;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  line-height: 1.1;
+  color: var(--white);
+  text-transform: uppercase;
+  margin: 0;
+  text-align: center;
+}
+
+.optionsStack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.optionPill {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 0.7rem 1.25rem;
+  font-family: var(--font-poppins);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-foreground);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.optionPill:hover {
+  background: #fdfdfd;
+  border-color: var(--color-primary);
+}
+
+.optionSelected {
+  background: var(--white);
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  padding: 0.6375rem 1.25rem; /* Adjust for 2px border */
+}
+
+.optionSelected::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ==================== Grid Options (Step 1) ==================== */
+.gridOptions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+  .gridOptions {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.optionSquare {
+  composes: optionPill;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1.1;
+  position: relative;
+}
+
+.optionSquare span {
+  width: 100%;
+}
+
+.optionSquare .label {
+  margin-top: 0.5rem;
+}
+
+.optionSquare.optionSelected::after {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.optionsStack:not(.gridOptions) {
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.navButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+  gap: 1.5rem;
+  width: 100%;
+  padding-top: 0.5rem;
+  padding-bottom: 2rem; /* Move up from the bottom border */
+}
+
+@media (min-width: 768px) {
+  .navButtons {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.backButton {
+  font-family: var(--font-inter);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-gray);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.backButton:hover {
+  color: var(--color-foreground);
+}
+
+/* ==================== Results State ==================== */
+.resultsCard {
+  composes: cardBase;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.resultsTitle {
+  font-family: var(--font-big-shoulders);
+  font-weight: 800;
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin: 0 0 0.25rem 0;
+}
+
+.serviceLabel {
+  font-family: var(--font-poppins);
+  font-size: 0.8125rem;
+  color: var(--text-gray);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.priceDisplay {
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .priceDisplay {
+    align-items: center;
+  }
+}
+
+.priceValue {
+  font-family: var(--font-anton);
+  font-size: clamp(2.25rem, 4vw, 2.75rem);
+  color: var(--color-primary);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.complexityBadge {
+  display: inline-block;
+  font-family: var(--font-inter);
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  background: var(--white);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  margin-top: 0.25rem;
+}
+
+.budgetTip {
+  background: #fff8f6;
+  border: 1px solid #ffe5e0;
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.8rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.tipIcon {
+  color: var(--color-accent);
+  font-size: 0.875rem;
+}
+
+.budgetTip p {
+  font-family: var(--font-poppins);
+  font-size: 0.75rem;
+  color: #664d4d;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.restartAction {
+  margin-top: 1rem;
+}
+
+.restartButton {
+  background: transparent;
+  border: none;
+  font-family: var(--font-inter);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-gray);
+  cursor: pointer;
+  text-decoration: underline;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* ==================== Shared Buttons ==================== */
+.primaryActionPill {
+  background: var(--color-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 0.7rem 1.5rem;
+  font-family: var(--font-poppins);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--white);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-width: 160px;
+}
+
+.primaryActionPill:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(31, 103, 241, 0.2);
+}
+
+.primaryActionPill:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ctaActionPill {
+  composes: primaryActionPill;
+  background: var(--color-primary);
+  width: 100%;
+}
+
+/* ==================== Mobile Height Optimization ==================== */
+@media (max-width: 768px) {
+  .cardBase {
+    padding: 0;
+  }
+  
+  .quizCard {
+    padding: 0;
+  }
+
+  .resultsCard {
+    padding: 0;
+  }
+
+  .introTitle {
+    font-size: 1.75rem;
+  }
+
+  .introSubtitle {
+    font-size: 0.8125rem;
+  }
+
+  .questionTitle {
+    font-size: 1.5rem;
+  }
+
+  .optionPill {
+    padding: 0.6rem 1rem;
+    font-size: 0.8125rem;
+  }
+
+  .navButtons {
+    margin-top: 1rem;
+  }
+}

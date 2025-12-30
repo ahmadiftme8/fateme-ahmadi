@@ -33,37 +33,7 @@
   font-display: swap;
 }
 
-:root {
-  color-scheme: light;
-  --color-background: #d9d9d9;
-  --color-foreground: #121212;
-  --color-primary: #1f67f1;
-  --color-accent: #ea5039;
-
-  /* Color aliases for Services section */
-  --primary-blue: #1f67f1;
-  --accent-orange: #ea5b37;
-  --bg-gray: #e5e5e5;
-
-  --font-big-shoulders-text: "Big Shoulders Text", sans-serif;
-  --font-anton-sc: var(--font-anton-sc), sans-serif;
-  --font-inter: var(--font-inter), sans-serif;
-
-  /* Fluid Typography Scale */
-  --font-size-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-  --font-size-h1: clamp(2.5rem, 5vw + 1rem, 4.5rem);
-  --font-size-h2: clamp(2rem, 4vw + 1rem, 3.5rem);
-  --font-size-h3: clamp(1.75rem, 3vw + 1rem, 2.5rem);
-}
-
-[data-theme="dark"] {
-  color-scheme: dark;
-  --color-background: #121212;
-  --color-foreground: #f5f5f5;
-  --color-primary: #6b96ff;
-  --color-accent: #ff826d;
-
-}
+@import "../styles/tokens/tokens.css";
 
 *,
 *::before,
@@ -130,7 +100,7 @@ button {
   font-weight: 800;
   text-transform: uppercase;
   font-size: var(--font-size-h2);
-  color: var(--blue, #1f67f1);
+  color: var(--primary-blue);
   letter-spacing: 0.01em;
   width: 100%;
 }
@@ -145,7 +115,7 @@ button {
 
 ::selection {
   background-color: var(--color-primary);
-  color: #ffffff;
+  color: var(--white);
 }
 
 
@@ -197,14 +167,10 @@ html[lang="fa"] :where(a[href^="http"], a[href^="https"], time, .numeric) {
   text-align: left;
 }
 
-@theme {
-  --breakpoint-xs: 376px;
-  /* یعنی از 376px به بالا */
-}
 
 /* About Page Specific Styles */
 body:has([data-page="about"]) {
-  background-color: #f0f0f0;
+  background-color: var(--about-body-bg);
 }
 
 body:has([data-page="about"]) main {

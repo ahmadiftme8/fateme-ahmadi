@@ -1,0 +1,57 @@
+:root {
+  color-scheme: light;
+  /* Colors - Light (Default) */
+  --color-background: #d9d9d9;
+  --color-foreground: #121212;
+  --color-primary: #1f67f1;
+  --color-accent: #ea5039;
+
+  /* Color Aliases */
+  --primary-blue: #1f67f1;
+  --accent-orange: #ea5b37;
+  --bg-gray: #e5e5e5;
+  --white: #ffffff;
+  --blue-accent: #7fc1f4;
+  --blue-contact: #1f67f1;
+  --orange-dot: #ea5039;
+  --glass-bg: rgba(217, 217, 217, 0.26);
+  --glass-border: #e4e4e4;
+  --text-black: #000000;
+  --about-body-bg: #f0f0f0;
+  --text-gray: #797979;
+  --border-light: #dcdcdc;
+  --primary-light: #e8f0ff;
+
+  /* Typography - Fonts */
+  --font-poppins: var(--font-poppins), 'Poppins', sans-serif;
+  --font-big-shoulders: var(--font-big-shoulders), 'Big Shoulders Text', sans-serif;
+  --font-vazirmatn: 'Vazirmatn', sans-serif;
+  --font-inter: var(--font-inter), 'Inter', sans-serif;
+  --font-anton: var(--font-anton-sc), 'Anton SC', sans-serif;
+
+  /* Typography - Scale */
+  --font-size-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --font-size-h1: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+  --font-size-h2: clamp(2rem, 4vw + 1rem, 3.5rem);
+  --font-size-h3: clamp(1.75rem, 3vw + 1rem, 2.5rem);
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 28px;
+  --radius-lg: 31px;
+  --radius-full: 100px;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-background: #121212;
+  --color-foreground: #f5f5f5;
+  --color-primary: #6b96ff;
+  --color-accent: #ff826d;
+}
+
+@theme {
+  --breakpoint-xs: 376px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1101px;
+}

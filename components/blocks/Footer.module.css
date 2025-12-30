@@ -1,5 +1,7 @@
 /* --- Variables for easy maintenance --- */
 .footerSection {
+    margin-top: 70px;
+    /* Existing styles */
     --blue-bg: #1F67F1;
     --orange-accent: #EA5B37;
     --white: #FFFFFF;
@@ -19,6 +21,7 @@
     width: 100%;
     box-sizing: border-box;
 }
+
 
 /* --- Floating CV Badge (Mobile Base) --- */
 .cvBadge {
