@@ -2,7 +2,7 @@ import "./globals.css";
 
 import type { Metadata } from "next";
 import { cookies, headers } from "next/headers";
-import { Big_Shoulders, Anton_SC, Inter, Poppins } from "next/font/google";
+import { Big_Shoulders, Anton_SC, Inter, Poppins, Antonio } from "next/font/google";
 import { ReactNode } from "react";
 
 import { getDirection } from "@/lib/i18n";
@@ -15,9 +15,8 @@ const poppins = Poppins({
   display: "swap",
 });
 
-const bigShouldersDisplay = Big_Shoulders({
+const bigShoulders = Big_Shoulders({
   subsets: ["latin"],
-  weight: ["700", "800", "900"],
   variable: "--font-big-shoulders",
   display: "swap",
 });
@@ -32,6 +31,13 @@ const antonSC = Anton_SC({
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+const antonio = Antonio({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-antonio",
   display: "swap",
 });
 
@@ -75,7 +81,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
       <body
-        className={`${poppins.variable} ${bigShouldersDisplay.variable} ${antonSC.variable} ${inter.variable} min-h-dvh antialiased ${bodyFontClass}`}
+        className={`${poppins.variable} ${bigShoulders.variable} ${antonio.variable} ${antonSC.variable} ${inter.variable} min-h-dvh antialiased ${bodyFontClass}`}
         data-theme="light"
         data-locale={locale}
         data-dir={dir}

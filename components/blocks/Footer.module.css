@@ -5,7 +5,7 @@
     --blue-bg: #1F67F1;
     --orange-accent: #EA5B37;
     --white: #FFFFFF;
-    --font-title: var(--font-big-shoulders-text), 'Big Shoulders Text', sans-serif;
+    --font-title: var(--font-big-shoulders), 'Big Shoulders Text', sans-serif;
     --font-display: var(--font-big-shoulders), 'Big Shoulders Display', sans-serif;
     --font-body: var(--font-poppins), 'Poppins', sans-serif;
 

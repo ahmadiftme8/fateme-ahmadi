@@ -1,8 +1,4 @@
-/* IMPORTS: Add the fonts used in your design */
-@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@400&family=Big+Shoulders+Text:wght@800&family=Inter:wght@400&display=swap');
 
-/* IMPORTS: Add the fonts used in your design */
-@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@400&family=Big+Shoulders+Text:wght@800&family=Inter:wght@400&display=swap');
 
 .faq-container {
     width: 100%;
@@ -26,7 +22,7 @@
 
 /* Title */
 .faq-title {
-    font-family: 'Big Shoulders Text', sans-serif;
+    font-family: var(--font-big-shoulders), sans-serif;
     font-weight: 800;
     font-size: 39px;
     line-height: 1.2;
@@ -47,7 +43,7 @@
 .faq-description {
     display: none;
     /* Hidden on mobile */
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-inter), sans-serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 1.5;
@@ -78,7 +74,7 @@
 }
 
 .question-text {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-inter), sans-serif;
     font-weight: 600;
     /* Bolder as requested */
     font-size: 14px;
@@ -111,7 +107,7 @@
 }
 
 .answer-text {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-inter), sans-serif;
     font-weight: 400;
     font-size: 13px;
     line-height: 1.6;
