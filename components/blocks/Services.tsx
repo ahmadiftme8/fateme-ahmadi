@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import styles from "./Services.module.css";
 
 type Service = {
@@ -103,7 +104,7 @@ export default function Services() {
               className={`${styles.serviceCard} ${imageOnRight ? styles.imageRight : ''}`}
             >
               <div className={styles.cardImage}>
-                <img
+                <Image
                   src={service.image}
                   alt={`${service.title} illustration`}
                   width={180}
@@ -126,7 +127,7 @@ export default function Services() {
                 onClick={() => handleServiceClick(service.categoryId)}
                 aria-label={`View ${service.title} projects`}
               >
-                <img
+                <Image
                   src="/images/vectors/card-arrow.svg"
                   alt=""
                   width={50}

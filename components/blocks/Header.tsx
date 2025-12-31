@@ -43,9 +43,7 @@ export function Header() {
   const [hasMounted, setHasMounted] = useState(false);
   const [isMobileViewport, setIsMobileViewport] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
-  const collapsedOffsetRef = useRef<number>(0);
   const isMenuOpenRef = useRef(isMenuOpen);
-  const previousBodyPaddingTopRef = useRef<string | null>(null);
 
   const [activeSection, setActiveSection] = useState<string>("");
   

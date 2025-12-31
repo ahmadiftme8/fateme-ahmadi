@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
 
 import styles from "./HomeHero.module.css";
 
@@ -10,19 +9,6 @@ export function HomeHero() {
   const t = useTranslations("hero");
   const locale = useLocale();
   const isFa = locale === "fa";
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 981);
-    };
-
-    // Initial check
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   return (
     <>
