@@ -528,6 +528,10 @@
 
 /* ==================== Mobile Height Optimization ==================== */
 @media (max-width: 768px) {
+  .container {
+    margin-top: 60px;
+  }
+
   .cardBase {
     padding: 0;
   }
