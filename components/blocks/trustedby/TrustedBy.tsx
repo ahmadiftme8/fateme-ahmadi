@@ -1,7 +1,10 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import styles from "./TrustedBy.module.css";
 import { trustedBrands } from "@/data/trustedByData";
+import { FadeIn, getStaggerDelay } from "@/components/ui/FadeIn";
 
 export default function TrustedBy() {
   // Split brands for Desktop (2 rows)
@@ -15,34 +18,48 @@ export default function TrustedBy() {
   const mobileRow2 = trustedBrands.slice(5, 10);
   const mobileRow3 = trustedBrands.slice(10, 14);
 
+  const desktopRows = [
+    { brands: desktopRow1, direction: "left" as const },
+    { brands: desktopRow2, direction: "right" as const },
+  ];
+
+  const mobileRows = [
+    { brands: mobileRow1, direction: "left" as const },
+    { brands: mobileRow2, direction: "right" as const },
+    { brands: mobileRow3, direction: "left" as const },
+  ];
+
   return (
     <section className={styles.logoSection}>
-      <h2 className="sectionTitle">
+      <FadeIn as="h2" className="sectionTitle" delay={getStaggerDelay(0)}>
         {/* <ShieldIcon className={styles.shieldIcon} /> */}
         TRUSTED BY
-      </h2>
+      </FadeIn>
 
       {/* Desktop View: 2 Rows */}
       <div className={styles.desktopView}>
-        <div className={styles.logoRowWrapper}>
-          <CarouselRow brands={desktopRow1} direction="left" />
-        </div>
-        <div className={styles.logoRowWrapper}>
-          <CarouselRow brands={desktopRow2} direction="right" />
-        </div>
+        {desktopRows.map((row, index) => (
+          <FadeIn
+            key={`desktop-${row.direction}-${index}`}
+            className={styles.logoRowWrapper}
+            delay={getStaggerDelay(index + 1)}
+          >
+            <CarouselRow brands={row.brands} direction={row.direction} />
+          </FadeIn>
+        ))}
       </div>
 
       {/* Mobile View: 3 Rows */}
       <div className={styles.mobileView}>
-        <div className={styles.logoRowWrapper}>
-          <CarouselRow brands={mobileRow1} direction="left" />
-        </div>
-        <div className={styles.logoRowWrapper}>
-          <CarouselRow brands={mobileRow2} direction="right" />
-        </div>
-        <div className={styles.logoRowWrapper}>
-          <CarouselRow brands={mobileRow3} direction="left" />
-        </div>
+        {mobileRows.map((row, index) => (
+          <FadeIn
+            key={`mobile-${row.direction}-${index}`}
+            className={styles.logoRowWrapper}
+            delay={getStaggerDelay(index + 1)}
+          >
+            <CarouselRow brands={row.brands} direction={row.direction} />
+          </FadeIn>
+        ))}
       </div>
     </section>
   );

@@ -11,8 +11,8 @@ export default function PostList({ posts }: BlogPostListProps){
     return(
         <div className={styles['postsWrapper']}>
 
-                {posts.map((post) => (
-                    <BlogCard key={post.slug} post={post} />  // Each post goes to ONE card
+                {posts.map((post, index) => (
+                    <BlogCard key={post.slug} post={post} index={index} />
                 ))}
             
         </div>

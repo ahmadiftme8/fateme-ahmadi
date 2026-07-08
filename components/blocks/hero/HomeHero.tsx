@@ -5,6 +5,7 @@ import { ProfileImage } from "@/components/ui/ProfileImage";
 import { useLocale, useTranslations } from "next-intl";
 
 import { Button } from "@/components/ui/Button";
+import { FadeIn, getStaggerDelay } from "@/components/ui/FadeIn";
 import styles from "./HomeHero.module.css";
 
 const cvUrl = "/documents/Fatemeh Ahmadi - Designer and Developer.pdf";
@@ -33,7 +34,7 @@ export function HomeHero() {
         <div className={styles.container}>
           <div className={styles.heroWrap}>
             {/* Profile Wrapper with Image and Badge */}
-            <div className={styles.profileWrapper}>
+            <FadeIn className={styles.profileWrapper} delay={getStaggerDelay(0)}>
               <div className={styles.heroImageFrame}>
                 <div className={styles.heroCard}>
                   <ProfileImage
@@ -60,19 +61,19 @@ export function HomeHero() {
                   </svg>
                 </div>
               </div>
-            </div>
+            </FadeIn>
 
             {/* Text Content */}
-            <div className={styles.textContent}>
+            <FadeIn className={styles.textContent} delay={getStaggerDelay(1)}>
               <h1   className={styles.heroName}>{t("name")}</h1>
               <p className={styles.heroRole}>
                 {isFa ? t("designerDeveloper") : `${t("designer")} & ${t("developer")}`}
               </p>
-            </div>
+            </FadeIn>
           </div>
         </div>
 
-        <div className={styles.postHero} id="about">
+        <FadeIn className={styles.postHero} delay={getStaggerDelay(2)} id="about">
           <svg
             id="Layer_2"
             width="46"
@@ -117,7 +118,7 @@ export function HomeHero() {
               <span>View CV</span>
             </Button> */}
           </div>
-        </div>
+        </FadeIn>
       </section>
     </>
   );

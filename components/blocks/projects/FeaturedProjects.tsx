@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
+import { FadeIn, getStaggerDelay } from "@/components/ui/FadeIn";
 
 import styles from "./FeaturedProjects.module.css";
 
@@ -104,13 +105,20 @@ export default function FeaturedProjects({ projects = [] }: { projects?: Project
       <div
         className={styles.featuredProjects__container}
       >
-        <h2 className={`${styles.featuredProjects__title} sectionTitle`}>Featured Projects</h2>
+        <FadeIn
+          as="h2"
+          className={`${styles.featuredProjects__title} sectionTitle`}
+          delay={getStaggerDelay(0)}
+        >
+          Featured Projects
+        </FadeIn>
 
-        <div
+        <FadeIn
+          delay={getStaggerDelay(1)}
           style={{
             width: "100%",
             position: "relative",
-            zIndex: 40
+            zIndex: 40,
           }}
         >
           <motion.div
@@ -190,11 +198,11 @@ export default function FeaturedProjects({ projects = [] }: { projects?: Project
               </ul>
             </nav>
           </motion.div>
-        </div>
+        </FadeIn>
 
-        <div className="w-full">
+        <FadeIn className="w-full" delay={getStaggerDelay(2)}>
           <WheelCarousel key={activeCategory} projects={displayItems} activeCategory={activeCategory} />
-        </div>
+        </FadeIn>
 
         {/* Bottom Sentinel to trigger sticky OFF */}
 

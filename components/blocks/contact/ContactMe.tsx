@@ -13,6 +13,7 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { AlertTriangle, Check, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { FadeIn, getStaggerDelay } from "@/components/ui/FadeIn";
 import styles from "./ContactMe.module.css";
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/meoeyaeg";
@@ -211,23 +212,24 @@ export default function ContactMe() {
 
   return (
     <section className={styles.contactSection} id="contact" aria-labelledby="contact-title">
-      <div className={styles.contactIntro}>
+      <FadeIn className={styles.contactIntro} delay={getStaggerDelay(0)}>
         <h2 className={styles.contactTitle} id="contact-title">
           Got a New Idea?<br></br> Contact Me.
         </h2>
         <p className={styles.contactDescription}>
           Share the essentials and I will get back to you with the next steps.
         </p>
-      </div>
+      </FadeIn>
 
-      <form
-        className={styles.contactForm}
-        action={formspreeEndpoint}
-        method="POST"
-        onSubmit={handleSubmit}
-        noValidate
-        aria-describedby="contact-form-status"
-      >
+      <FadeIn delay={getStaggerDelay(1)}>
+        <form
+          className={styles.contactForm}
+          action={formspreeEndpoint}
+          method="POST"
+          onSubmit={handleSubmit}
+          noValidate
+          aria-describedby="contact-form-status"
+        >
         <div className={styles.formGrid}>
           <Field
             id="contact-name"
@@ -334,7 +336,8 @@ export default function ContactMe() {
             submitStatus={submitStatus}
           />
         </div>
-      </form>
+        </form>
+      </FadeIn>
     </section>
   );
 }

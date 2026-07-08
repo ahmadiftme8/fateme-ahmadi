@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { FadeIn, getStaggerDelay } from "@/components/ui/FadeIn";
 import styles from "./FAQ.module.css";
 
 const faqData = [
@@ -97,7 +98,7 @@ export default function FAQ() {
 
     return (
         <div className={styles['faq-container']}>
-            <div className={styles['faq-header']}>
+            <FadeIn className={styles['faq-header']} delay={getStaggerDelay(0)}>
                 <h2 className={styles['faq-title']}>
                     <span className={styles['title-mobile']}>FAQ</span>
                     <span className={styles['title-desktop']}>FREQUENTLY ASKED QUESTIONS</span>
@@ -107,10 +108,14 @@ export default function FAQ() {
                     freelance designer. If you don’t see your question here, feel free to
                     reach out—I’m happy to help!
                 </p>
-            </div>
+            </FadeIn>
             <div className={styles['faq-list']}>
                 {faqData.map((item, index) => (
-                    <div key={item.id} className={`${styles['faq-item']} ${activeIndex === index ? styles['active'] : ''}`}>
+                    <FadeIn
+                        key={item.id}
+                        className={`${styles['faq-item']} ${activeIndex === index ? styles['active'] : ''}`}
+                        delay={getStaggerDelay(index + 1)}
+                    >
                         <div
                             className={styles['question-header']}
                             onClick={() => toggleFAQ(index)}
@@ -136,7 +141,7 @@ export default function FAQ() {
                                 </motion.div>
                             )}
                         </AnimatePresence>
-                    </div>
+                    </FadeIn>
                 ))}
             </div>
         </div>

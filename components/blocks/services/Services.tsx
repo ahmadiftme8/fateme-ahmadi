@@ -10,6 +10,7 @@ import WebDevelopment from '../public/images/vectors/web-development.svg';  */
  import WebDevelopment from '../../icons/WebDevelopment';
  import UiuxDesign from '../../icons/UiuxDesign';
  import VideoEditor from '../../icons/VideoEditor';
+ import { FadeIn, getStaggerDelay } from "@/components/ui/FadeIn";
 
 type Service = {
   id: number;
@@ -100,7 +101,9 @@ export default function Services() {
 
   return (
     <section className={styles.servicesSection}>
-      <h2 className={styles.sectionTitle}>My Services</h2>
+      <FadeIn as="h2" className={styles.sectionTitle} delay={getStaggerDelay(0)}>
+        My Services
+      </FadeIn>
 
       <div className={styles.servicesGrid}>
         {services.map((service, index) => {
@@ -108,9 +111,10 @@ export default function Services() {
           const imageOnRight = index % 2 === 1;
           
           return (
-            <div 
-              key={service.id} 
+            <FadeIn
+              key={service.id}
               className={`${styles.serviceCard} ${imageOnRight ? styles.imageRight : ''}`}
+              delay={getStaggerDelay(index + 1)}
             >
               <div className={styles.cardImage}>
                 <service.IconComponent
@@ -146,7 +150,7 @@ export default function Services() {
                   quality={75}
                 />
               </button>
-            </div>
+            </FadeIn>
           );
         })}
       </div>
