@@ -1,13 +1,13 @@
-.themeToggleBtn{
-
- position: fixed;
- bottom: 4%;
- z-index: 100;
- display: flex;
- justify-self: center;
- background-color: var(--color-background);
- cursor: pointer;
- border: 1px solid var( --nav-border-color)
+.themeToggleBtn {
+  position: fixed;
+  bottom: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  background-color: var(--color-background);
+  cursor: pointer;
+  border: 1px solid var(--nav-border-color);
 }
 
 .tglBtn{
