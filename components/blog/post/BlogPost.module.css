@@ -1,0 +1,221 @@
+.page {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 140px 1.25rem 4rem;
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: fit-content;
+  font-family: var(--font-poppins);
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--color-foreground-lowopacity);
+  border: 1px solid transparent;
+  border-radius: 2rem;
+  padding: 0.45rem 0.85rem;
+  margin-inline-start: -0.85rem;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.backLink:hover {
+  color: #d9d9d9;
+  border-color: rgba(231, 225, 210, 0.22);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(231, 225, 210, 0.14);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-poppins);
+  font-size: 0.8125rem;
+  color: var(--color-foreground-lowopacity);
+}
+
+.metaLabel {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.6875rem;
+  color: var(--color-accent);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-big-shoulders);
+  font-size: clamp(1.875rem, 4vw + 0.5rem, 2.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--color-primary);
+}
+
+.content {
+  font-family: var(--font-poppins);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: #d9d9d9;
+}
+
+.content > h1:first-child {
+  display: none;
+}
+
+.content :is(h1, h2, h3, h4) {
+  font-family: var(--font-big-shoulders);
+  font-weight: 700;
+  line-height: 1.25;
+  color: #ececec;
+  margin: 2.25rem 0 0.85rem;
+}
+
+.content h2 {
+  font-size: clamp(1.375rem, 2vw + 0.5rem, 1.75rem);
+}
+
+.content h3 {
+  font-size: clamp(1.125rem, 1.5vw + 0.5rem, 1.375rem);
+  color: var(--color-primary);
+}
+
+.content p {
+  margin: 0 0 1.25rem;
+}
+
+.content p:last-child {
+  margin-bottom: 0;
+}
+
+.content strong {
+  font-weight: 600;
+  color: #f0f0f0;
+}
+
+.content em {
+  font-style: italic;
+  color: #e8e8e8;
+}
+
+.content a {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.content a:hover {
+  color: #8faef5;
+}
+
+.content blockquote {
+  margin: 1.75rem 0;
+  padding: 1rem 1.25rem;
+  border-inline-start: 3px solid var(--color-accent);
+  border-radius: 0 0.75rem 0.75rem 0;
+  background: rgba(255, 255, 255, 0.03);
+  color: #c8c8c8;
+}
+
+.content blockquote p {
+  margin: 0;
+  font-style: italic;
+}
+
+.content blockquote p + p {
+  margin-top: 0.75rem;
+}
+
+.content hr {
+  margin: 2.5rem auto;
+  border: none;
+  height: 1px;
+  width: min(100%, 12rem);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(231, 225, 210, 0.35),
+    transparent
+  );
+}
+
+.content :is(ul, ol) {
+  margin: 0 0 1.25rem;
+  padding-inline-start: 1.35rem;
+}
+
+.content li {
+  margin-bottom: 0.5rem;
+}
+
+.content li::marker {
+  color: var(--color-accent);
+}
+
+.content code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9em;
+  padding: 0.15em 0.4em;
+  border-radius: 0.35rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f0f0f0;
+}
+
+.content pre {
+  margin: 1.5rem 0;
+  padding: 1rem 1.15rem;
+  border-radius: 1rem;
+  background: rgba(0, 0, 0, 0.35);
+  overflow-x: auto;
+}
+
+.content pre code {
+  padding: 0;
+  background: none;
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding-top: 120px;
+    padding-bottom: 6rem;
+  }
+
+  .article {
+    border-radius: 2rem;
+    border: 2px solid rgba(231, 225, 210, 0.22);
+    background: rgba(27, 19, 9, 0.54);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    padding: 2.5rem 2.75rem;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.575);
+  }
+
+  .title {
+    color: #d9d9d9;
+  }
+
+  .backLink {
+    margin-inline-start: 0;
+  }
+
+  .content {
+    font-size: 1.0625rem;
+  }
+}

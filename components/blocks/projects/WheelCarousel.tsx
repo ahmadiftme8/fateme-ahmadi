@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { motion, useMotionValue, PanInfo, animate, useMotionValueEvent } from "framer-motion";
 import Image from "next/image";
-import { FaDribbble, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaDribbble, FaGithub, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 type Project = {
     id?: string | number;
@@ -15,8 +15,9 @@ type Project = {
     name?: string;
     excerpt?: string;
     description?: string;
-    isDribbble?: boolean; // New flag for the CTA card
-    isUnderConstruction?: boolean; // Flag for under construction card
+    isDribbble?: boolean;
+    isGithub?: boolean;
+    isUnderConstruction?: boolean;
     [key: string]: unknown;
 };
 
@@ -29,7 +30,7 @@ const CARD_WIDTH = 242;
 const GAP = 11; // Gap between cards
 
 export default function WheelCarousel({ projects, activeCategory }: WheelCarouselProps) {
-    // 1. Prepare Data: Add Dribbble or Under Construction Card
+    // 1. Prepare Data: Add GitHub, Dribbble, or Under Construction Card
     const projectsWithCta = useMemo(() => {
         const isUnderConstructionCategory = activeCategory === "ui-ux-design" || activeCategory === "video-editing";
 
@@ -40,6 +41,17 @@ export default function WheelCarousel({ projects, activeCategory }: WheelCarouse
                 title: "Under Construction",
             };
             return [...projects, constructionCard];
+        }
+
+        if (activeCategory === "web-development") {
+            const githubCard: Project = {
+                id: "github-cta",
+                isGithub: true,
+                title: "Check out my GitHub",
+                description: "If you want to see more web development projects, check out my GitHub.",
+                URL: "https://github.com/ahmadiftme8"
+            };
+            return [...projects, githubCard];
         }
 
         const dribbbleCard: Project = {
@@ -488,6 +500,49 @@ function WheelCard({ project, isActive, onClick }: { project: Project, isActive:
                         Under Construction
                     </p>
                 </div>
+            </motion.div>
+        );
+    }
+
+    if (project.isGithub) {
+        return (
+            <motion.div
+                layout
+                onClick={onClick}
+                animate={{
+                    height: isActive ? 388 : 343,
+                    opacity: isActive ? 1 : 0.7,
+                    zIndex: isActive ? 10 : 1,
+                    scale: isActive ? 1 : 0.95,
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                className={`
+                    flex flex-col items-center justify-between p-[20px] rounded-[28px]
+                    w-[242px] shrink-0 cursor-pointer overflow-hidden
+                    ${isActive ? 'shadow-[-2px_3px_33.5px_rgba(0,0,0,0.25)]' : ''}
+                `}
+                style={{
+                    backgroundColor: "#0d1117",
+                    color: "white",
+                    border: "1px solid #30363d",
+                }}
+            >
+                <div className="flex flex-col items-center justify-center flex-1 w-full gap-4 text-center">
+                    <FaGithub className="w-16 h-16 text-white" />
+                    <p className="font-poppins font-medium text-[14px] leading-tight text-[#c9d1d9] px-2">
+                        {project.description}
+                    </p>
+                </div>
+
+                <a
+                    href={project.URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-4 px-6 py-2 bg-[#238636] text-white font-bold rounded-full text-sm hover:bg-[#2ea043] transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    View GitHub
+                </a>
             </motion.div>
         );
     }

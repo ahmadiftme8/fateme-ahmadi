@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { getAllPostSlugs, getPostBySlug } from '@/lib/posts';
 import BlogPost from '@/components/blog/post/BlogPost';
+import { PageTheme } from '@/components/utility/PageTheme';
 
 export const dynamic = 'force-static';
 export const revalidate = 3600;
@@ -23,9 +24,12 @@ export default async function BlogPostPage({
     const post = getPostBySlug(slug);
     
     return (
-      <main className="max-w-3xl mx-auto px-4 py-12">
-        <BlogPost post={post} />
-      </main>
+      <>
+        <PageTheme defaultTheme="dark" storageKey="fateme-theme-blog" />
+        <main data-theme="dark" className="fullPageMain">
+          <BlogPost post={post} />
+        </main>
+      </>
     );
   } catch (error) {
     notFound();
