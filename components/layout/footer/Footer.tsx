@@ -10,6 +10,7 @@ import {
   FaEnvelope
 } from "react-icons/fa";
 import { MdDownload } from "react-icons/md";
+import { withBasePath } from "@/lib/base-path";
 import styles from "./Footer.module.css";
 
 export function Footer() {
@@ -19,7 +20,7 @@ export function Footer() {
   return (
     <footer className={styles.footerSection} id="contact">
       {/* Floating CV Badge */}
-      <a href="/documents/Fatemeh Ahmadi - Designer and Developer.pdf" className={styles.cvBadge} download="Fatemeh Ahmadi - Designer and Developer.pdf">
+      <a href={withBasePath("/documents/Fatemeh Ahmadi - Designer and Developer.pdf")} className={styles.cvBadge} download="Fatemeh Ahmadi - Designer and Developer.pdf">
         <MdDownload size={35} />
         <span className={styles.cvText}>{t("cv")}</span>
       </a>

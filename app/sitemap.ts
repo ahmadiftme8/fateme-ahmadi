@@ -2,6 +2,8 @@
 import type { MetadataRoute } from "next";
 import { abs } from "@/lib/seo";
 
+export const dynamic = "force-static";
+
 // All supported locales (keep in sync with next-intl)
 const locales = ["en", "fa"] as const;
 

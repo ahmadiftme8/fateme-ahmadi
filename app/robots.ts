@@ -2,6 +2,8 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo";
 
+export const dynamic = "force-static";
+
 // This runs on the server and returns a typed robots config.
 export default function robots(): MetadataRoute.Robots {
   return {

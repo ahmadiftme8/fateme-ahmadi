@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Markdown from "react-markdown";
+import { useLocale } from "next-intl";
 import { Post } from "@/types/post";
 import { FadeIn, getStaggerDelay } from "@/components/ui/FadeIn";
 import styles from "./BlogPost.module.css";
@@ -25,11 +26,13 @@ function formatPostDate(date: string) {
 }
 
 export default function BlogPost({ post }: BlogPostProps) {
+  const locale = useLocale();
+
   return (
     <div className={styles.page}>
       <article className={styles.article}>
         <FadeIn delay={getStaggerDelay(0)}>
-          <Link href="/blog" className={styles.backLink}>
+          <Link href={`/${locale}/blog`} className={styles.backLink}>
             ← Back to Blog
           </Link>
         </FadeIn>

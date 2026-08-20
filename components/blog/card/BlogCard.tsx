@@ -2,6 +2,7 @@
 
 import styles from "./BlogCard.module.css";
 import Link from "next/link";
+import { useLocale } from "next-intl";
 import { Post } from "@/types/post";
 import { FadeIn, getStaggerDelay } from "@/components/ui/FadeIn";
 
@@ -11,6 +12,8 @@ interface BlogCardProps {
 }
 
 export default function BlogCard({ post, index }: BlogCardProps) {
+  const locale = useLocale();
+
   return (
     <FadeIn
       as="article"
@@ -18,7 +21,7 @@ export default function BlogCard({ post, index }: BlogCardProps) {
       delay={getStaggerDelay(index + 1)}
     >
       <div className={styles["postHeader"]}>
-        <Link href={`/blog/${post.slug}`}>
+        <Link href={`/${locale}/blog/${post.slug}`}>
           <h2 className={styles["postTitle"]}>{post.title}</h2>
         </Link>
 
@@ -26,7 +29,7 @@ export default function BlogCard({ post, index }: BlogCardProps) {
       </div>
 
       <p className={styles["postMainContent"]}>{post.excerpt}</p>
-      <Link href={`/blog/${post.slug}`} className={styles["readMoreBtn"]}>
+      <Link href={`/${locale}/blog/${post.slug}`} className={styles["readMoreBtn"]}>
         Read more →
       </Link>
     </FadeIn>
