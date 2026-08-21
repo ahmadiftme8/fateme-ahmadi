@@ -39,7 +39,7 @@ export function PrefetchAboutAssets() {
 
   useEffect(() => {
     let idleId: number | undefined;
-    let timeoutId: number | undefined;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
     let cancelled = false;
 
     const warmAboutCache = () => {
@@ -61,12 +61,12 @@ export function PrefetchAboutAssets() {
     };
 
     const schedule = () => {
-      if ("requestIdleCallback" in window) {
+      if (typeof window.requestIdleCallback === "function") {
         idleId = window.requestIdleCallback(warmAboutCache, { timeout: 2500 });
         return;
       }
 
-      timeoutId = window.setTimeout(warmAboutCache, 400);
+      timeoutId = setTimeout(warmAboutCache, 400);
     };
 
     if (document.readyState === "complete") {
@@ -78,11 +78,11 @@ export function PrefetchAboutAssets() {
     return () => {
       cancelled = true;
       window.removeEventListener("load", schedule);
-      if (idleId !== undefined && "cancelIdleCallback" in window) {
-        window.cancelIdleCallback(idleId);
+      if (idleId !== undefined) {
+        window.cancelIdleCallback?.(idleId);
       }
       if (timeoutId !== undefined) {
-        window.clearTimeout(timeoutId);
+        clearTimeout(timeoutId);
       }
     };
   }, [isAbout, locale, router]);
