@@ -19,7 +19,7 @@ const faqData = [
                 <br /><br />
                 <strong>UI/UX Design:</strong> User interface prototyping, wireframing, and mobile app design layouts.
                 <br /><br />
-                <strong>Video Editing:</strong> Promotional videos, YouTube content editing, color grading, and motion graphics.
+                <strong>Video and Motion:</strong> Promotional videos, YouTube content editing, color grading, and motion graphics.
             </>
         )
     },

@@ -68,7 +68,7 @@ const services: Service[] = [
   },
   {
     id: 4,
-    title: "Video Editing",
+    title: "Video and Motion",
     items: [
       "Promotional and social media editing",
       "Motion graphics and text animation",

@@ -14,6 +14,7 @@ import nextIntlConfig, { AppLocale, locales } from "@/next-intl.config";
 import "../globals.css";
 
 import { PageLoader } from "@/components/utility/PageLoader";
+import { PrefetchAboutAssets } from "@/components/about/PrefetchAboutAssets";
 
 type LayoutProps = {
   children: ReactNode;
@@ -57,6 +58,7 @@ export default async function LocaleLayout({
           >
             <AnimatedDottedBackground />
             <Header />
+            <PrefetchAboutAssets />
             <main className="flex-1">
               {children}
               <SpeedInsightsLazy />

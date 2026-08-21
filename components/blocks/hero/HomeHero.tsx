@@ -97,7 +97,7 @@ export function HomeHero() {
           </svg>
           <p className={styles.postHeroText}>{`I'm Fateme, a multidisciplinary designer and front-end developer
             creating impactful digital experiences, visuals, and products for
-            brands and businesses for over 7 years.`}
+            brands and businesses for over 6 years.`}
           </p>
           <div className={styles.cvActions}>
             <Button

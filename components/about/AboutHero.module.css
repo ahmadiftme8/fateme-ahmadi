@@ -18,9 +18,7 @@
   max-width: 100%;
   height: 100vh;
   min-height: 100vh;
-  
-  /* Background Image setup */
-  background: url('/images/hero/fatemeahmadi-desktop-hero.webp') no-repeat center center/cover;
+  background-color: #1a1a1a;
   border-radius: 0;
   
   display: flex;
@@ -29,6 +27,22 @@
   padding: 0 5%;
   overflow: hidden;
   margin-bottom: 0;
+}
+
+.heroMedia,
+.heroMedia picture,
+.heroImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.heroImage {
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  pointer-events: none;
 }
 
 /* --- Hero Content (Left Side) --- */
@@ -73,6 +87,7 @@
   border-radius: 52px;
   border: none;
   cursor: pointer;
+  text-decoration: none;
   
   font-family: 'Big Shoulders Display', var(--font-big-shoulders), sans-serif;
   font-weight: 700;
@@ -84,6 +99,10 @@
 
 .btnPrimary:hover {
   transform: scale(1.05);
+}
+
+.btnPrimary:visited {
+  color: var(--blue-accent);
 }
 
 .iconArrow {
@@ -470,7 +489,6 @@
 
 @media (max-width: 768px) {
   .heroCard {
-    background: url('/images/hero/fatemeahmadi-mobile-hero.webp') no-repeat center center/cover;
     border-radius: 0;
     height: 100vh;
     min-height: 100vh;
