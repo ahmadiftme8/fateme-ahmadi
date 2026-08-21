@@ -64,12 +64,13 @@ export default function AboutHero() {
         >
           <h2 className={styles.headline}>
             {t("intro.title")
-              .split("!")
-              .filter((phrase) => phrase.trim())
+              .split(".")
+              .map((phrase) => phrase.trim())
+              .filter(Boolean)
               .map((phrase, index, array) => (
-                <span key={index}>
-                  {phrase.replace(/\.$/, ".")}
-                  {index < array.length - 1 && <br />}
+                <span key={index} className={styles.headlinePhrase}>
+                  {phrase}.
+                  {index < array.length - 1 && " "}
                 </span>
               ))}
           </h2>

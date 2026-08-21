@@ -167,8 +167,8 @@
   white-space: nowrap;
 }
 
-.headline br {
-  display: none;
+.headlinePhrase {
+  display: inline;
 }
 
 .subhead {
@@ -421,7 +421,7 @@
     white-space: normal;
   }
   
-  .headline br {
+  .headlinePhrase {
     display: block;
   }
   
@@ -574,7 +574,7 @@
     white-space: normal;
   }
   
-  .headerPill .headline br {
+  .headerPill .headlinePhrase {
     display: block;
   }
   
@@ -773,7 +773,7 @@
     white-space: normal;
   }
   
-  .headerPill .headline br {
+  .headerPill .headlinePhrase {
     display: block;
   }
   
